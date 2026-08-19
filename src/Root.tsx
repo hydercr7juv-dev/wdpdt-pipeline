@@ -7,8 +7,19 @@ import { airplaneLights } from "./videos/airplaneLights";
 import { windowHole } from "./videos/windowHole";
 import { fuelDump } from "./videos/fuelDump";
 import { bleedAir } from "./videos/bleedAir";
+import { blandFood } from "./videos/blandFood";
+import { wingFlex } from "./videos/wingFlex";
+import { roundWindows } from "./videos/roundWindows";
 
-const SPECS: VideoSpec[] = [airplaneLights, windowHole, fuelDump, bleedAir];
+const SPECS: VideoSpec[] = [
+  airplaneLights,
+  windowHole,
+  fuelDump,
+  bleedAir,
+  blandFood,
+  wingFlex,
+  roundWindows,
+];
 
 export const RemotionRoot: React.FC = () => {
   return (

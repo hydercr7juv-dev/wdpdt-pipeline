@@ -3,7 +3,11 @@
 You are running inside a scheduled cloud routine with this repo cloned in. You have Bash + the Composio MCP tools. Network egress is allowlisted: only `registry.npmjs.org` and `storage.googleapis.com` are reachable by curl; everything else must go through MCP tools. Report every step's result in your final message.
 
 ## A. Setup
-1. Find this repo's dir (has `package.json`, `src/`, `public/assets/*.mp4`) — check the current directory and `/home/user`. `cd` into it.
+1. Clone the pipeline repo and enter it:
+   ```
+   rm -rf /tmp/wdpdt && git clone https://github.com/hydercr7juv-dev/wdpdt-pipeline /tmp/wdpdt && cd /tmp/wdpdt
+   ```
+   (It is public — no auth needed. It has `package.json`, `src/`, `public/assets/*.mp4`.)
 2. `npm install` (npmjs is allowlisted).
 3. Download Chrome from the allowed Google bucket and unzip:
    ```

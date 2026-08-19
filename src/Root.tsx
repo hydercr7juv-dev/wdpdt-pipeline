@@ -1,0 +1,30 @@
+import React from "react";
+import { Composition } from "remotion";
+import { Short } from "./Short";
+import { FPS, WIDTH, HEIGHT } from "./lib/timing";
+import { VideoSpec, durationInFrames } from "./lib/video";
+import { airplaneLights } from "./videos/airplaneLights";
+import { windowHole } from "./videos/windowHole";
+import { fuelDump } from "./videos/fuelDump";
+import { bleedAir } from "./videos/bleedAir";
+
+const SPECS: VideoSpec[] = [airplaneLights, windowHole, fuelDump, bleedAir];
+
+export const RemotionRoot: React.FC = () => {
+  return (
+    <>
+      {SPECS.map((spec) => (
+        <Composition
+          key={spec.id}
+          id={spec.id}
+          component={Short}
+          durationInFrames={durationInFrames(spec)}
+          fps={FPS}
+          width={WIDTH}
+          height={HEIGHT}
+          defaultProps={{ spec }}
+        />
+      ))}
+    </>
+  );
+};

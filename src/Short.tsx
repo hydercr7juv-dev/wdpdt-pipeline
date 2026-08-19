@@ -4,17 +4,33 @@ import {
   Audio,
   OffthreadVideo,
   Sequence,
+  cancelRender,
+  continueRender,
+  delayRender,
   interpolate,
   spring,
   staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { loadFont } from "@remotion/google-fonts/Anton";
 import { buildWords, buildGroups, Word, Group } from "./lib/timing";
 import { VideoSpec } from "./lib/video";
 
-const { fontFamily } = loadFont();
+// Load Anton from a bundled local file, not the Google Fonts CDN — the cloud
+// render sandbox blocks fonts.gstatic.com, which would drop the caption font.
+const fontFamily = "Anton";
+const fontHandle = delayRender("load-anton");
+const antonFace = new FontFace(
+  fontFamily,
+  `url(${staticFile("fonts/Anton-Regular.ttf")}) format('truetype')`,
+);
+antonFace
+  .load()
+  .then((loaded) => {
+    document.fonts.add(loaded);
+    continueRender(fontHandle);
+  })
+  .catch((err) => cancelRender(err));
 
 const EMPH = "#FFD93B"; // popping keyword color
 const WHITE = "#FFFFFF";

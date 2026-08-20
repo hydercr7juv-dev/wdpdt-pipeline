@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "ToolSearch",
+      "RemoteTrigger",
+      "Bash(gcloud storage sign-url:*)",
+      "Bash(/opt/homebrew/bin/gcloud storage sign-url:*)",
+      "Bash(gcloud storage:*)",
+      "Bash(/opt/homebrew/bin/gcloud storage:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(date:*)",
+      "Bash(cat:*)",
+      "Read",
+      "Write",
+      "Edit"
+    ]
+  }
+}

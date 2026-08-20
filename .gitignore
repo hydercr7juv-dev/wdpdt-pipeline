@@ -5,3 +5,5 @@ out/
 install2.log
 render*.log
 r_*.log
+
+cloud/*.log

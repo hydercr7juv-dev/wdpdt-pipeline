@@ -1,0 +1,58 @@
+{
+  "cadence_per_day": 2,
+  "slot_hours_utc": [10, 16],
+  "bucket": "wdpdt-media-71552573513",
+  "service_account": "wdpdt-uploader@wdpdt-506016.iam.gserviceaccount.com",
+  "account": "planes",
+  "videos": [
+    {
+      "id": "AirplaneLights", "object": "airplanelights",
+      "title": "Why Pilots Dim The Cabin Lights Before Landing #Shorts",
+      "description": "Pilots dim the cabin before landing so your eyes pre-adjust to the dark. If an evacuation happened, you could already see the exits. Every second counts. #Shorts #aviation #planes #flying #didyouknow",
+      "tags": "aviation, planes, shorts, did you know, flying",
+      "last_posted": "2026-08-19"
+    },
+    {
+      "id": "WindowHole", "object": "windowhole",
+      "title": "Why Every Airplane Window Has A Tiny Hole #Shorts",
+      "description": "That tiny hole in your airplane window is the breather hole. It balances pressure between the panes so the outer pane takes the stress and the glass doesn't fog or crack at altitude. #Shorts #aviation #planes #flying",
+      "tags": "aviation, planes, shorts, did you know, flying",
+      "last_posted": "2026-08-19"
+    },
+    {
+      "id": "FuelDump", "object": "fueldump",
+      "title": "Why Planes Dump Fuel In The Sky Before Landing #Shorts",
+      "description": "In an emergency right after takeoff a plane is too heavy to land, so it sprays fuel from the wingtips high enough that it vaporises before reaching the ground. #Shorts #aviation #planes #flying",
+      "tags": "aviation, planes, shorts, did you know, flying",
+      "last_posted": "2026-08-19"
+    },
+    {
+      "id": "BleedAir", "object": "bleedair",
+      "title": "You're Breathing Engine Air Right Now #Shorts",
+      "description": "Cabin air comes straight through the engines. They squeeze thin outside air hot and dense, bleed some off before it burns, then cool and filter it into the cabin. #Shorts #aviation #planes #flying",
+      "tags": "aviation, planes, shorts, did you know, flying",
+      "last_posted": "2026-08-19"
+    },
+    {
+      "id": "BlandFood", "object": "blandfood",
+      "title": "Why Airplane Food Tastes So Bland #Shorts",
+      "description": "At altitude, low pressure and dry cabin air numb your taste buds by up to 30 percent. Your food didn't change, your tongue did. #Shorts #aviation #planes #flying #didyouknow",
+      "tags": "aviation, planes, shorts, food, did you know",
+      "last_posted": "2026-08-20"
+    },
+    {
+      "id": "WingFlex", "object": "wingflex",
+      "title": "Why Airplane Wings Bend So Much #Shorts",
+      "description": "Airplane wings bend by design. A Boeing 787's wingtips flex over 3 metres in flight. A stiff wing would crack under turbulence; flexing absorbs the stress like a diving board. #Shorts #aviation #planes #flying",
+      "tags": "aviation, planes, shorts, engineering, did you know",
+      "last_posted": "2026-08-20"
+    },
+    {
+      "id": "RoundWindows", "object": "roundwindows",
+      "title": "Why Airplane Windows Are Round, Not Square #Shorts",
+      "description": "Early jets had square windows and it was catastrophic. Sharp corners concentrate stress and cracked planes apart. Round windows spread the pressure evenly, with no corner for a crack to start. #Shorts #aviation #planes #flying",
+      "tags": "aviation, planes, shorts, history, did you know",
+      "last_posted": "2026-08-20"
+    }
+  ]
+}

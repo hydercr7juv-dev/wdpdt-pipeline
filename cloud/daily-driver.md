@@ -17,7 +17,7 @@ b. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCI
    "Why [surprising question]? Some people think [wrong guess]. But that's not actually why. [2–3 sentences of the real mechanical explanation.] [One stakes/consequence sentence.]"
    Save it to `/tmp/<slug>.txt`.
 
-c. **Voiceover (free Andrew):** `python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
+c. **Voiceover (free Andrew):** use this exact Python (it has edge-tts): `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
 
 d. **Write the spec** `src/videos/<slug>.ts`. Copy the shape of an existing file like `src/videos/windowHole.ts` EXACTLY (same imports/export), changing: `id: "<CompId>"`, `title`, `voFile: "assets/vo_<slug>.mp3"`, `audioDuration: <DUR>`, `script` (same text as /tmp/<slug>.txt), `emphasis` (10–20 vivid keywords from the script, lowercased), and `scenes`: ~9–10 cuts of ~3–4s covering 0→(DUR+0.5), each using one of the ONLY available clips in public/assets — `cabin.mp4`, `window.mp4`, `citynight.mp4`, `runway.mp4`, `takeoff.mp4`, `eye.mp4` — pick the clips that best match the sentence, vary `startFrom` (1–18), and make the last scene end at DUR+0.5.
 

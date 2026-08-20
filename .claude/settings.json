@@ -20,7 +20,9 @@
       "Bash(git pull:*)",
       "Read",
       "Write",
-      "Edit"
+      "Edit",
+      "Bash(/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts:*)",
+      "Bash(/Library/Frameworks/Python.framework/Versions/3.11/bin/python3:*)"
     ]
   }
 }

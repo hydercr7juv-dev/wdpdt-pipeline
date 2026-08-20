@@ -1,0 +1,14 @@
+{
+  "id": "session-1787233734540",
+  "startedAt": "2026-08-20T13:48:54.540Z",
+  "cwd": "/Users/hydermoedeen/.wdpdt/repo",
+  "context": {},
+  "metrics": {
+    "edits": 5,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  },
+  "endedAt": "2026-08-20T13:53:37.649Z",
+  "duration": 283111
+}

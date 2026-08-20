@@ -13,6 +13,8 @@ import { roundWindows } from "./videos/roundWindows";
 import { contrails } from "./videos/contrails";
 import { blackbox } from "./videos/blackbox";
 import { cruiseAltitude } from "./videos/cruiseAltitude";
+import { windowShades } from "./videos/windowShades";
+import { boardingLeft } from "./videos/boardingLeft";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -25,6 +27,8 @@ const SPECS: VideoSpec[] = [
   contrails,
   blackbox,
   cruiseAltitude,
+  windowShades,
+  boardingLeft,
 ];
 
 export const RemotionRoot: React.FC = () => {

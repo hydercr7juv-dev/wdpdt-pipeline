@@ -1,0 +1,14 @@
+{
+  "id": "session-1787222943101",
+  "startedAt": "2026-08-20T10:49:03.101Z",
+  "cwd": "/Users/hydermoedeen/Desktop/Claude/remotion-slouch",
+  "context": {},
+  "metrics": {
+    "edits": 1,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  },
+  "endedAt": "2026-08-20T10:49:32.957Z",
+  "duration": 29858
+}

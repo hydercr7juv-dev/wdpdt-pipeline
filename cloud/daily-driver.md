@@ -1,6 +1,6 @@
 # WDPDT daily poster — run these steps exactly, once per day
 
-You schedule today's YouTube Shorts for the "Why Do Planes Do That" channel. Be idempotent: if today is already scheduled, do nothing. Work in the repo dir you were started in (`/Users/hydermoedeen/Desktop/Claude/remotion-slouch`). Use the gcloud at `/opt/homebrew/bin/gcloud`.
+You schedule today's YouTube Shorts for the "Why Do Planes Do That" channel. Be idempotent: if today is already scheduled, do nothing. Work ONLY in the current working directory (a checkout of the wdpdt-pipeline repo) — do not cd elsewhere. Use the gcloud at `/opt/homebrew/bin/gcloud`.
 
 ## 1. Today + freshest manifest
 - `TODAY=$(date -u +%F)` and `NOWH=$(date -u +%-H)` (current UTC hour).

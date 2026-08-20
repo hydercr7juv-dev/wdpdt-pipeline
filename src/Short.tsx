@@ -15,15 +15,14 @@ import {
 } from "remotion";
 import { buildWords, buildGroups, Word, Group } from "./lib/timing";
 import { VideoSpec } from "./lib/video";
+import { ANTON_DATA_URL } from "./lib/antonFont";
 
-// Load Anton from a bundled local file, not the Google Fonts CDN — the cloud
-// render sandbox blocks fonts.gstatic.com, which would drop the caption font.
+// Anton is embedded as a base64 data URL (no network/staticFile fetch) so the
+// cloud render never hangs loading the caption font. fonts.gstatic.com is
+// blocked in the sandbox, and a staticFile URL load timed out there too.
 const fontFamily = "Anton";
 const fontHandle = delayRender("load-anton", { timeout: 120000 });
-const antonFace = new FontFace(
-  fontFamily,
-  `url(${staticFile("fonts/Anton-Regular.ttf")}) format('truetype')`,
-);
+const antonFace = new FontFace(fontFamily, `url(${ANTON_DATA_URL})`);
 antonFace
   .load()
   .then((loaded) => {

@@ -4,9 +4,6 @@ import {
   Audio,
   OffthreadVideo,
   Sequence,
-  cancelRender,
-  continueRender,
-  delayRender,
   interpolate,
   spring,
   staticFile,
@@ -15,21 +12,18 @@ import {
 } from "remotion";
 import { buildWords, buildGroups, Word, Group } from "./lib/timing";
 import { VideoSpec } from "./lib/video";
-import { ANTON_DATA_URL } from "./lib/antonFont";
-
-// Anton is embedded as a base64 data URL (no network/staticFile fetch) so the
-// cloud render never hangs loading the caption font. fonts.gstatic.com is
-// blocked in the sandbox, and a staticFile URL load timed out there too.
+// Anton is loaded from the bundled local file, not fonts.gstatic.com, which is
+// blocked in the cloud render sandbox.
+//
+// Deliberately a plain @font-face and NOT delayRender + FontFace.load(): the JS
+// load promise intermittently never settles in reused render tabs, and a
+// delayRender handle that is never cleared kills the render hundreds of frames
+// in. Remotion already waits for document.fonts.ready before capturing each
+// frame, so the CSS rule alone is enough — and it has nothing that can hang.
+// (`font-display: block` so text never flashes in a fallback face mid-render.)
 const fontFamily = "Anton";
-const fontHandle = delayRender("load-anton", { timeout: 120000 });
-const antonFace = new FontFace(fontFamily, `url(${ANTON_DATA_URL})`);
-antonFace
-  .load()
-  .then((loaded) => {
-    document.fonts.add(loaded);
-    continueRender(fontHandle);
-  })
-  .catch((err) => cancelRender(err));
+const fontUrl = staticFile("fonts/Anton-Regular.ttf");
+const fontCss = `@font-face{font-family:"${fontFamily}";src:url("${fontUrl}") format("truetype");font-weight:400;font-style:normal;font-display:block;}`;
 
 const EMPH = "#FFD93B"; // popping keyword color
 const WHITE = "#FFFFFF";
@@ -158,6 +152,7 @@ export const Short: React.FC<{ spec: VideoSpec }> = ({ spec }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
+      <style>{fontCss}</style>
       {spec.scenes.map((s, i) => {
         const from = Math.round(s.start * fps);
         const durationInFrames = Math.max(1, Math.round((s.end - s.start) * fps));

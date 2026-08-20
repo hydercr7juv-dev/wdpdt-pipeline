@@ -10,6 +10,8 @@ import { bleedAir } from "./videos/bleedAir";
 import { blandFood } from "./videos/blandFood";
 import { wingFlex } from "./videos/wingFlex";
 import { roundWindows } from "./videos/roundWindows";
+import { contrails } from "./videos/contrails";
+import { blackbox } from "./videos/blackbox";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -19,6 +21,8 @@ const SPECS: VideoSpec[] = [
   blandFood,
   wingFlex,
   roundWindows,
+  contrails,
+  blackbox,
 ];
 
 export const RemotionRoot: React.FC = () => {

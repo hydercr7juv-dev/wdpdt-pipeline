@@ -15,6 +15,8 @@ import { blackbox } from "./videos/blackbox";
 import { cruiseAltitude } from "./videos/cruiseAltitude";
 import { windowShades } from "./videos/windowShades";
 import { boardingLeft } from "./videos/boardingLeft";
+import { landingWind } from "./videos/landingWind";
+import { tireBurst } from "./videos/tireBurst";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -29,6 +31,8 @@ const SPECS: VideoSpec[] = [
   cruiseAltitude,
   windowShades,
   boardingLeft,
+  landingWind,
+  tireBurst,
 ];
 
 export const RemotionRoot: React.FC = () => {

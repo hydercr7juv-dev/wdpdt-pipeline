@@ -19,7 +19,7 @@ import { VideoSpec } from "./lib/video";
 // Load Anton from a bundled local file, not the Google Fonts CDN — the cloud
 // render sandbox blocks fonts.gstatic.com, which would drop the caption font.
 const fontFamily = "Anton";
-const fontHandle = delayRender("load-anton");
+const fontHandle = delayRender("load-anton", { timeout: 120000 });
 const antonFace = new FontFace(
   fontFamily,
   `url(${staticFile("fonts/Anton-Regular.ttf")}) format('truetype')`,

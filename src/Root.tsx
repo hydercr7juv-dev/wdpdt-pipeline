@@ -17,6 +17,7 @@ import { windowShades } from "./videos/windowShades";
 import { boardingLeft } from "./videos/boardingLeft";
 import { landingWind } from "./videos/landingWind";
 import { tireBurst } from "./videos/tireBurst";
+import { lostLuggage } from "./videos/lostLuggage";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -33,6 +34,7 @@ const SPECS: VideoSpec[] = [
   boardingLeft,
   landingWind,
   tireBurst,
+  lostLuggage,
 ];
 
 export const RemotionRoot: React.FC = () => {

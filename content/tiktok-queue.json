@@ -1,0 +1,84 @@
+{
+  "network": "tiktok",
+  "account": "why-do-planes-do-that",
+  "cadence_hours": 6,
+  "items": [
+    {
+      "item_id": "wdpdt-01",
+      "post_at": "2026-08-22T18:00Z",
+      "title": "Why there's a tiny hole in your plane window 🔍",
+      "description": "That little hole isn't a flaw — it's what stops the window cracking under pressure. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/19cae19d-fecc-40c9-a4f9-ce7ca99b11cf.mp4"
+    },
+    {
+      "item_id": "wdpdt-02",
+      "post_at": "2026-08-23T00:00Z",
+      "title": "Why airlines really lose your luggage 🧳",
+      "description": "It isn't careless handlers. Your bag is scanned at every handover, and a tight connection is all it takes. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/2e681f67-38ba-4b87-a91c-ee37a11488d8.mp4"
+    },
+    {
+      "item_id": "wdpdt-03",
+      "post_at": "2026-08-23T06:00Z",
+      "title": "Why almost every plane is painted white ✈️",
+      "description": "Not a style choice. White keeps the cabin cooler, resists UV fading and makes cracks obvious. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/69aa8bc8-c7ce-49dc-aa23-4f4ca34dea78.mp4"
+    },
+    {
+      "item_id": "wdpdt-04",
+      "post_at": "2026-08-23T12:00Z",
+      "title": "The black box isn't black 🟠",
+      "description": "It's bright orange, and that's the least surprising thing about it. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/82f4087a-ef7c-4049-8fbe-2a89ba849f87.mp4"
+    },
+    {
+      "item_id": "wdpdt-05",
+      "post_at": "2026-08-23T18:00Z",
+      "title": "Why you MUST open the window shade for landing",
+      "description": "It isn't about the view. It's a ninety-second survival rule. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/1ec9d02d-c7bc-4c02-a4b4-a7a845fcc04e.mp4"
+    },
+    {
+      "item_id": "wdpdt-06",
+      "post_at": "2026-08-24T00:00Z",
+      "title": "Why you always board a plane from the left",
+      "description": "It's not tradition — the right side belongs to the fuel truck. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/2465b726-4c67-4f98-a633-c6ce849b6088.mp4"
+    },
+    {
+      "item_id": "wdpdt-07",
+      "post_at": "2026-08-24T06:00Z",
+      "title": "Why planes fly at 35,000 feet",
+      "description": "Thin air means less drag, less fuel and a smoother ride. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/b9d521f2-44f1-4836-ac84-ed1f9851b904.mp4"
+    },
+    {
+      "item_id": "wdpdt-08",
+      "post_at": "2026-08-24T12:00Z",
+      "title": "Why planes dump fuel before landing ⛽",
+      "description": "A plane can take off far heavier than it can safely land. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/c3022d5d-db29-448e-8b93-1adbb635396c.mp4"
+    },
+    {
+      "item_id": "wdpdt-09",
+      "post_at": "2026-08-24T18:00Z",
+      "title": "Why planes leave white trails in the sky ☁️",
+      "description": "Those lines behind a jet aren't smoke. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/82c43ac8-f87b-48ff-8a49-d058f4461a8c.mp4"
+    },
+    {
+      "item_id": "wdpdt-10",
+      "post_at": "2026-08-25T00:00Z",
+      "title": "The air you breathe on a plane comes from the engines 😮",
+      "description": "It's called bleed air — and it's cleaner than it sounds. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/f01cfac2-86be-464b-9245-4e69116af739.mp4"
+    },
+    {
+      "item_id": "wdpdt-11",
+      "post_at": "2026-08-25T06:00Z",
+      "title": "Why cabin lights dim for landing",
+      "description": "Your eyes need to already be adjusted if anything goes wrong. #aviation #planes #flying #avgeek #didyouknow",
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/9caba06d-3dbb-487e-92fc-e5cd005ceda0.mp4"
+    }
+  ]
+}

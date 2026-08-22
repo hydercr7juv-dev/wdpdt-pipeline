@@ -7,3 +7,10 @@ render*.log
 r_*.log
 
 cloud/*.log
+
+# Per-session scratch state. Tracking it made every concurrent push collide —
+# the Mac's daily driver and an interactive session would each rewrite these,
+# and the resulting conflict left the driver's clone stuck mid-rebase, which
+# silently stopped it generating videos.
+.claude-flow/sessions/
+.claude-flow/data/pending-insights.jsonl

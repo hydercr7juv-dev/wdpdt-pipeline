@@ -24,6 +24,10 @@ import { lightningStrike } from "./videos/lightningStrike";
 import { toiletFlush } from "./videos/toiletFlush";
 import { pushback } from "./videos/pushback";
 import { earthStopped } from "./videos/earthStopped";
+import { blackHole } from "./videos/blackHole";
+import { sunOut } from "./videos/sunOut";
+import { iceMelt } from "./videos/iceMelt";
+import { magField } from "./videos/magField";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -47,6 +51,10 @@ const SPECS: VideoSpec[] = [
   toiletFlush,
   pushback,
   earthStopped,
+  blackHole,
+  sunOut,
+  iceMelt,
+  magField,
 ];
 
 export const RemotionRoot: React.FC = () => {

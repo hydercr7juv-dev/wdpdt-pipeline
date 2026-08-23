@@ -1,0 +1,65 @@
+{
+  "network": "youtube",
+  "channel": "What If Labs",
+  "channel_id": "UCjcSxwyu8ecxyu5-0rGDKIA",
+  "composio_account": "youtube_elt-gentoo",
+  "cadence_hours": 4,
+  "items": [
+    {
+      "item_id": "wil-01",
+      "post_at": "2026-08-23T20:00Z",
+      "title": "What If You Fell Into A Black Hole? #Shorts",
+      "description": "You wouldn't be crushed first — you'd be stretched. And to anyone watching, you never arrive.\n\nFootage: NASA (public domain)\n\n#shorts #science #space #whatif #physics",
+      "tags": [
+        "shorts",
+        "science",
+        "space",
+        "whatif",
+        "physics"
+      ],
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/16d8fc94-6788-434b-94c7-d0fa73092d4c.mp4"
+    },
+    {
+      "item_id": "wil-02",
+      "post_at": "2026-08-24T00:00Z",
+      "title": "What If The Sun Went Out? #Shorts",
+      "description": "For 8 minutes 20 seconds, nothing. Then the sky goes dark — and the deep sea carries on regardless.\n\nFootage: NASA (public domain)\n\n#shorts #science #space #whatif #physics",
+      "tags": [
+        "shorts",
+        "science",
+        "space",
+        "whatif",
+        "physics"
+      ],
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/40bf8104-f552-4c9c-9311-37720c4c5e3e.mp4"
+    },
+    {
+      "item_id": "wil-03",
+      "post_at": "2026-08-24T04:00Z",
+      "title": "What If All The Ice Melted? #Shorts",
+      "description": "Not the whole planet underwater — about 60 metres of sea level rise. It redraws the map.\n\nFootage: NASA (public domain)\n\n#shorts #science #space #whatif #physics",
+      "tags": [
+        "shorts",
+        "science",
+        "space",
+        "whatif",
+        "physics"
+      ],
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/c3215b46-5557-4aeb-9891-202bdc634f6e.mp4"
+    },
+    {
+      "item_id": "wil-04",
+      "post_at": "2026-08-24T08:00Z",
+      "title": "What If Earth Lost Its Magnetic Field? #Shorts",
+      "description": "You wouldn't be fried on day one. The damage is slow — and Mars shows where it ends.\n\nFootage: NASA (public domain)\n\n#shorts #science #space #whatif #physics",
+      "tags": [
+        "shorts",
+        "science",
+        "space",
+        "whatif",
+        "physics"
+      ],
+      "video_url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3HE2oGZUN5sXsfKAQFYKkN1p4XX/098a6bbf-245f-4599-8e5b-0b14f4fb2447.mp4"
+    }
+  ]
+}

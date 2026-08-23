@@ -22,6 +22,7 @@ import { whitePlanes } from "./videos/whitePlanes";
 import { earsPop } from "./videos/earsPop";
 import { lightningStrike } from "./videos/lightningStrike";
 import { toiletFlush } from "./videos/toiletFlush";
+import { pushback } from "./videos/pushback";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -43,6 +44,7 @@ const SPECS: VideoSpec[] = [
   earsPop,
   lightningStrike,
   toiletFlush,
+  pushback,
 ];
 
 export const RemotionRoot: React.FC = () => {

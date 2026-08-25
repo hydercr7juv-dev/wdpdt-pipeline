@@ -30,6 +30,8 @@ import { iceMelt } from "./videos/iceMelt";
 import { magField } from "./videos/magField";
 import { winglets } from "./videos/winglets";
 import { reverseThrust } from "./videos/reverseThrust";
+import { tireSmoke } from "./videos/tireSmoke";
+import { oxygenMasks } from "./videos/oxygenMasks";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -59,6 +61,8 @@ const SPECS: VideoSpec[] = [
   magField,
   winglets,
   reverseThrust,
+  tireSmoke,
+  oxygenMasks,
 ];
 
 export const RemotionRoot: React.FC = () => {

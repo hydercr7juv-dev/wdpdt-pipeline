@@ -28,6 +28,8 @@ import { blackHole } from "./videos/blackHole";
 import { sunOut } from "./videos/sunOut";
 import { iceMelt } from "./videos/iceMelt";
 import { magField } from "./videos/magField";
+import { solarStorm } from "./videos/solarStorm";
+import { moonGone } from "./videos/moonGone";
 import { winglets } from "./videos/winglets";
 import { reverseThrust } from "./videos/reverseThrust";
 import { tireSmoke } from "./videos/tireSmoke";
@@ -67,6 +69,8 @@ const SPECS: VideoSpec[] = [
   oxygenMasks,
   dihedral,
   seatbeltSign,
+  solarStorm,
+  moonGone,
 ];
 
 export const RemotionRoot: React.FC = () => {

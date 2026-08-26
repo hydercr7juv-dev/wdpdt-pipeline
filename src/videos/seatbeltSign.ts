@@ -30,16 +30,18 @@ export const seatbeltSign: VideoSpec = {
     "glowing",
     "bet",
   ],
+  // Scene list rebuilt on the wider clip library — the generated original
+  // reused cabin four times and window three, which reads as one repeated shot.
   scenes: [
-    { clip: "cabin.mp4", start: 0.0, end: 3.6, startFrom: 3 },
-    { clip: "window.mp4", start: 3.6, end: 7.1, startFrom: 2 },
-    { clip: "cabin.mp4", start: 7.1, end: 10.6, startFrom: 8 },
-    { clip: "citynight.mp4", start: 10.6, end: 14.1, startFrom: 5 },
-    { clip: "window.mp4", start: 14.1, end: 17.6, startFrom: 12 },
-    { clip: "eye.mp4", start: 17.6, end: 21.1, startFrom: 1 },
-    { clip: "cabin.mp4", start: 21.1, end: 24.6, startFrom: 14 },
-    { clip: "window.mp4", start: 24.6, end: 28.1, startFrom: 18 },
-    { clip: "takeoff.mp4", start: 28.1, end: 30.9, startFrom: 4 },
-    { clip: "cabin.mp4", start: 30.9, end: 33.932, startFrom: 1 },
+    { clip: "seatbelt.mp4", start: 0.0, end: 3.6, startFrom: 1 },
+    { clip: "windowseat.mp4", start: 3.6, end: 7.1, startFrom: 2 },
+    { clip: "clouds.mp4", start: 7.1, end: 10.6, startFrom: 2 },
+    { clip: "cockpit.mp4", start: 10.6, end: 14.1, startFrom: 1 },
+    { clip: "clouds2.mp4", start: 14.1, end: 17.6, startFrom: 3 },
+    { clip: "cabin.mp4", start: 17.6, end: 21.1, startFrom: 8 },
+    { clip: "sunsetflight.mp4", start: 21.1, end: 24.6, startFrom: 2 },
+    { clip: "planeview.mp4", start: 24.6, end: 28.1, startFrom: 3 },
+    { clip: "beltoff.mp4", start: 28.1, end: 30.9, startFrom: 6 },
+    { clip: "climbout.mp4", start: 30.9, end: 33.932, startFrom: 6 },
   ],
 };

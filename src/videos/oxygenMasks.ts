@@ -35,16 +35,18 @@ export const oxygenMasks: VideoSpec = {
     "dive",
     "altitude",
   ],
+  // Scene list rebuilt on the wider clip library — the generated original
+  // cycled cabin/window/eye three times each, which reads as one repeated shot.
   scenes: [
     { clip: "cabin.mp4", start: 0.0, end: 3.6, startFrom: 2 },
-    { clip: "window.mp4", start: 3.6, end: 7.2, startFrom: 4 },
+    { clip: "windowseat.mp4", start: 3.6, end: 7.2, startFrom: 1 },
     { clip: "eye.mp4", start: 7.2, end: 10.8, startFrom: 1 },
-    { clip: "cabin.mp4", start: 10.8, end: 14.4, startFrom: 7 },
-    { clip: "window.mp4", start: 14.4, end: 18.0, startFrom: 10 },
-    { clip: "eye.mp4", start: 18.0, end: 21.6, startFrom: 5 },
-    { clip: "cabin.mp4", start: 21.6, end: 25.2, startFrom: 12 },
-    { clip: "runway.mp4", start: 25.2, end: 28.8, startFrom: 3 },
-    { clip: "takeoff.mp4", start: 28.8, end: 32.4, startFrom: 6 },
-    { clip: "cabin.mp4", start: 32.4, end: 35.9, startFrom: 15 },
+    { clip: "beltoff.mp4", start: 10.8, end: 14.4, startFrom: 2 },
+    { clip: "cockpit.mp4", start: 14.4, end: 18.0, startFrom: 1 },
+    { clip: "window.mp4", start: 18.0, end: 21.6, startFrom: 10 },
+    { clip: "sunsetflight.mp4", start: 21.6, end: 25.2, startFrom: 2 },
+    { clip: "climbout.mp4", start: 25.2, end: 28.8, startFrom: 3 },
+    { clip: "clouds.mp4", start: 28.8, end: 32.4, startFrom: 2 },
+    { clip: "cabin.mp4", start: 32.4, end: 35.9, startFrom: 8 },
   ],
 };

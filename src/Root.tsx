@@ -38,6 +38,8 @@ import { dihedral } from "./videos/dihedral";
 import { seatbeltSign } from "./videos/seatbeltSign";
 import { staticWicks } from "./videos/staticWicks";
 import { holdingPattern } from "./videos/holdingPattern";
+import { chevrons } from "./videos/chevrons";
+import { windshieldHeat } from "./videos/windshieldHeat";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -75,6 +77,8 @@ const SPECS: VideoSpec[] = [
   moonGone,
   staticWicks,
   holdingPattern,
+  chevrons,
+  windshieldHeat,
 ];
 
 export const RemotionRoot: React.FC = () => {

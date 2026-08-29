@@ -104,6 +104,66 @@ def _ts(s):
     return f"{int(s // 3600)}:{int((s % 3600) // 60):02d}:{s % 60:05.2f}"
 
 
+ASS_HEAD = """[Script Info]
+ScriptType: v4.00+
+PlayResX: {w}
+PlayResY: {h}
+WrapStyle: 0
+[V4+ Styles]
+Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
+Style: K,Anton,104,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,6,3,2,60,60,430,1
+[Events]
+Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
+"""
+
+
+def caption_groups(script, total, emphasis):
+    """Word timings collapsed into three-word groups, with per-word karaoke
+    durations and a yellow flag for emphasis words."""
+    timings = word_timings(script, total)
+    emph = {re.sub(r"[^a-z]", "", e.lower()) for e in emphasis}
+    groups = []
+    for i in range(0, len(timings), 3):
+        grp = timings[i:i + 3]
+        parts = []
+        for w, ws, we in grp:
+            clean = re.sub(r"[^A-Za-z0-9'£$%-]", "", w).upper()
+            if not clean:
+                continue
+            hot = re.sub(r"[^a-z]", "", w.lower()) in emph
+            parts.append((clean, we - ws, hot))
+        if parts:
+            groups.append((grp[0][1], grp[-1][2], parts))
+    return groups
+
+
+def ass_for_window(groups, start, end, path):
+    """Write an ASS covering only [start, end), with times rebased to zero.
+
+    Captions are burned per scene rather than in one pass over the whole video:
+    libass' glyph/bitmap cache grows as it goes, and on the workbench's ~1GB a
+    single full-length pass gets OOM-killed around ten seconds in. Per-scene
+    passes keep each render short and reset that cache every time.
+    """
+    lines = []
+    for gs, ge, parts in groups:
+        if ge <= start or gs >= end:
+            continue
+        s = max(0.0, gs - start)
+        e = min(end - start, ge - start)
+        if e - s < 0.05:
+            continue
+        txt = "".join(
+            "{\\k%d}%s%s " % (max(1, int(d * 100)),
+                              r"{\c&H003BD9FF&}" if hot else r"{\c&H00FFFFFF&}",
+                              word)
+            for word, d, hot in parts
+        ).strip()
+        lines.append(f"Dialogue: 0,{_ts(s)},{_ts(e)},K,,0,0,0,,{txt}")
+    open(path, "w").write(ASS_HEAD.format(w=W, h=H) + "\n".join(lines) + "\n")
+    return path
+
+
 def build_ass(script, total, emphasis, path="/tmp/caps.ass"):
     """Groups of three words, karaoke-timed, emphasis words in yellow.
     ASS colours are &HBBGGRR — 3BD9FF is the #FFD93B used by the Remotion build."""
@@ -144,50 +204,43 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
     total = duration(vo) + TAIL
     paths = fetch_clips(clips)
 
-    # Even scene split across the voiceover, each cut normalised so concat is safe.
+    # Captions are burned scene by scene (see ass_for_window), so each ffmpeg
+    # pass is only a few seconds long and peak memory stays flat.
+    groups = caption_groups(script, total - TAIL, emphasis)
     seg = total / len(paths)
+
+    # These colour/timing flags are what YouTube wants — a file without them
+    # comes back "Processing abandoned". They go on the scene encodes because
+    # those streams are concatenated straight into the final video.
+    VENC = (f'-threads 2 -c:v libx264 -profile:v high -level 4.0 -preset veryfast -crf 21 '
+            f'-pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 '
+            f'-color_trc bt709 -r {FPS} -fps_mode cfr -video_track_timescale 15360 '
+            f'-x264-params "threads=2:lookahead-threads=1:sliced-threads=0"')
+
     parts = []
     for i, p in enumerate(paths):
         src_len = duration(p)
         start = min(1.0 + (i % 3) * 2.0, max(0.0, src_len - seg - 0.2))
+        caps = ass_for_window(groups, i * seg, (i + 1) * seg, f"/tmp/caps_{i}.ass")
         outp = f"/tmp/scene_{i}.mp4"
-        # -threads 2 matters: x264 allocates frame buffers per thread and the
-        # workbench only has ~1GB, so default threading gets the process
-        # OOM-killed part way through.
         run(f'{ff()} -y -stream_loop -1 -ss {start:.2f} -t {seg:.2f} -i {p} '
-            f'-vf "scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},setsar=1" '
-            f'-an -threads 2 -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p {outp}')
+            f'-vf "scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},'
+            f'fps={FPS},setsar=1,ass={caps}" -filter_threads 1 '
+            f'-an {VENC} {outp}')
         os.remove(p)  # free the source immediately; disk is tight too
         parts.append(outp)
 
     with open("/tmp/list.txt", "w") as f:
         for p in parts:
             f.write(f"file '{p}'\n")
-    run(f'{ff()} -y -f concat -safe 0 -i /tmp/list.txt -c copy /tmp/joined.mp4')
 
-    caps = build_ass(script, total - TAIL, emphasis)
-    # yuv420p + tv range + faststart is the profile YouTube accepts; jpeg-ish
-    # full-range output is what caused "Processing abandoned" on early uploads.
-    #
-    # Thread caps are load-bearing, not tidiness: this pass decodes 1080x1920,
-    # runs libass over it and re-encodes, and on the workbench's ~1GB it gets
-    # OOM-killed around frame 300 with default threading. Two encode threads and
-    # single-threaded filtering keeps peak RSS well under the limit.
-    # Every flag below earned its place by a YouTube "Processing abandoned":
-    #   -map_metadata -1      strip container metadata carried through concat
-    #   -fflags +genpts       concat -c copy leaves gappy timestamps; regenerate
-    #   -r 30 -fps_mode cfr   force constant frame rate; VFR gets rejected
-    #   -video_track_timescale 15360  matches the timebase of uploads that worked
-    #   colour tags written explicitly rather than left "unknown"
-    run(f'{ff()} -y -fflags +genpts -i /tmp/joined.mp4 -i {vo} '
-        f'-filter_complex "[0:v]ass={caps}[v]" -filter_complex_threads 1 -filter_threads 1 '
-        f'-map "[v]" -map 1:a -threads 2 -map_metadata -1 '
-        f'-c:v libx264 -profile:v high -level 4.0 -preset veryfast -crf 22 '
-        f'-pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 '
-        f'-r {FPS} -fps_mode cfr -video_track_timescale 15360 '
-        f'-x264-params "threads=2:lookahead-threads=1:sliced-threads=0" '
+    # Video is already captioned and correctly encoded, so it is copied, not
+    # re-encoded — no second full-length pass, which is what kept blowing up.
+    run(f'{ff()} -y -fflags +genpts -f concat -safe 0 -i /tmp/list.txt -i {vo} '
+        f'-map 0:v -map 1:a -map_metadata -1 -c:v copy '
         f'-c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart -shortest {out}')
-    for p in parts + ["/tmp/joined.mp4"]:
+
+    for p in parts:
         try:
             os.remove(p)
         except OSError:

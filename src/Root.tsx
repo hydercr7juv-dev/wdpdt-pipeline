@@ -40,6 +40,8 @@ import { staticWicks } from "./videos/staticWicks";
 import { holdingPattern } from "./videos/holdingPattern";
 import { chevrons } from "./videos/chevrons";
 import { windshieldHeat } from "./videos/windshieldHeat";
+import { nitrogenTires } from "./videos/nitrogenTires";
+import { wingVortex } from "./videos/wingVortex";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -79,6 +81,8 @@ const SPECS: VideoSpec[] = [
   holdingPattern,
   chevrons,
   windshieldHeat,
+  nitrogenTires,
+  wingVortex,
 ];
 
 export const RemotionRoot: React.FC = () => {

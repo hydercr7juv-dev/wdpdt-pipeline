@@ -234,8 +234,17 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
             f'-vf "scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},'
             f'fps={FPS},setsar=1,ass={caps}" -filter_threads 1 '
             f'-an {VENC} {outp}')
-        os.remove(p)  # free the source immediately; disk is tight too
         parts.append(outp)
+
+    # Sources are freed only once every scene is cut. Deleting each one right
+    # after use looked like a tidy way to save space, but a clip list may name
+    # the same file twice (a shot returning later in the video), and the second
+    # pass then found it missing.
+    for p in set(paths):
+        try:
+            os.remove(p)
+        except OSError:
+            pass
 
     with open("/tmp/list.txt", "w") as f:
         for p in parts:

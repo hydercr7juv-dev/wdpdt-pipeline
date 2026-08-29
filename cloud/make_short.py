@@ -67,14 +67,21 @@ def duration(path):
 
 
 def fetch_clips(clips):
-    """Pull each clip once from the public repo."""
+    """Pull each clip from the public repo.
+
+    Re-downloads whenever the cached copy is missing OR too small: a crashed
+    earlier run can leave a truncated file behind, and trusting mere existence
+    made the next build fail on an unreadable source.
+    """
     paths = []
     for c in clips:
         p = f"/tmp/src_{c}"
-        if not os.path.exists(p):
+        if not os.path.exists(p) or os.path.getsize(p) < 50_000:
+            if os.path.exists(p):
+                os.remove(p)
             run(f'curl -sfL -o {p} "{ASSETS}/{c}"', timeout=300)
-            if os.path.getsize(p) < 50_000:
-                raise RuntimeError(f"clip {c} downloaded too small — wrong name?")
+            if not os.path.exists(p) or os.path.getsize(p) < 50_000:
+                raise RuntimeError(f"clip {c} missing or too small — wrong filename?")
         paths.append(p)
     return paths
 

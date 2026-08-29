@@ -173,10 +173,18 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
     # runs libass over it and re-encodes, and on the workbench's ~1GB it gets
     # OOM-killed around frame 300 with default threading. Two encode threads and
     # single-threaded filtering keeps peak RSS well under the limit.
-    run(f'{ff()} -y -i /tmp/joined.mp4 -i {vo} '
+    # Every flag below earned its place by a YouTube "Processing abandoned":
+    #   -map_metadata -1      strip container metadata carried through concat
+    #   -fflags +genpts       concat -c copy leaves gappy timestamps; regenerate
+    #   -r 30 -fps_mode cfr   force constant frame rate; VFR gets rejected
+    #   -video_track_timescale 15360  matches the timebase of uploads that worked
+    #   colour tags written explicitly rather than left "unknown"
+    run(f'{ff()} -y -fflags +genpts -i /tmp/joined.mp4 -i {vo} '
         f'-filter_complex "[0:v]ass={caps}[v]" -filter_complex_threads 1 -filter_threads 1 '
-        f'-map "[v]" -map 1:a -threads 2 '
-        f'-c:v libx264 -profile:v high -preset veryfast -crf 22 -pix_fmt yuv420p -color_range tv '
+        f'-map "[v]" -map 1:a -threads 2 -map_metadata -1 '
+        f'-c:v libx264 -profile:v high -level 4.0 -preset veryfast -crf 22 '
+        f'-pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 '
+        f'-r {FPS} -fps_mode cfr -video_track_timescale 15360 '
         f'-x264-params "threads=2:lookahead-threads=1:sliced-threads=0" '
         f'-c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart -shortest {out}')
     for p in parts + ["/tmp/joined.mp4"]:

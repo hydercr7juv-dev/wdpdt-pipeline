@@ -151,9 +151,13 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
         src_len = duration(p)
         start = min(1.0 + (i % 3) * 2.0, max(0.0, src_len - seg - 0.2))
         outp = f"/tmp/scene_{i}.mp4"
+        # -threads 2 matters: x264 allocates frame buffers per thread and the
+        # workbench only has ~1GB, so default threading gets the process
+        # OOM-killed part way through.
         run(f'{ff()} -y -stream_loop -1 -ss {start:.2f} -t {seg:.2f} -i {p} '
             f'-vf "scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS},setsar=1" '
-            f'-an -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p {outp}')
+            f'-an -threads 2 -c:v libx264 -preset veryfast -crf 21 -pix_fmt yuv420p {outp}')
+        os.remove(p)  # free the source immediately; disk is tight too
         parts.append(outp)
 
     with open("/tmp/list.txt", "w") as f:
@@ -164,10 +168,22 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
     caps = build_ass(script, total - TAIL, emphasis)
     # yuv420p + tv range + faststart is the profile YouTube accepts; jpeg-ish
     # full-range output is what caused "Processing abandoned" on early uploads.
+    #
+    # Thread caps are load-bearing, not tidiness: this pass decodes 1080x1920,
+    # runs libass over it and re-encodes, and on the workbench's ~1GB it gets
+    # OOM-killed around frame 300 with default threading. Two encode threads and
+    # single-threaded filtering keeps peak RSS well under the limit.
     run(f'{ff()} -y -i /tmp/joined.mp4 -i {vo} '
-        f'-filter_complex "[0:v]ass={caps}[v]" -map "[v]" -map 1:a '
+        f'-filter_complex "[0:v]ass={caps}[v]" -filter_complex_threads 1 -filter_threads 1 '
+        f'-map "[v]" -map 1:a -threads 2 '
         f'-c:v libx264 -profile:v high -preset veryfast -crf 22 -pix_fmt yuv420p -color_range tv '
+        f'-x264-params "threads=2:lookahead-threads=1:sliced-threads=0" '
         f'-c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart -shortest {out}')
+    for p in parts + ["/tmp/joined.mp4"]:
+        try:
+            os.remove(p)
+        except OSError:
+            pass
     if not os.path.exists(out) or os.path.getsize(out) < 200_000:
         raise RuntimeError("final mp4 missing or suspiciously small")
     return out

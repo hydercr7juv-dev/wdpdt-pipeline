@@ -42,6 +42,8 @@ import { chevrons } from "./videos/chevrons";
 import { windshieldHeat } from "./videos/windshieldHeat";
 import { nitrogenTires } from "./videos/nitrogenTires";
 import { wingVortex } from "./videos/wingVortex";
+import { coffinCorner } from "./videos/coffinCorner";
+import { pitotTube } from "./videos/pitotTube";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -83,6 +85,8 @@ const SPECS: VideoSpec[] = [
   windshieldHeat,
   nitrogenTires,
   wingVortex,
+  coffinCorner,
+  pitotTube,
 ];
 
 export const RemotionRoot: React.FC = () => {

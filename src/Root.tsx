@@ -44,6 +44,8 @@ import { nitrogenTires } from "./videos/nitrogenTires";
 import { wingVortex } from "./videos/wingVortex";
 import { coffinCorner } from "./videos/coffinCorner";
 import { pitotTube } from "./videos/pitotTube";
+import { rivets } from "./videos/rivets";
+import { greatCircle } from "./videos/greatCircle";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -87,6 +89,8 @@ const SPECS: VideoSpec[] = [
   wingVortex,
   coffinCorner,
   pitotTube,
+  rivets,
+  greatCircle,
 ];
 
 export const RemotionRoot: React.FC = () => {

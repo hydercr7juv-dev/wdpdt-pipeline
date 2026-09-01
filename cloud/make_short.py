@@ -42,11 +42,16 @@ def run(cmd, timeout=900):
 
 
 def install_font():
-    os.makedirs("/root/.fonts", exist_ok=True)
-    run(f'curl -sfL -o /root/.fonts/Anton-Regular.ttf "{FONT_URL}"')
+    # ~/.fonts in the cloud sandbox is /root/.fonts, but this also runs on a Mac
+    # where /root is read-only — resolve the home directory instead of hardcoding.
+    fdir = os.path.expanduser("~/.fonts")
+    os.makedirs(fdir, exist_ok=True)
+    run(f'curl -sfL -o {fdir}/Anton-Regular.ttf "{FONT_URL}"')
     run("fc-cache -f >/dev/null 2>&1 || true")
-    if "anton" not in run("fc-list").lower():
-        raise RuntimeError("Anton font did not register with fontconfig")
+    if "anton" not in run("fc-list 2>/dev/null || true").lower():
+        # macOS ships fontconfig only sometimes; libass can still find the file
+        # via the fonts dir, so warn rather than abort.
+        print("warning: Anton not registered with fontconfig; relying on font file")
 
 
 def say(text, path="/tmp/vo.mp3"):

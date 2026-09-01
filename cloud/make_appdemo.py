@@ -21,7 +21,8 @@ from make_short import (  # noqa: E402
 )
 
 
-def build_demo(shot, script, emphasis, out="/tmp/demo.mp4", top=0, bottom=None, hold=1.2):
+def build_demo(shot, script, emphasis, out="/tmp/demo.mp4", top=0, bottom=None, hold=1.2,
+               caption_margin=210):
     """Pan from `top` to `bottom` of the screenshot over the voiceover.
 
     hold = seconds held still at the start, so the opening frame (the headline)
@@ -52,6 +53,10 @@ def build_demo(shot, script, emphasis, out="/tmp/demo.mp4", top=0, bottom=None, 
             f"{y_start}+({y_end}-{y_start})*(n-{hold_f})/{max(1, frames - hold_f)})")
 
     caps = ass_for_window(caption_groups(script, total - TAIL, emphasis), 0, total, "/tmp/caps_demo.ass")
+    # Sit the captions low, clear of the page content they're overlaying. The
+    # shared style hardcodes MarginV 430, which lands mid-screen here.
+    txt = open(caps).read().replace(",60,60,430,1", f",60,60,{caption_margin},1")
+    open(caps, "w").write(txt)
 
     run(f'{ff()} -y -loop 1 -framerate {FPS} -t {total:.2f} -i {shot} -i {vo} '
         f'-filter_complex "[0:v]scale={W}:-1,crop={W}:{H}:0:\'{expr}\','

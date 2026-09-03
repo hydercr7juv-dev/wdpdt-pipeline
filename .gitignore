@@ -14,3 +14,12 @@ cloud/*.log
 # silently stopped it generating videos.
 .claude-flow/sessions/
 .claude-flow/data/pending-insights.jsonl
+
+# Secrets. The Pexels key lives here and must never be committed.
+.env
+.env.*
+
+# Local venv for the footage fetcher (real ffmpeg; Remotion ships a reduced build)
+.venv/
+
+__pycache__/

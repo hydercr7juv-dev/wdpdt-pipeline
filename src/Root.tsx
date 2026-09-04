@@ -50,6 +50,8 @@ import { wingSweep } from "./videos/wingSweep";
 import { deicingFluid } from "./videos/deicingFluid";
 import { wakeTurbulence } from "./videos/wakeTurbulence";
 import { flapTracks } from "./videos/flapTracks";
+import { runwayNumbers } from "./videos/runwayNumbers";
+import { noStepWing } from "./videos/noStepWing";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -99,6 +101,8 @@ const SPECS: VideoSpec[] = [
   deicingFluid,
   wakeTurbulence,
   flapTracks,
+  runwayNumbers,
+  noStepWing,
 ];
 
 export const RemotionRoot: React.FC = () => {

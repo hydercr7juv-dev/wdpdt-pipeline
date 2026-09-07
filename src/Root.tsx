@@ -56,6 +56,8 @@ import { plugDoor } from "./videos/plugDoor";
 import { spinnerSwirl } from "./videos/spinnerSwirl";
 import { radome } from "./videos/radome";
 import { ramTurbine } from "./videos/ramTurbine";
+import { apu } from "./videos/apu";
+import { engineMount } from "./videos/engineMount";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -111,6 +113,8 @@ const SPECS: VideoSpec[] = [
   spinnerSwirl,
   radome,
   ramTurbine,
+  apu,
+  engineMount,
 ];
 
 export const RemotionRoot: React.FC = () => {

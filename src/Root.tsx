@@ -58,6 +58,8 @@ import { radome } from "./videos/radome";
 import { ramTurbine } from "./videos/ramTurbine";
 import { apu } from "./videos/apu";
 import { engineMount } from "./videos/engineMount";
+import { cabinAltitude } from "./videos/cabinAltitude";
+import { dimLights } from "./videos/dimLights";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -115,6 +117,8 @@ const SPECS: VideoSpec[] = [
   ramTurbine,
   apu,
   engineMount,
+  cabinAltitude,
+  dimLights,
 ];
 
 export const RemotionRoot: React.FC = () => {

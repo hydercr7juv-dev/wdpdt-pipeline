@@ -60,6 +60,8 @@ import { apu } from "./videos/apu";
 import { engineMount } from "./videos/engineMount";
 import { cabinAltitude } from "./videos/cabinAltitude";
 import { dimLights } from "./videos/dimLights";
+import { doorsAutomatic } from "./videos/doorsAutomatic";
+import { tcas } from "./videos/tcas";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -119,6 +121,8 @@ const SPECS: VideoSpec[] = [
   engineMount,
   cabinAltitude,
   dimLights,
+  doorsAutomatic,
+  tcas,
 ];
 
 export const RemotionRoot: React.FC = () => {

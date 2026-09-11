@@ -64,6 +64,8 @@ import { doorsAutomatic } from "./videos/doorsAutomatic";
 import { tcas } from "./videos/tcas";
 import { v1Speed } from "./videos/v1Speed";
 import { etops } from "./videos/etops";
+import { vortexGenerators } from "./videos/vortexGenerators";
+import { trimTank } from "./videos/trimTank";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -127,6 +129,8 @@ const SPECS: VideoSpec[] = [
   tcas,
   v1Speed,
   etops,
+  vortexGenerators,
+  trimTank,
 ];
 
 export const RemotionRoot: React.FC = () => {

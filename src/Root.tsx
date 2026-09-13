@@ -66,6 +66,8 @@ import { v1Speed } from "./videos/v1Speed";
 import { etops } from "./videos/etops";
 import { vortexGenerators } from "./videos/vortexGenerators";
 import { trimTank } from "./videos/trimTank";
+import { lifeVest } from "./videos/lifeVest";
+import { wingSlats } from "./videos/wingSlats";
 
 const SPECS: VideoSpec[] = [
   airplaneLights,
@@ -131,6 +133,8 @@ const SPECS: VideoSpec[] = [
   etops,
   vortexGenerators,
   trimTank,
+  lifeVest,
+  wingSlats,
 ];
 
 export const RemotionRoot: React.FC = () => {

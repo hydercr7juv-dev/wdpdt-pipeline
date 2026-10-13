@@ -1,0 +1,718 @@
+{
+ "bank": [
+  {
+   "slug": "apuWhine",
+   "question": "Why that whine before the engines start",
+   "keywords": "APU auxiliary power unit tail whine",
+   "used": false
+  },
+  {
+   "slug": "groundLav",
+   "question": "Why you cannot use the toilet on the ground",
+   "keywords": "lavatory servicing vacuum ground",
+   "used": false
+  },
+  {
+   "slug": "soulsOnBoard",
+   "question": "Why pilots say souls on board",
+   "keywords": "souls on board phrase emergency count",
+   "used": false
+  },
+  {
+   "slug": "chimeCodes",
+   "question": "What the cabin chimes actually mean",
+   "keywords": "chime tones crew call codes",
+   "used": false
+  },
+  {
+   "slug": "brace",
+   "question": "Why the brace position is that shape",
+   "keywords": "brace position spine impact",
+   "used": false
+  },
+  {
+   "slug": "armRests",
+   "question": "Why armrests must be down for landing",
+   "keywords": "armrest evacuation aisle width",
+   "used": false
+  },
+  {
+   "slug": "galleyCurtain",
+   "question": "Why the galley curtains open for takeoff",
+   "keywords": "curtain evacuation sightline",
+   "used": false
+  },
+  {
+   "slug": "cabinCrewSit",
+   "question": "Why crew sit on their hands at takeoff",
+   "keywords": "crew bracing silent review",
+   "used": false
+  },
+  {
+   "slug": "thirtyK",
+   "question": "Why the first and last eleven minutes matter most",
+   "keywords": "critical eleven minutes accident data",
+   "used": false
+  },
+  {
+   "slug": "stepClimb",
+   "question": "Why planes climb higher mid flight",
+   "keywords": "step climb fuel burn weight",
+   "used": false
+  },
+  {
+   "slug": "etops",
+   "question": "Why twin engine jets fly set ocean routes",
+   "keywords": "ETOPS diversion time rules",
+   "used": false
+  },
+  {
+   "slug": "oceanTracks",
+   "question": "Why Atlantic routes shift every single day",
+   "keywords": "north atlantic tracks jet stream",
+   "used": false
+  },
+  {
+   "slug": "fuelTankerin",
+   "question": "Why airlines sometimes carry extra fuel on purpose",
+   "keywords": "tankering fuel price arbitrage",
+   "used": false
+  },
+  {
+   "slug": "coldFuel",
+   "question": "Why jet fuel does not freeze at altitude",
+   "keywords": "fuel freeze point kerosene",
+   "used": false
+  },
+  {
+   "slug": "wingFuel",
+   "question": "Why fuel lives in the wings",
+   "keywords": "wing fuel tanks bending relief",
+   "used": false
+  },
+  {
+   "slug": "minFuel",
+   "question": "Why pilots declare minimum fuel not emergency",
+   "keywords": "minimum fuel declaration priority",
+   "used": false
+  },
+  {
+   "slug": "flaps",
+   "question": "Why wings grow bigger for landing",
+   "keywords": "flaps slats lift area",
+   "used": false
+  },
+  {
+   "slug": "spoilers",
+   "question": "Why panels pop up the second you touch down",
+   "keywords": "spoilers lift dump weight on wheels",
+   "used": false
+  },
+  {
+   "slug": "autobrake",
+   "question": "Why landings feel harder than they look",
+   "keywords": "autobrake firm touchdown water",
+   "used": false
+  },
+  {
+   "slug": "greaser",
+   "question": "Why a smooth landing is not always a good one",
+   "keywords": "firm landing wet runway aquaplaning",
+   "used": false
+  },
+  {
+   "slug": "crosswindCrab",
+   "question": "Why planes land sideways in wind",
+   "keywords": "crosswind crab de-crab kick",
+   "used": false
+  },
+  {
+   "slug": "goAround",
+   "question": "Why a go around is not a failure",
+   "keywords": "go around unstable approach",
+   "used": false
+  },
+  {
+   "slug": "flare",
+   "question": "Why the nose lifts just before touchdown",
+   "keywords": "flare round out sink rate",
+   "used": false
+  },
+  {
+   "slug": "runwayNumbers",
+   "question": "Why runway numbers change over decades",
+   "keywords": "magnetic north drift renumbering",
+   "used": false
+  },
+  {
+   "slug": "runwayGrooves",
+   "question": "Why runways have grooves cut into them",
+   "keywords": "grooved runway drainage aquaplaning",
+   "used": false
+  },
+  {
+   "slug": "runwayLights",
+   "question": "Why approach lights are coloured that way",
+   "keywords": "PAPI red white glideslope",
+   "used": false
+  },
+  {
+   "slug": "rabbitLights",
+   "question": "Why the runway lights seem to run toward you",
+   "keywords": "sequenced flashing lights rabbit",
+   "used": false
+  },
+  {
+   "slug": "blackMarks",
+   "question": "Why the runway threshold is black",
+   "keywords": "rubber deposits touchdown zone",
+   "used": false
+  },
+  {
+   "slug": "birdCannon",
+   "question": "Why airports fire cannons at birds",
+   "keywords": "bird strike deterrent wildlife control",
+   "used": false
+  },
+  {
+   "slug": "birdIngest",
+   "question": "Why engines are tested with dead birds",
+   "keywords": "bird ingestion certification",
+   "used": false
+  },
+  {
+   "slug": "engineWater",
+   "question": "Why engines are tested in monsoon rain",
+   "keywords": "water ingestion flame out test",
+   "used": false
+  },
+  {
+   "slug": "fanBlade",
+   "question": "Why one blade is deliberately destroyed in testing",
+   "keywords": "fan blade off containment test",
+   "used": false
+  },
+  {
+   "slug": "engineCert",
+   "question": "Why a jet engine must survive losing a blade",
+   "keywords": "containment ring certification",
+   "used": false
+  },
+  {
+   "slug": "twoEngines",
+   "question": "Why four engine jets nearly disappeared",
+   "keywords": "twin engine efficiency reliability",
+   "used": false
+  },
+  {
+   "slug": "engineHang",
+   "question": "Why engines hang in front of the wing",
+   "keywords": "pylon engine position flutter",
+   "used": false
+  },
+  {
+   "slug": "engineDroop",
+   "question": "Why engines look flattened underneath",
+   "keywords": "flat bottom nacelle ground clearance",
+   "used": false
+  },
+  {
+   "slug": "apuTail",
+   "question": "Why the hole in the tail",
+   "keywords": "APU exhaust tail cone",
+   "used": false
+  },
+  {
+   "slug": "ramAir",
+   "question": "Why a small propeller drops out in emergencies",
+   "keywords": "ram air turbine RAT hydraulic",
+   "used": false
+  },
+  {
+   "slug": "hydraulics",
+   "question": "Why there are three separate hydraulic systems",
+   "keywords": "triple redundancy hydraulics",
+   "used": false
+  },
+  {
+   "slug": "flyByWire",
+   "question": "Why the controls are not connected to anything",
+   "keywords": "fly by wire envelope protection",
+   "used": false
+  },
+  {
+   "slug": "sidestick",
+   "question": "Why Airbus and Boeing controls differ",
+   "keywords": "sidestick yoke philosophy",
+   "used": false
+  },
+  {
+   "slug": "trimTank",
+   "question": "Why some jets pump fuel to the tail",
+   "keywords": "trim tank centre of gravity",
+   "used": false
+  },
+  {
+   "slug": "cgLimits",
+   "question": "Why where you sit changes the fuel burn",
+   "keywords": "centre of gravity loading trim",
+   "used": false
+  },
+  {
+   "slug": "weightBalance",
+   "question": "Why passengers get moved before departure",
+   "keywords": "weight and balance load sheet",
+   "used": false
+  },
+  {
+   "slug": "standardMan",
+   "question": "Why airlines assume you weigh a set amount",
+   "keywords": "standard passenger weights",
+   "used": false
+  },
+  {
+   "slug": "overbook",
+   "question": "Why flights are deliberately oversold",
+   "keywords": "overbooking no show statistics",
+   "used": false
+  },
+  {
+   "slug": "tailNumber",
+   "question": "Why every plane has a letter code on the tail",
+   "keywords": "registration tail number country prefix",
+   "used": false
+  },
+  {
+   "slug": "squawk",
+   "question": "Why pilots talk about squawking a number",
+   "keywords": "transponder squawk code 7700",
+   "used": false
+  },
+  {
+   "slug": "sevenSevenHundred",
+   "question": "Why 7700 clears the sky around you",
+   "keywords": "emergency squawk priority",
+   "used": false
+  },
+  {
+   "slug": "mayday",
+   "question": "Why mayday is said three times",
+   "keywords": "mayday repetition radio clarity",
+   "used": false
+  },
+  {
+   "slug": "alphaBravo",
+   "question": "Why pilots spell with Alpha Bravo Charlie",
+   "keywords": "phonetic alphabet radio noise",
+   "used": false
+  },
+  {
+   "slug": "rogerWilco",
+   "question": "Why pilots never say repeat",
+   "keywords": "say again repeat artillery",
+   "used": false
+  },
+  {
+   "slug": "niner",
+   "question": "Why pilots say niner instead of nine",
+   "keywords": "niner nein confusion german",
+   "used": false
+  },
+  {
+   "slug": "zulu",
+   "question": "Why aviation runs on a single world clock",
+   "keywords": "zulu time UTC coordination",
+   "used": false
+  },
+  {
+   "slug": "flightLevel",
+   "question": "Why altitude becomes a flight level up high",
+   "keywords": "transition altitude standard pressure",
+   "used": false
+  },
+  {
+   "slug": "qnhQne",
+   "question": "Why every pilot resets their altimeter",
+   "keywords": "QNH pressure setting terrain",
+   "used": false
+  },
+  {
+   "slug": "mountainWave",
+   "question": "Why clear air can throw a jet around",
+   "keywords": "mountain wave clear air turbulence",
+   "used": false
+  },
+  {
+   "slug": "cat",
+   "question": "Why turbulence does not show on radar",
+   "keywords": "clear air turbulence invisible",
+   "used": false
+  },
+  {
+   "slug": "turbSafe",
+   "question": "Why wings are built to flex in turbulence",
+   "keywords": "load factor design limits",
+   "used": false
+  },
+  {
+   "slug": "seatbeltInjury",
+   "question": "Why nearly all turbulence injuries are avoidable",
+   "keywords": "seatbelt turbulence injury data",
+   "used": false
+  },
+  {
+   "slug": "thunderAvoid",
+   "question": "Why pilots fly around not over storms",
+   "keywords": "overshoot updraft hail",
+   "used": false
+  },
+  {
+   "slug": "hailDamage",
+   "question": "Why hail is worse than lightning for a jet",
+   "keywords": "hail radome damage",
+   "used": false
+  },
+  {
+   "slug": "radome",
+   "question": "Why the nose is not metal",
+   "keywords": "radome radar transparent nose",
+   "used": false
+  },
+  {
+   "slug": "weatherRadar",
+   "question": "Why the nose radar looks down and ahead",
+   "keywords": "tilt weather radar returns",
+   "used": false
+  },
+  {
+   "slug": "volcanicAsh",
+   "question": "Why volcanic ash shuts airports",
+   "keywords": "ash glass turbine melting",
+   "used": false
+  },
+  {
+   "slug": "saharaDust",
+   "question": "Why desert dust grounds flights",
+   "keywords": "dust engine erosion visibility",
+   "used": false
+  },
+  {
+   "slug": "fogZero",
+   "question": "Why some jets land in zero visibility",
+   "keywords": "autoland CAT III ILS",
+   "used": false
+  },
+  {
+   "slug": "autolandRare",
+   "question": "Why autoland is used less than you think",
+   "keywords": "autoland maintenance currency",
+   "used": false
+  },
+  {
+   "slug": "ilsCritical",
+   "question": "Why vehicles stop short of the runway in fog",
+   "keywords": "ILS critical area signal bending",
+   "used": false
+  },
+  {
+   "slug": "coldSoak",
+   "question": "Why frost forms on wings in warm weather",
+   "keywords": "cold soaked fuel frost",
+   "used": false
+  },
+  {
+   "slug": "holdoverTime",
+   "question": "Why de-icing has a countdown",
+   "keywords": "holdover time anti-ice fluid",
+   "used": false
+  },
+  {
+   "slug": "twoStepDeice",
+   "question": "Why planes get sprayed twice",
+   "keywords": "type one type four de-icing",
+   "used": false
+  },
+  {
+   "slug": "pitotIce",
+   "question": "Why heated probes matter so much",
+   "keywords": "pitot heat ice blockage airspeed",
+   "used": false
+  },
+  {
+   "slug": "engineAntiIce",
+   "question": "Why engines bleed hot air to their lips",
+   "keywords": "engine anti ice cowl",
+   "used": false
+  },
+  {
+   "slug": "groundIdle",
+   "question": "Why engines stay running at the gate sometimes",
+   "keywords": "ground power unavailable idle",
+   "used": false
+  },
+  {
+   "slug": "singleEngineTaxi",
+   "question": "Why one engine starts late",
+   "keywords": "taxi fuel saving engine start",
+   "used": false
+  },
+  {
+   "slug": "conformalTaxi",
+   "question": "Why taxiway lights are green and blue",
+   "keywords": "taxiway centreline edge lights",
+   "used": false
+  },
+  {
+   "slug": "hotspots",
+   "question": "Why some taxiway junctions are called hot spots",
+   "keywords": "runway incursion hot spot",
+   "used": false
+  },
+  {
+   "slug": "followMe",
+   "question": "Why a car leads planes to the stand",
+   "keywords": "follow me marshalling",
+   "used": false
+  },
+  {
+   "slug": "standGuidance",
+   "question": "Why the nose wheel must stop on a line",
+   "keywords": "stand guidance jet bridge reach",
+   "used": false
+  },
+  {
+   "slug": "chocks",
+   "question": "Why chocks go in before the engines stop",
+   "keywords": "chocks brake release parking",
+   "used": false
+  },
+  {
+   "slug": "cargoBalance",
+   "question": "Why bags are loaded in a set order",
+   "keywords": "hold loading trim balance",
+   "used": false
+  },
+  {
+   "slug": "liveAnimals",
+   "question": "Why the hold is pressurised and heated",
+   "keywords": "live animal cargo hold conditions",
+   "used": false
+  },
+  {
+   "slug": "humanRemains",
+   "question": "Why some cargo is loaded last",
+   "keywords": "special cargo handling order",
+   "used": false
+  },
+  {
+   "slug": "dangerousGoods",
+   "question": "Why a spare battery cannot go in the hold",
+   "keywords": "lithium battery fire cargo rules",
+   "used": false
+  },
+  {
+   "slug": "vapeRule",
+   "question": "Why vapes must stay in the cabin",
+   "keywords": "lithium fire crew access",
+   "used": false
+  },
+  {
+   "slug": "halon",
+   "question": "Why crew use a specific extinguisher on a laptop",
+   "keywords": "halon lithium fire containment",
+   "used": false
+  },
+  {
+   "slug": "galleyFire",
+   "question": "Why ovens are checked before descent",
+   "keywords": "galley fire risk securing",
+   "used": false
+  },
+  {
+   "slug": "smokeHood",
+   "question": "Why pilots keep a hood by the seat",
+   "keywords": "smoke hood protective breathing",
+   "used": false
+  },
+  {
+   "slug": "quickDon",
+   "question": "Why pilots can mask up in five seconds",
+   "keywords": "quick don oxygen mask rule",
+   "used": false
+  },
+  {
+   "slug": "oneHundredFeet",
+   "question": "Why one pilot eats before the other",
+   "keywords": "crew incapacitation food rule",
+   "used": false
+  },
+  {
+   "slug": "twoPerson",
+   "question": "Why two people must be in the cockpit",
+   "keywords": "two person rule flight deck",
+   "used": false
+  },
+  {
+   "slug": "doorLock",
+   "question": "Why the cockpit door has a delay",
+   "keywords": "reinforced door timer access",
+   "used": false
+  },
+  {
+   "slug": "crewRest",
+   "question": "Why long haul jets hide a bedroom",
+   "keywords": "crew rest compartment",
+   "used": false
+  },
+  {
+   "slug": "deadhead",
+   "question": "Why pilots fly as passengers in uniform",
+   "keywords": "deadheading positioning crew",
+   "used": false
+  },
+  {
+   "slug": "standbyCrew",
+   "question": "Why airlines pay crew to stay home",
+   "keywords": "standby reserve crew",
+   "used": false
+  },
+  {
+   "slug": "dutyTime",
+   "question": "Why a flight cancels over a delay of minutes",
+   "keywords": "flight time limitation duty",
+   "used": false
+  },
+  {
+   "slug": "slotTime",
+   "question": "Why a short delay becomes a three hour one",
+   "keywords": "airport slot missed window",
+   "used": false
+  },
+  {
+   "slug": "curfew",
+   "question": "Why some airports shut at night",
+   "keywords": "night curfew noise restriction",
+   "used": false
+  },
+  {
+   "slug": "noiseAbatement",
+   "question": "Why takeoff feels like it stops climbing",
+   "keywords": "noise abatement thrust cutback",
+   "used": false
+  },
+  {
+   "slug": "steepApproach",
+   "question": "Why some airports need special certification",
+   "keywords": "steep approach London City",
+   "used": false
+  },
+  {
+   "slug": "highAltAirport",
+   "question": "Why some airports need a longer runway",
+   "keywords": "density altitude performance",
+   "used": false
+  },
+  {
+   "slug": "hotAndHigh",
+   "question": "Why heat can stop a plane taking off",
+   "keywords": "hot and high thrust limits",
+   "used": false
+  },
+  {
+   "slug": "waterInjection",
+   "question": "Why old jets sprayed water into engines",
+   "keywords": "water injection thrust boost",
+   "used": false
+  },
+  {
+   "slug": "derate",
+   "question": "Why pilots deliberately use less than full power",
+   "keywords": "derated takeoff engine life",
+   "used": false
+  },
+  {
+   "slug": "flexTemp",
+   "question": "Why the computer is told a false temperature",
+   "keywords": "flex temp assumed temperature",
+   "used": false
+  },
+  {
+   "slug": "v1",
+   "question": "Why there is a point of no return on the runway",
+   "keywords": "V1 decision speed",
+   "used": false
+  },
+  {
+   "slug": "rejectedTakeoff",
+   "question": "Why stopping is sometimes more dangerous",
+   "keywords": "rejected takeoff overrun",
+   "used": false
+  },
+  {
+   "slug": "balancedField",
+   "question": "Why runway length is calculated for failure",
+   "keywords": "balanced field length",
+   "used": false
+  },
+  {
+   "slug": "rotateSpeed",
+   "question": "Why the nose lifts at a precise speed",
+   "keywords": "VR rotate speed",
+   "used": false
+  },
+  {
+   "slug": "gearRetract",
+   "question": "Why the gear comes up so quickly",
+   "keywords": "gear retraction drag climb",
+   "used": false
+  },
+  {
+   "slug": "gearDoors",
+   "question": "Why wheels are left spinning in the bay",
+   "keywords": "brake cooling gear bay",
+   "used": false
+  },
+  {
+   "slug": "brakeFans",
+   "question": "Why brakes have fans",
+   "keywords": "brake cooling turnaround time",
+   "used": false
+  },
+  {
+   "slug": "fuseplug",
+   "question": "Why a melting plug saves the tyres",
+   "keywords": "fusible plug tyre deflation",
+   "used": false
+  },
+  {
+   "slug": "carbonBrakes",
+   "question": "Why carbon brakes work better when hot",
+   "keywords": "carbon brake temperature",
+   "used": false
+  },
+  {
+   "slug": "towbarless",
+   "question": "Why some tugs lift the nose wheel",
+   "keywords": "towbarless tug nose gear",
+   "used": false
+  },
+  {
+   "slug": "deicePad",
+   "question": "Why planes queue at a remote pad",
+   "keywords": "de-icing pad glycol capture",
+   "used": false
+  },
+  {
+   "slug": "glycolRecovery",
+   "question": "Why de-icing fluid is collected",
+   "keywords": "glycol environmental recovery",
+   "used": false
+  },
+  {
+   "slug": "blueIce",
+   "question": "Why ice can fall from a plane",
+   "keywords": "blue ice lavatory leak",
+   "used": false
+  }
+ ]
+}

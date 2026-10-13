@@ -1,0 +1,242 @@
+{
+ "used": {
+  "airplaneLights": [
+   "cabin lights",
+   "dim",
+   "dimming",
+   "lights before landing"
+  ],
+  "windowHole": [
+   "window hole",
+   "tiny hole",
+   "breather hole",
+   "bleed hole"
+  ],
+  "fuelDump": [
+   "dump fuel",
+   "fuel dump",
+   "jettison"
+  ],
+  "bleedAir": [
+   "bleed air",
+   "engine air",
+   "cabin air source"
+  ],
+  "blandFood": [
+   "food taste",
+   "bland",
+   "taste buds",
+   "airline food"
+  ],
+  "wingFlex": [
+   "wing flex",
+   "wings bend",
+   "wings flap"
+  ],
+  "roundWindows": [
+   "round window",
+   "not square",
+   "oval window"
+  ],
+  "contrails": [
+   "contrail",
+   "vapour trail",
+   "vapor trail",
+   "white line"
+  ],
+  "blackbox": [
+   "black box",
+   "flight recorder",
+   "orange box"
+  ],
+  "cruiseAltitude": [
+   "35,000",
+   "cruise altitude",
+   "why so high",
+   "cruising height"
+  ],
+  "windowShades": [
+   "window shade",
+   "blind up",
+   "shades up"
+  ],
+  "boardingLeft": [
+   "board from the left",
+   "left side",
+   "port side boarding"
+  ],
+  "landingWind": [
+   "into the wind",
+   "headwind landing",
+   "land into"
+  ],
+  "tireBurst": [
+   "tyre burst",
+   "tire burst",
+   "tyres don't pop"
+  ],
+  "lostLuggage": [
+   "lost luggage",
+   "lose your bag",
+   "baggage lost"
+  ],
+  "whitePlanes": [
+   "painted white",
+   "white paint",
+   "why white"
+  ],
+  "earsPop": [
+   "ears pop",
+   "ear pressure"
+  ],
+  "lightningStrike": [
+   "lightning"
+  ],
+  "toiletFlush": [
+   "toilet",
+   "flush",
+   "lavatory"
+  ],
+  "pushback": [
+   "pushed back",
+   "pushback",
+   "tug",
+   "reverse out of gate"
+  ],
+  "earthStopped": [
+   "earth stopped spinning"
+  ],
+  "blackHole": [
+   "black hole"
+  ],
+  "sunOut": [
+   "sun went out",
+   "sun disappeared"
+  ],
+  "iceMelt": [
+   "ice melted",
+   "ice caps"
+  ],
+  "magField": [
+   "magnetic field"
+  ],
+  "moonGone": [
+   "moon disappeared",
+   "no moon"
+  ],
+  "nitrogenTires": [
+   "nitrogen",
+   "tyres filled",
+   "tires filled"
+  ],
+  "oxygenMasks": [
+   "oxygen mask",
+   "masks drop"
+  ],
+  "pitotTube": [
+   "pitot",
+   "airspeed probe"
+  ],
+  "reverseThrust": [
+   "reverse thrust",
+   "thrust reverser"
+  ],
+  "rivets": [
+   "rivet"
+  ],
+  "seatbeltSign": [
+   "seatbelt sign",
+   "fasten seatbelt"
+  ],
+  "solarStorm": [
+   "solar storm",
+   "solar flare"
+  ],
+  "staticWicks": [
+   "static wick",
+   "discharger"
+  ],
+  "tireSmoke": [
+   "tyre smoke",
+   "tire smoke",
+   "puff of smoke"
+  ],
+  "wakeTurbulence": [
+   "wake turbulence",
+   "separation behind"
+  ],
+  "windshieldHeat": [
+   "windshield heat",
+   "heated windscreen"
+  ],
+  "wingSweep": [
+   "swept wing",
+   "wing sweep"
+  ],
+  "wingVortex": [
+   "wingtip vortex",
+   "vortex"
+  ],
+  "winglets": [
+   "winglet",
+   "upturned wingtip",
+   "wingtip fence",
+   "small fence"
+  ],
+  "chevrons": [
+   "chevron",
+   "sawtooth nacelle"
+  ],
+  "coffinCorner": [
+   "coffin corner"
+  ],
+  "deicingFluid": [
+   "de-icing",
+   "deicing",
+   "anti-ice fluid"
+  ],
+  "dihedral": [
+   "dihedral",
+   "wings angled up"
+  ],
+  "flapTracks": [
+   "flap track",
+   "flap fairing"
+  ],
+  "greatCircle": [
+   "great circle",
+   "curved route",
+   "over greenland"
+  ],
+  "holdingPattern": [
+   "holding pattern",
+   "circle before landing",
+   "stack",
+   "circling"
+  ],
+  "taxiOneEngine": [
+   "taxi on one engine",
+   "taxi with only one engine",
+   "taxi on just one engine",
+   "single engine taxi"
+  ],
+  "twoMinWait": [
+   "wait two minutes before takeoff",
+   "two minutes before takeoff"
+  ],
+  "dryCabinAir": [
+   "cabin air is so dry",
+   "cabin air dry"
+  ],
+  "cabinPressure8000": [
+   "cabin pressure",
+   "pressurised to sea level",
+   "set at 8,000 feet",
+   "8,000 feet"
+  ],
+  "wingFence": [
+   "small fence",
+   "wingtip fence"
+  ]
+ }
+}

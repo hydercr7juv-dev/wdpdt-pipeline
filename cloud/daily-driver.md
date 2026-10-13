@@ -9,21 +9,37 @@ Config: BUCKET=`wdpdt-media-71552573513`, SA=`wdpdt-uploader@wdpdt-506016.iam.gs
 - ToolSearch `select:RemoteTrigger`; `RemoteTrigger action=list`. If any routine name contains `WDPDT auto <TODAY>`, STOP (already done today).
 
 ## 2. Generate N brand-new videos
-List existing topics: `ls src/videos/*.ts`. Each file is an already-used topic — do NOT repeat any of them. For each of N new videos:
 
-a. **Invent a fresh, true, surprising plane/aviation "why" topic** not already covered. Pick a `slug` (lowercase, e.g. `contrails`) and a `CompId` (PascalCase, e.g. `Contrails`).
+Do NOT invent topics. Inventing is what produced three separate "land into the wind"
+videos and four "pushback" videos, which split each other's audience: the first upload
+got 10,404 views and its retreads got about 2,400 each.
 
-b. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCII, no line breaks):
+a. **Take the topics from the bank:** `node scripts/pick-topic.mjs <N>`. It prints N
+   unused topics as JSON, each with a `slug`, a `question` and `keywords`. Use those
+   exact slugs. `CompId` is the slug in PascalCase (`apuWhine` -> `ApuWhine`).
+
+   If the bank is empty it exits non-zero and says so. In that case STOP and report
+   that `content/question-bank.json` needs new topics. Never fall back to inventing.
+
+b. **Before writing anything, verify the title is not a retread:**
+   `node scripts/pick-topic.mjs --check "<your working title>"`.
+   Exit 1 means it duplicates a published video: discard it and take the next topic
+   from the bank. Exit 0 means proceed.
+
+c. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCII, no line breaks):
    "Why [surprising question]? Some people think [wrong guess]. But that's not actually why. [2–3 sentences of the real mechanical explanation.] [One stakes/consequence sentence.]"
    Save it to `/tmp/<slug>.txt`.
 
-c. **Voiceover (free Andrew):** use this exact Python (it has edge-tts): `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
+d. **Voiceover (free Andrew):** use this exact Python (it has edge-tts): `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
 
-d. **Write the spec** `src/videos/<slug>.ts`. Copy the shape of an existing file like `src/videos/windowHole.ts` EXACTLY (same imports/export), changing: `id: "<CompId>"`, `title`, `voFile: "assets/vo_<slug>.mp3"`, `audioDuration: <DUR>`, `script` (same text as /tmp/<slug>.txt), `emphasis` (10–20 vivid keywords from the script, lowercased), and `scenes`: ~9–10 cuts of ~3–4s covering 0→(DUR+0.5), each using one of the ONLY available clips in public/assets — `cabin.mp4`, `window.mp4`, `citynight.mp4`, `runway.mp4`, `takeoff.mp4`, `eye.mp4` — pick the clips that best match the sentence, vary `startFrom` (1–18), and make the last scene end at DUR+0.5.
+e. **Write the spec** `src/videos/<slug>.ts`. Copy the shape of an existing file like `src/videos/windowHole.ts` EXACTLY (same imports/export), changing: `id: "<CompId>"`, `title`, `voFile: "assets/vo_<slug>.mp3"`, `audioDuration: <DUR>`, `script` (same text as /tmp/<slug>.txt), `emphasis` (10–20 vivid keywords from the script, lowercased), and `scenes`: ~9–10 cuts of ~3–4s covering 0→(DUR+0.5), each using one of the ONLY available clips in public/assets — `cabin.mp4`, `window.mp4`, `citynight.mp4`, `runway.mp4`, `takeoff.mp4`, `eye.mp4` — pick the clips that best match the sentence, vary `startFrom` (1–18), and make the last scene end at DUR+0.5.
 
-e. **Register it:** add the import and the array entry to `src/Root.tsx` (follow the existing pattern).
+f. **Register it:** add the import and the array entry to `src/Root.tsx` (follow the existing pattern).
 
-f. Verify TypeScript is still valid: `npx tsc --noEmit -p tsconfig.json` (if it errors on your new files, fix them).
+g. Verify TypeScript is still valid: `npx tsc --noEmit -p tsconfig.json` (if it errors on your new files, fix them).
+
+h. **Mark each topic consumed** so tomorrow's run cannot pick it again:
+   `node scripts/pick-topic.mjs --use <slug>` for every slug you built.
 
 Commit everything: `git add -A && git commit -m "generate <TODAY>: <slugs>" && git push --quiet`.
 

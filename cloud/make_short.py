@@ -89,7 +89,11 @@ def say(text, path="/tmp/vo.mp3"):
             return ex.submit(asyncio.run, coro).result()
 
     async def stream():
-        comm = edge_tts.Communicate(text, VOICE, rate=RATE)
+        # boundary defaults to "SentenceBoundary", which yields one event per
+        # sentence and is useless for three word karaoke captions. Asking for
+        # WordBoundary is the entire fix; without it this returns nothing and
+        # the build silently falls back to the old estimate.
+        comm = edge_tts.Communicate(text, VOICE, rate=RATE, boundary="WordBoundary")
         timings = []
         with open(path, "wb") as f:
             async for chunk in comm.stream():

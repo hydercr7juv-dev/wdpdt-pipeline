@@ -28,7 +28,23 @@ b. **Before writing anything, verify the title is not a retread:**
 
 c. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCII, no line breaks):
    "Why [surprising question]? Some people think [wrong guess]. But that's not actually why. [2–3 sentences of the real mechanical explanation.] [One stakes/consequence sentence.]"
-   Save it to `/tmp/<slug>.txt`.
+
+   Then append a space and this sentence, word for word, as the last thing in the script:
+
+       Nervous flyer? The whole flight, every noise in order. Link in bio.
+
+   It sells the guide at whydoplanesdothat.gumroad.com/l/nervous-flyer, which
+   Hyder puts in the channel bio. Do not reword it and do not move it earlier:
+   a mid-script plug costs retention at the exact moment the explanation is
+   landing.
+
+   **The CTA is about 4 seconds, so the body must be about 4 seconds shorter
+   than it used to be.** Keep the FULL script, body plus CTA, inside 28 to 36
+   seconds, which is roughly 85 to 105 words at this voice and rate. Letting the
+   total grow instead would cost retention on every upload, which is a worse
+   trade than a slightly tighter explanation.
+
+   Save the whole thing, CTA included, to `/tmp/<slug>.txt`.
 
 d. **Voiceover (free Andrew):** use this exact Python (it has edge-tts): `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
 

@@ -1,0 +1,223 @@
+{
+ "channel": "The Quiet Grind",
+ "voice": "Calm and blunt. Second person. Never shouts, never hypes, never says hustle or grindset. The whole point of the name is that it is quiet: the delivery is a flat, certain voice telling you something uncomfortable and true. No rhetorical questions. No lists. No calls to subscribe inside the script.",
+ "formula": "HOOK: one specific uncomfortable observation, not a platitude. MECHANISM: two or three sentences on why it is actually true, concrete, ideally naming a number or a process. STAKES: one sentence on what it costs you. ACTION: one small thing, doable today, no equipment.",
+ "audience": "14 to 19 year olds who already suspect they are wasting time and want the reason, not the pep talk.",
+ "rules": [
+  "No em dashes anywhere, the voice engine reads them as pauses in the wrong place.",
+  "No quotes from famous people. Original scripts only. Quote-card channels are what YouTube's inauthentic content policy targets and they do not build an audience that trusts you.",
+  "Plain ASCII only.",
+  "Never promise money or results. Say what the mechanism is and let the viewer draw it.",
+  "80 words is the target. At the Andrew voice +12% that lands around 30 seconds."
+ ],
+ "bank": [
+  {
+   "slug": "firstHourDecides",
+   "hook": "Your first hour decides the other fifteen",
+   "script": "Nobody tells you that the first hour after you wake up sets the difficulty of your whole day. Your brain is most sensitive to reward right after sleep. Feed it a feed, and everything slower than a feed feels broken for hours afterwards. That is why your books feel impossible at four in the afternoon. It is not that you are lazy. You spent the sensitive hour on the fastest thing in the house. Tomorrow, keep the phone in another room until you have been awake sixty minutes.",
+   "keywords": "morning bedroom sunrise window waking alarm clock",
+   "emphasis": "first hour, difficulty, sensitive, reward, feed, impossible, lazy, sixty minutes",
+   "used": false
+  },
+  {
+   "slug": "nobodyIsWatching",
+   "hook": "They are not judging you, they are not thinking about you",
+   "script": "You are not starting because you think people will watch you be bad at it. Here is the thing nobody says. They are not watching. They are inside their own head, worrying about their own version of exactly this. The audience you are performing for does not exist. You invented it, and then you let it make your decisions. Everything you have not started is being blocked by people who are not paying attention. Pick the thing you are embarrassed about and do the first ten minutes of it badly today.",
+   "keywords": "crowd street walking alone city people blurred",
+   "emphasis": "not watching, own head, does not exist, invented, blocked, not paying attention, badly",
+   "used": false
+  },
+  {
+   "slug": "boredomMuscle",
+   "hook": "You cannot focus because you never let yourself be bored",
+   "script": "You think you have a focus problem. You have a boredom problem. Focus is just the ability to sit inside something uninteresting long enough for it to get interesting. You have not been bored in years. Every queue, every walk, every gap of thirty seconds gets filled. So the muscle that holds attention through the dull part has never been loaded. Then you sit down to work and it collapses in four minutes, and you decide something is wrong with you. Nothing is wrong with you. Go on one walk today with no headphones.",
+   "keywords": "waiting bus stop rain window train empty room",
+   "emphasis": "boredom problem, uninteresting, bored, filled, muscle, collapses, four minutes, no headphones",
+   "used": false
+  },
+  {
+   "slug": "twoYearGap",
+   "hook": "One hour a day for two years is 730 hours",
+   "script": "An hour a day sounds like nothing. Over two years it is seven hundred and thirty hours. That is more time than most people spend learning anything in their entire adult life. It is the difference between a person who can do something and a person who talks about it. And the reason almost nobody collects those hours is that on any single day the hour feels pointless, because it is. The hour is not the point. The pile is the point. Start the pile tonight with one hour, and do not measure anything for a month.",
+   "keywords": "stacking books desk lamp night studying hands writing",
+   "emphasis": "seven hundred and thirty, entire adult life, difference, pointless, the pile, tonight, do not measure",
+   "used": false
+  },
+  {
+   "slug": "motivationIsWeather",
+   "hook": "Waiting to feel like it is the whole mistake",
+   "script": "You are waiting to feel motivated. Motivation is a feeling, and feelings are weather. You would not plan your week around whether it rains on Thursday, but you are planning your life around whether you happen to feel inspired at seven in the evening. People who get things done are not more motivated than you. They have stopped consulting the feeling before they start. The feeling usually shows up about four minutes after you begin, which is the cruel part. Tonight, start without checking how you feel about it first.",
+   "keywords": "rain window storm clouds grey weather walking",
+   "emphasis": "waiting, feeling, weather, planning your life, inspired, stopped consulting, four minutes, without checking",
+   "used": false
+  },
+  {
+   "slug": "tellingKillsIt",
+   "hook": "Telling people your plan makes you less likely to do it",
+   "script": "When you announce what you are going to do, you get the reward straight away. People are impressed, you feel the thing you were chasing, and your brain quietly files the job as finished. It is called a substitute for completion, and it is why the most talked about plans are the ones that never happen. The people who finish things are boring to talk to beforehand. They look like they are doing nothing. Keep the next thing you start completely to yourself until it exists.",
+   "keywords": "phone screen typing message alone room quiet desk",
+   "emphasis": "announce, reward, impressed, filed as finished, substitute, never happen, boring, doing nothing, to yourself",
+   "used": false
+  },
+  {
+   "slug": "comparisonClock",
+   "hook": "You are comparing your year one to their year ten",
+   "script": "The person you compare yourself to is further along because they started earlier, not because they are built differently. You are watching the output of ten years and measuring it against the output of ten weeks. That is not ambition, it is a maths error. And it is expensive, because the feeling it produces is the exact feeling that makes people quit. If you must compare, compare yourself to the version of you from six months ago. That one is a fair fight, and it is the only comparison that tells you anything useful.",
+   "keywords": "mirror reflection gym running track stairs climbing",
+   "emphasis": "further along, started earlier, ten years, ten weeks, maths error, expensive, quit, six months ago",
+   "used": false
+  },
+  {
+   "slug": "smallerPromise",
+   "hook": "You do not need discipline, you need a smaller promise",
+   "script": "You keep promising yourself two hours and delivering zero. That is not a discipline failure, it is a sizing failure. Every time you break a promise to yourself, the next promise is worth less, and eventually your own word means nothing to you. So stop raising the target and start lowering it until you cannot fail. Ten minutes. Five. One page. The point of a small promise is not the work it produces, it is that you kept it. Make tomorrow's promise so small it would be embarrassing to break.",
+   "keywords": "single page notebook pen hands writing small desk",
+   "emphasis": "two hours, zero, sizing failure, worth less, your own word, lowering it, cannot fail, kept it, embarrassing",
+   "used": false
+  },
+  {
+   "slug": "switchingCost",
+   "hook": "Every check costs you twenty minutes, not twenty seconds",
+   "script": "You checked your phone for ten seconds, so you think you lost ten seconds. You lost the next twenty minutes. Attention does not resume where it stopped. It has to rebuild the whole picture of what you were doing, and that rebuild is the expensive part. Check six times in an hour and you never actually enter the work at all. You just sit near it, feeling tired, producing nothing, and then conclude you studied for an hour. Put the phone in a different room, not face down on the desk.",
+   "keywords": "phone notification desk clock time laptop studying",
+   "emphasis": "ten seconds, twenty minutes, does not resume, rebuild, six times, never enter, sit near it, different room",
+   "used": false
+  },
+  {
+   "slug": "borrowedNight",
+   "hook": "Late at night does not feel free, but it is borrowed",
+   "script": "Midnight feels like the only time that belongs to you. It does not. You are spending tomorrow morning in advance, and tomorrow morning is where the useful version of you lives. The reason the night feels free is that your judgement drops before your energy does, so everything seems like a reasonable idea at one in the morning. Then you wake up owing the day. You are not a night person. You are a person avoiding the morning. Go to bed thirty minutes earlier tonight and notice what happens by Friday.",
+   "keywords": "night city lights dark bedroom phone glow late",
+   "emphasis": "belongs to you, spending tomorrow, in advance, judgement drops, owing the day, avoiding the morning, thirty minutes",
+   "used": false
+  },
+  {
+   "slug": "talentShowsUpLate",
+   "hook": "Talent arrives after the boring part, not before it",
+   "script": "You tried something, you were bad at it, and you decided you were not naturally gifted. Nobody is gifted at the start. What looks like talent is almost always somebody who stayed past the point where it was humiliating. The first four weeks of anything are ugly for everyone, including the people you think were born able to do it. The only difference is they did not read the ugliness as a verdict. Pick the thing you quit because you were bad at it, and give it four more weeks.",
+   "keywords": "practice guitar hands repetition training alone gym",
+   "emphasis": "naturally gifted, nobody is gifted, stayed past, humiliating, four weeks, ugly for everyone, verdict, four more weeks",
+   "used": false
+  },
+  {
+   "slug": "startingIsTheFight",
+   "hook": "The hard part is not the work, it is the first four minutes",
+   "script": "You are not avoiding two hours of work. You are avoiding four minutes of starting. Once you are in it, the resistance drops to almost nothing, which is why you have never once regretted a session you actually began. The problem is that the resistance peaks right before, and at that moment it feels like evidence that today is not the day. It is not evidence. It is a gate that is always there and always thin. Set a timer for five minutes tonight and allow yourself to stop when it goes off.",
+   "keywords": "timer clock desk start pen opening book stairs",
+   "emphasis": "four minutes, resistance drops, never regretted, peaks, not the day, not evidence, gate, always thin, five minutes",
+   "used": false
+  },
+  {
+   "slug": "audienceOfNone",
+   "hook": "Can you do it when nobody will ever know",
+   "script": "Most of what you do has a witness. Marks get seen, posts get liked, effort in front of other people gets credited. So you have learned to work at the level that gets noticed, and no higher. The problem is that everything that compounds happens in the part nobody sees. There is no audience for the hour you revise alone, and that hour is the one that changes the result. Do one thing today that nobody will ever find out about, and do not mention it afterwards.",
+   "keywords": "empty room alone studying night desk solitary window",
+   "emphasis": "a witness, gets credited, gets noticed, no higher, compounds, nobody sees, no audience, changes the result, nobody will find out",
+   "used": false
+  },
+  {
+   "slug": "theQuietYears",
+   "hook": "Everyone you admire had years nobody watched",
+   "script": "You found them when they were already good, so it looks like they appeared fully formed. Behind every person you follow there is a stretch of two to five years where nothing worked and nobody was paying attention. That stretch is not the part before the real thing. It is the real thing. The reason it is invisible is that nobody posts it, and the reason it is unbearable is that you are inside yours right now with no way of knowing how long it lasts. Assume you are in year one of five.",
+   "keywords": "empty stadium early morning training dark gym alone road",
+   "emphasis": "already good, fully formed, two to five years, nobody watching, the real thing, invisible, unbearable, year one of five",
+   "used": false
+  },
+  {
+   "slug": "scrollDebt",
+   "hook": "Three hours a day is forty five days a year",
+   "script": "Three hours a day on a screen is not three hours. Over a year it is one thousand and ninety five hours, which is forty five entire days, awake, gone. Nobody chooses that. It gets taken in four minute pieces that feel free because no single piece costs anything. That is exactly why it works. Debt always arrives in instalments small enough to ignore. Check your screen time right now, multiply it by three hundred and sixty five, and sit with the number before you decide it does not matter.",
+   "keywords": "phone screen time scrolling clock calendar hourglass",
+   "emphasis": "three hours, one thousand and ninety five, forty five entire days, nobody chooses, four minute pieces, instalments, sit with the number",
+   "used": false
+  },
+  {
+   "slug": "consistencyIsRare",
+   "hook": "Hard work is common, showing up on a bad day is not",
+   "script": "Everyone can work hard once. Almost everyone has had a week where they went all in. That is not rare and it does not compound. What is rare is the ordinary Tuesday where you feel flat, nothing is exciting, there is no deadline, and you do the normal amount anyway. Nobody writes songs about that day, and that day is the entire thing. Your goal is not to be intense. It is to become boring and unstoppable. Do the normal amount today specifically because you do not feel like it.",
+   "keywords": "rain training repetition ordinary day walking routine",
+   "emphasis": "hard work once, all in, not rare, does not compound, ordinary Tuesday, flat, the entire thing, boring and unstoppable",
+   "used": false
+  },
+  {
+   "slug": "rereadingIsFake",
+   "hook": "Re reading your notes is not revision, it just feels like it",
+   "script": "Reading over your notes makes the material feel familiar, and your brain reads familiar as known. It is not the same thing. Recognising an answer when you see it is a completely different skill from producing it when the page is blank, and the exam only ever asks for the second one. This is why people revise for hours and still blank. They practised the wrong move. Close the book, write down everything you can remember on a blank page, and then check what you missed. It will feel worse and work better.",
+   "keywords": "notes highlighter textbook blank page exam desk writing",
+   "emphasis": "familiar, reads familiar as known, recognising, producing, blank, practised the wrong move, blank page, worse and work better",
+   "used": false
+  },
+  {
+   "slug": "goalsDoNothing",
+   "hook": "The goal does not do the work, the default does",
+   "script": "You have a goal. So does everyone who fails. A goal is a direction, and a direction has never moved anybody. What actually decides the outcome is what you do by default when you are tired and nothing has been decided. If your default at seven in the evening is your bed and your phone, that default will beat any goal you have ever written down. Change one default instead of setting one more goal. Decide what happens at a specific time, in a specific place, before you get there.",
+   "keywords": "empty desk bed room evening routine door keys",
+   "emphasis": "a goal, a direction, never moved anybody, by default, tired, nothing decided, beat any goal, one default, specific time",
+   "used": false
+  },
+  {
+   "slug": "roomIsMind",
+   "hook": "Willpower loses to furniture",
+   "script": "You keep trying to beat your phone with willpower, in a room designed to make using it easy. Willpower is a limited daily budget and the room never gets tired. If the console is plugged in, the phone is charging by your pillow and the books are in a bag on the floor, you have already decided how tonight goes. Stop trying to be stronger than the room and change the room instead. Tonight, move one thing: the charger goes downstairs, and whatever you want to do goes where the phone was.",
+   "keywords": "tidy desk setup bedroom charger plug organised room",
+   "emphasis": "willpower, designed, limited budget, never gets tired, already decided, stronger than the room, move one thing",
+   "used": false
+  },
+  {
+   "slug": "inputsBecomeYou",
+   "hook": "You are the average of what you watch at one in the morning",
+   "script": "You do not choose your thoughts, you choose your inputs, and the thoughts arrive from there. Six months of a feed full of people doing nothing and you will find yourself defending doing nothing, with arguments that feel like your own. They are not your own. You downloaded them. The same mechanism runs in the other direction, which is the useful part. Unfollow five accounts today that make you feel behind rather than capable, and replace them with people who are two steps ahead, not twenty.",
+   "keywords": "phone late night scrolling dark glow bedroom feed",
+   "emphasis": "choose your inputs, arrive from there, six months, defending doing nothing, downloaded them, other direction, two steps ahead",
+   "used": false
+  },
+  {
+   "slug": "dailyDose",
+   "hook": "One hard thing a day on purpose",
+   "script": "Discomfort is a skill and you can train it directly. Not in a dramatic way. One thing a day that you do not want to do, chosen on purpose, finished anyway. The cold end of the shower. The set you could skip. The message you have been avoiding sending. What you are training is not toughness, it is the gap between feeling resistance and obeying it. Widen that gap and every other difficult thing in your life gets quieter. Choose today's one now, before you have a reason not to.",
+   "keywords": "cold shower water running early morning gym weights",
+   "emphasis": "discomfort is a skill, not dramatic, on purpose, finished anyway, the gap, obeying it, widen that gap, choose now",
+   "used": false
+  },
+  {
+   "slug": "restIsScheduled",
+   "hook": "Rest you did not plan is not rest, it is collapse",
+   "script": "You work until you cannot, then you crash for a day and a half and call it a break. It does not restore you, because collapse is not rest. Real rest is scheduled in advance, has an end time, and happens before you need it. Unplanned rest always comes with guilt attached, which means you get the downtime and none of the recovery. Put one real block of nothing in your week, decide when it ends, and take it whether you have earned it or not.",
+   "keywords": "lying down window light calm resting empty afternoon",
+   "emphasis": "until you cannot, crash, collapse is not rest, scheduled in advance, before you need it, guilt attached, none of the recovery, whether you have earned it",
+   "used": false
+  },
+  {
+   "slug": "notBehind",
+   "hook": "The timeline you are behind was invented",
+   "script": "You feel late. Behind what. There is no schedule. The ages you think things are supposed to happen by came from a handful of outliers and a feed that only shows the early ones. Meanwhile most people who end up good at something started at an age that would have looked hopeless on the internet. The feeling of being behind is not information about your life, it is a side effect of what you have been looking at. Stop pricing yourself against a timetable nobody wrote.",
+   "keywords": "clock calendar road long walking alone horizon sunrise",
+   "emphasis": "feel late, behind what, no schedule, handful of outliers, looked hopeless, not information, side effect, nobody wrote",
+   "used": false
+  },
+  {
+   "slug": "skillsNotMoney",
+   "hook": "You do not have a money problem yet, you have a skill problem",
+   "script": "At your age money is just a skill somebody will pay for, stored. That is the whole mechanism. Nobody pays for your time, your enthusiasm or your potential. They pay because something is worth more to them finished than the money is in their pocket. So the question is not how to make money, it is what can you do that somebody would rather not do themselves. Pick one, get genuinely good at it, badly and in public, and the money part stops being mysterious.",
+   "keywords": "hands working laptop craft building tools focused desk",
+   "emphasis": "a skill somebody will pay for, stored, nobody pays for your time, potential, worth more finished, rather not do themselves, badly and in public",
+   "used": false
+  },
+  {
+   "slug": "theDayFourDip",
+   "hook": "You quit on day four, every time, and it is predictable",
+   "script": "The first three days are easy because they are new. Day four is when novelty runs out and results have not arrived, so the whole thing feels stupid. That is not a sign you picked wrong. It is the most predictable point in any attempt, and almost everybody reads it as a verdict and stops. You can simply know it is coming. Write day four on a piece of paper now. When it arrives, do the smallest possible version and let that count, because getting past it is the only thing that matters.",
+   "keywords": "calendar days marked pen struggling uphill running road",
+   "emphasis": "first three days, day four, novelty runs out, feels stupid, most predictable point, reads it as a verdict, smallest possible version",
+   "used": false
+  },
+  {
+   "slug": "nobodyIsComing",
+   "hook": "Nobody is coming, and that is the good news",
+   "script": "At some point you work out that there is no teacher, parent or lucky break arriving to organise your life for you. That lands like bad news. It is not. If nobody is coming, then nothing is waiting on permission, and every single thing you have been holding until someone notices you can start this evening. The same fact that makes you responsible makes you free, and most people only ever feel the first half of it. Name one thing you have been waiting for permission to start, and start it tonight.",
+   "keywords": "alone road walking door opening empty horizon stairs",
+   "emphasis": "no teacher, lucky break, bad news, nobody is coming, waiting on permission, this evening, responsible makes you free, start it tonight",
+   "used": false
+  }
+ ]
+}

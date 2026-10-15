@@ -31,14 +31,14 @@ c. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCI
 
    Then append a space and this sentence, word for word, as the last thing in the script:
 
-       Nervous flyer? The whole flight, every noise in order. Link in bio.
+       Also guys, if you are a nervous flyer, go check the link in my bio.
 
    It sells the guide at whydoplanesdothat.gumroad.com/l/nervous-flyer, which
    Hyder puts in the channel bio. Do not reword it and do not move it earlier:
    a mid-script plug costs retention at the exact moment the explanation is
    landing.
 
-   **The CTA is about 4 seconds, so the body must be about 4 seconds shorter
+   **The CTA is about 5 seconds, so the body must be about 4 seconds shorter
    than it used to be.** Keep the FULL script, body plus CTA, inside 28 to 36
    seconds, which is roughly 85 to 105 words at this voice and rate. Letting the
    total grow instead would cost retention on every upload, which is a worse

@@ -46,7 +46,17 @@ Commit everything: `git add -A && git commit -m "generate <TODAY>: <slugs>" && g
 ## 3. Schedule the cloud posts
 For each new video i (slot H = SLOTS_UTC[i]; if H<=NOWH use H2=NOWH+1+i else H2=H; RUNAT=`<TODAY>T<H2 padded>:00:00Z`):
 - `PUT=$(/opt/homebrew/bin/gcloud storage sign-url gs://BUCKET/renders/<slug>.mp4 --impersonate-service-account=SA --http-verb=PUT --region=us --duration=12h --format='value(signed_url)')` and same with `--http-verb=GET` → GET.
-- `RemoteTrigger action=create` with this body (fresh v4 uuid; TITLE/DESCRIPTION from the script — description = a 1–2 sentence hook + " #Shorts #aviation #planes #flying #didyouknow"; TAGS = "aviation, planes, shorts, did you know, flying"):
+- `RemoteTrigger action=create` with this body (fresh v4 uuid; TITLE/DESCRIPTION from the script; TAGS = "aviation, planes, shorts, did you know, flying"):
+
+  DESCRIPTION is built as three parts, in this order, every time:
+  1. a 1 to 2 sentence hook drawn from the script
+  2. a blank line, then exactly this, unchanged:
+     `Nervous flyer? Every noise explained, gate to landing: https://whydoplanesdothat.gumroad.com/l/nervous-flyer`
+  3. a blank line, then ` #Shorts #aviation #planes #flying #didyouknow`
+
+  Part 2 is not optional and is not to be reworded. The channel has 189 videos
+  and 304,000 views that carried no link at all, which is the whole reason the
+  guide has sold nothing. Every new upload is a permanent doorway to it.
   ```
   {"name":"WDPDT auto <TODAY> <CompId>","run_once_at":"<RUNAT>","enabled":true,"job_config":{"ccr":{"environment_id":"env_01M5JJDn8E9FCVeBeAWtuPiP","session_context":{"model":"claude-sonnet-5","allowed_tools":["Bash","Read","Write"]},"events":[{"data":{"uuid":"<uuid>","session_id":"","type":"user","parent_tool_use_id":null,"message":{"role":"user","content":"Run the cloud video pipeline. First: git clone https://github.com/hydercr7juv-dev/wdpdt-pipeline /tmp/wdpdt . Then open /tmp/wdpdt/cloud/PIPELINE.md and execute EVERY step exactly, substituting: COMPOSITION = <CompId> ; TITLE = <TITLE> ; DESCRIPTION = <DESCRIPTION> ; TAGS = aviation, planes, shorts, did you know, flying ; PRIVACY = public ; SIGNED_PUT_URL = <PUT> ; SIGNED_GET_URL = <GET> . Report every step result and the final YouTube video id. Keep going even if a step fails and report the exact error."}}}]}}}
   ```

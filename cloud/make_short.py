@@ -72,6 +72,22 @@ def say(text, path="/tmp/vo.mp3"):
     import asyncio
     import edge_tts
 
+    def drive(coro):
+        """Run a coroutine whether or not a loop is already going.
+
+        This builder's home is the Composio workbench, which is Jupyter, and
+        Jupyter always has a running event loop. asyncio.run() raises
+        "cannot be called from a running event loop" there, which would have
+        killed every scheduled run. A worker thread gets its own clean loop.
+        """
+        try:
+            asyncio.get_running_loop()
+        except RuntimeError:
+            return asyncio.run(coro)
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(1) as ex:
+            return ex.submit(asyncio.run, coro).result()
+
     async def stream():
         comm = edge_tts.Communicate(text, VOICE, rate=RATE)
         timings = []
@@ -85,7 +101,7 @@ def say(text, path="/tmp/vo.mp3"):
                     timings.append((chunk["text"], start, start + chunk["duration"] / 1e7))
         return timings
 
-    timings = asyncio.run(stream())
+    timings = drive(stream())
     if not os.path.exists(path) or os.path.getsize(path) < 1000:
         raise RuntimeError("edge-tts produced no audio")
     return path, timings

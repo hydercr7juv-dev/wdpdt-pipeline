@@ -46,9 +46,26 @@ c. **Write a ~28–36s script** in this exact formula (one paragraph, plain ASCI
 
    Save the whole thing, CTA included, to `/tmp/<slug>.txt`.
 
-d. **Voiceover (free Andrew):** use this exact Python (it has edge-tts): `/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 -m edge_tts --voice en-US-AndrewMultilingualNeural --rate "+12%" --file /tmp/<slug>.txt --write-media public/assets/vo_<slug>.mp3`. Get its duration: `afinfo public/assets/vo_<slug>.mp3 | grep 'estimated duration'` → DUR (seconds, float).
+d. **Voiceover and real word timings:** run
 
-e. **Write the spec** `src/videos/<slug>.ts`. Copy the shape of an existing file like `src/videos/windowHole.ts` EXACTLY (same imports/export), changing: `id: "<CompId>"`, `title`, `voFile: "assets/vo_<slug>.mp3"`, `audioDuration: <DUR>`, `script` (same text as /tmp/<slug>.txt), `emphasis` (10–20 vivid keywords from the script, lowercased), and `scenes`: ~9–10 cuts of ~3–4s covering 0→(DUR+0.5), each using one of the ONLY available clips in public/assets — `cabin.mp4`, `window.mp4`, `citynight.mp4`, `runway.mp4`, `takeoff.mp4`, `eye.mp4` — pick the clips that best match the sentence, vary `startFrom` (1–18), and make the last scene end at DUR+0.5.
+       /Library/Frameworks/Python.framework/Versions/3.11/bin/python3 scripts/say.py <slug>
+
+   It reads `/tmp/<slug>.txt`, writes `public/assets/vo_<slug>.mp3`, and writes
+   `/tmp/<slug>.words.json` containing `audioDuration` and a `words` array with
+   the real start and end of every spoken word.
+
+   Do NOT call `edge_tts` directly any more. The old command produced audio only,
+   and the captions were then estimated from word length and stretched to fit.
+   Measured against the real speech that was out by 1.31 seconds in the middle of
+   a 35 second video, which is what made the subtitles look out of step.
+
+   Read DUR from `audioDuration` in that JSON.
+
+   If the script prints a WARNING that the word counts differ, fix the script text
+   until they match. Mismatched counts mean the video silently falls back to the
+   old drifting estimate.
+
+e. **Write the spec** `src/videos/<slug>.ts`. Copy the shape of an existing file like `src/videos/windowHole.ts` EXACTLY (same imports/export), changing: `id: "<CompId>"`, `title`, `voFile: "assets/vo_<slug>.mp3"`, `audioDuration: <DUR>`, `script` (same text as /tmp/<slug>.txt), `emphasis` (10–20 vivid keywords from the script, lowercased), `words` (paste the `words` array from `/tmp/<slug>.words.json` verbatim, this is what keeps the captions in step and is NOT optional), and `scenes`: ~9–10 cuts of ~3–4s covering 0→(DUR+0.5), each using one of the ONLY available clips in public/assets — `cabin.mp4`, `window.mp4`, `citynight.mp4`, `runway.mp4`, `takeoff.mp4`, `eye.mp4` — pick the clips that best match the sentence, vary `startFrom` (1–18), and make the last scene end at DUR+0.5.
 
 f. **Register it:** add the import and the array entry to `src/Root.tsx` (follow the existing pattern).
 

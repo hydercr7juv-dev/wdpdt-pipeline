@@ -35,9 +35,25 @@ export function buildWords(
   script: string,
   audioDuration: number,
   emphasis: string[],
+  spoken?: { text: string; start: number; end: number }[],
 ): Word[] {
   const emph = new Set(emphasis.map((w) => w.toLowerCase()));
   const tokens = script.trim().split(/\s+/);
+
+  // Real timings from the voice engine, when the generator captured them.
+  // The estimate below is pinned at both ends and therefore wrong in the
+  // middle: measured against the real speech it drifted 1.31s at the worst
+  // point of a 35 second script. Only trust the real timings when there is
+  // exactly one per token, otherwise the two lists are misaligned and using
+  // them would be worse than the estimate.
+  if (spoken && spoken.length === tokens.length) {
+    return tokens.map((tok, i) => ({
+      text: tok.replace(/^[^a-zA-Z0-9']+|[^a-zA-Z0-9']+$/g, ""),
+      start: spoken[i].start,
+      end: spoken[i].end,
+      emphasis: emph.has(alnum(tok).toLowerCase()),
+    }));
+  }
   const weights = tokens.map((t) => Math.max(2, alnum(t).length));
   const pauses = tokens.map(pauseAfter);
   const totalPause = pauses.reduce((a, b) => a + b, 0);

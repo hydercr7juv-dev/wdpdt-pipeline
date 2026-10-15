@@ -146,7 +146,7 @@ const ProgressBar: React.FC = () => {
 export const Short: React.FC<{ spec: VideoSpec }> = ({ spec }) => {
   const { fps } = useVideoConfig();
   const groups = useMemo(() => {
-    const words = buildWords(spec.script, spec.audioDuration, spec.emphasis);
+    const words = buildWords(spec.script, spec.audioDuration, spec.emphasis, spec.words);
     return buildGroups(spec.script, words, spec.audioDuration);
   }, [spec]);
 

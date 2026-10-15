@@ -55,11 +55,40 @@ def install_font():
 
 
 def say(text, path="/tmp/vo.mp3"):
-    esc = text.replace('"', '\\"')
-    run(f'python -m edge_tts --voice {VOICE} --rate "{RATE}" --text "{esc}" --write-media {path}')
+    """Synthesise the voiceover AND capture when each word was actually spoken.
+
+    Returns (path, timings) where timings is [(word, start_s, end_s), ...], taken
+    from the engine's own WordBoundary events rather than estimated.
+
+    This replaced a CLI call plus a guess. Captions used to be timed by scoring
+    each word on letter count and trailing punctuation, then stretching the whole
+    lot to fit the audio length. That is fine for the first line and drifts badly
+    by the middle of a 30 second script, which is exactly what the finished videos
+    looked like. The engine knows the real offsets, so ask it.
+
+    The CLI's --write-subtitles only groups by sentence, which is not granular
+    enough for three word karaoke captions. The Python API gives per word events.
+    """
+    import asyncio
+    import edge_tts
+
+    async def stream():
+        comm = edge_tts.Communicate(text, VOICE, rate=RATE)
+        timings = []
+        with open(path, "wb") as f:
+            async for chunk in comm.stream():
+                if chunk["type"] == "audio":
+                    f.write(chunk["data"])
+                elif chunk["type"] == "WordBoundary":
+                    # offsets arrive in 100 nanosecond ticks
+                    start = chunk["offset"] / 1e7
+                    timings.append((chunk["text"], start, start + chunk["duration"] / 1e7))
+        return timings
+
+    timings = asyncio.run(stream())
     if not os.path.exists(path) or os.path.getsize(path) < 1000:
         raise RuntimeError("edge-tts produced no audio")
-    return path
+    return path, timings
 
 
 def duration(path):
@@ -129,10 +158,14 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """
 
 
-def caption_groups(script, total, emphasis):
-    """Word timings collapsed into three-word groups, with per-word karaoke
-    durations and a yellow flag for emphasis words."""
-    timings = word_timings(script, total)
+def caption_groups(timings, emphasis):
+    """Real word timings collapsed into three-word groups, with per-word karaoke
+    durations and a yellow flag for emphasis words.
+
+    `timings` comes straight from say(), so a caption appears exactly when the
+    voice says it. Takes the timings rather than re-deriving them, because
+    re-deriving is what put the captions out of step in the first place.
+    """
     emph = {re.sub(r"[^a-z]", "", e.lower()) for e in emphasis}
     groups = []
     for i in range(0, len(timings), 3):
@@ -212,13 +245,20 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 
 def build(script, emphasis, clips, out="/tmp/final.mp4"):
     install_font()
-    vo = say(script)
+    vo, timings = say(script)
     total = duration(vo) + TAIL
     paths = fetch_clips(clips)
 
+    if not timings:
+        # No WordBoundary events came back. Rather than ship a video whose
+        # captions are silently out of step, fall back to the old estimate and
+        # say so in the log, so it is obvious why that one looks worse.
+        print("warning: no word timings from edge-tts, falling back to estimated caption timing")
+        timings = word_timings(script, total - TAIL)
+
     # Captions are burned scene by scene (see ass_for_window), so each ffmpeg
     # pass is only a few seconds long and peak memory stays flat.
-    groups = caption_groups(script, total - TAIL, emphasis)
+    groups = caption_groups(timings, emphasis)
     seg = total / len(paths)
 
     # These colour/timing flags are what YouTube wants — a file without them

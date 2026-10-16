@@ -28,14 +28,6 @@
    "used": false
   },
   {
-   "slug": "boredomMuscle",
-   "hook": "You cannot focus because you never let yourself be bored",
-   "script": "You think you have a focus problem. You have a boredom problem. Focus is just the ability to sit inside something uninteresting long enough for it to get interesting. You have not been bored in years. Every queue, every walk, every gap of thirty seconds gets filled. So the muscle that holds attention through the dull part has never been loaded. Then you sit down to work and it collapses in four minutes, and you decide something is wrong with you. Nothing is wrong with you. Go on one walk today with no headphones.",
-   "keywords": "waiting bus stop rain window train empty room",
-   "emphasis": "boredom problem, uninteresting, bored, filled, muscle, collapses, four minutes, no headphones",
-   "used": false
-  },
-  {
    "slug": "twoYearGap",
    "hook": "One hour a day for two years is 730 hours",
    "script": "An hour a day sounds like nothing. Over two years it is seven hundred and thirty hours. That is more time than most people spend learning anything in their entire adult life. It is the difference between a person who can do something and a person who talks about it. And the reason almost nobody collects those hours is that on any single day the hour feels pointless, because it is. The hour is not the point. The pile is the point. Start the pile tonight with one hour, and do not measure anything for a month.",

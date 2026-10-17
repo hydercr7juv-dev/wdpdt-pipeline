@@ -2,6 +2,16 @@
 
 The caller gives you SLOT, 0 to 5. Everything else is here.
 
+## Fetching this file
+
+Read it with `curl`, not WebFetch. WebFetch summarises and refuses to reproduce
+a long file verbatim on quote limits, which cost the 09:05 plane run a turn on
+17 Oct before it fell back to curl. Use:
+
+    curl -sS https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/cloud/qg-run.md -o /tmp/run.md -w '%{http_code}\n'
+
+then read /tmp/run.md. A status other than 200 means STOP and report.
+
 Generate ONE Quiet Grind Short and post it to YouTube. Then stop.
 
 The channel is thirty second scripts on discipline, attention and time, aimed at
@@ -43,7 +53,13 @@ product, link or bio. The audience comes first.
 
 ## 2. Build, in the background, then poll
 
-Keep every sleep under 45 seconds; 60 hits the tool timeout.
+Poll with ONE short sleep per call: `time.sleep(30)`, print whether /tmp/done
+exists, nothing more. The whole workbench call must return within 45 seconds.
+
+Do NOT write a retry loop inside a single call. `for _ in range(4):
+time.sleep(30)` totals 120 seconds and the MCP gateway kills the call at 60
+("timed out after 60s"). Every run on 17 Oct lost a turn to exactly that, on
+both the plane and the What If Labs routines. One sleep per call, then return.
 
     import subprocess, json
     subprocess.run("pip install -q edge-tts imageio-ffmpeg", shell=True, timeout=600)

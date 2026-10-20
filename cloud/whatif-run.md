@@ -12,7 +12,9 @@ a long file verbatim on quote limits, which cost the 09:05 plane run a turn on
 
 then read /tmp/run.md. A status other than 200 means STOP and report.
 
-Generate ONE What If Labs Short and post it to YouTube AND Instagram. Then stop.
+Generate ONE What If Labs Short and post it to YouTube. Then stop.
+
+YouTube only. Instagram was cancelled on 20 October 2026.
 
 EVERYTHING happens inside COMPOSIO_REMOTE_WORKBENCH. Load it with ToolSearch
 (query: COMPOSIO_REMOTE_WORKBENCH). Do not render in the routine sandbox.
@@ -32,21 +34,23 @@ under ten seconds with `rate_limit: rejected (seven_day)`. Eighteen agent runs a
 day was more than the plan sustains, so on 20 October this channel dropped to
 three a day while the plane channel kept six.
 
-## 1. Verify the accounts FIRST, then pick the topic
+## 1. Verify the channel FIRST, then pick the topic
 
 The YouTube check comes first because it also supplies the number the topic
 index needs.
 
-    YouTube  : youtube_elt-gentoo        -> UCjcSxwyu8ecxyu5-0rGDKIA
-    Instagram: instagram_damson-ruffle   -> what_if_labs1
+    YouTube : youtube_elt-gentoo -> UCjcSxwyu8ecxyu5-0rGDKIA
 
   - YOUTUBE_GET_CHANNEL_STATISTICS {"mine": true}, account=youtube_elt-gentoo
     Keep `data.channels[0].statistics.videoCount` as an integer.
-  - INSTAGRAM_GET_USER_INFO {"ig_user_id": "me"}, account=instagram_damson-ruffle
 
-A failed check skips THAT platform only. Never fall back to another account.
-403 quotaExceeded or 429 on YouTube means the shared pool is dry: skip YouTube,
-say so, and still post to Instagram, whose quota is separate.
+If the id does not match, STOP and report what you got. Never fall back to
+another account. 403 quotaExceeded or 429 means the shared pool is dry: say so
+and stop.
+
+**This channel posts to YouTube ONLY.** Instagram was cancelled on 20 October
+2026 at the owner's instruction. Do not post to Instagram, do not call any
+INSTAGRAM_* tool, and do not reinstate it.
 
 Then:
 
@@ -180,7 +184,7 @@ Then append a space and this sentence, WORD FOR WORD, as the last thing:
     Also, if you want this stuff on your wall, I have made four science posters where every number is a real measurement. Link in my bio.
 
 It sells hydermoedeen.gumroad.com/l/science-posters, linked in the YouTube and
-Instagram bios, so "link in my bio" is correct on both. Do not reword it, do not
+bio, so "link in my bio" is correct. Do not reword it, do not
 move it earlier: a plug in the middle costs retention at the moment the
 explanation lands. It adds about 8 seconds, so the video runs a little over 30.
 
@@ -243,37 +247,8 @@ success: wait ~25s then YOUTUBE_GET_VIDEO_DETAILS_BATCH `{"id": [vid], "parts":
 ["status","processingDetails"]}`. Anything but processed or succeeded means it
 was rejected: say so and give the id.
 
-## 5. The same video to Instagram
+## 5. Report
 
-Reuse the s3key. Instagram's quota is separate, so do this even if YouTube
-failed on quota.
-
-    run_composio_tool("INSTAGRAM_POST_IG_USER_MEDIA", {
-        "ig_user_id": "28104900562482809",
-        "video_file": {"s3key": up["s3key"], "name": "short.mp4", "mimetype": "video/mp4"},
-        "media_type": "REELS",
-        "caption": <hook line> + "\n\n" + <the payoff> + "\n\nFour science posters, every number a real measurement. Link in our bio.\n\nFootage: NASA (public domain)\n\n#science #space #physics #whatif #didyouknow #astronomy #universe #spacefacts",
-        "share_to_feed": True
-    }, account="instagram_damson-ruffle")
-
-If YouTube failed on quota you still need the s3key: call `upload_local_file`
-before this step.
-
-Take the container id from data.id (or data.creation_id), poll
-INSTAGRAM_GET_POST_STATUS `{"creation_id": "<id>"}` every 6s up to 20 times:
-
-  - FINISHED      : publish.
-  - ERROR/EXPIRED : STOP and report. Never reuse a creation_id, it is single-use.
-  - IN_PROGRESS after 20 polls: STOP and report. Do not publish.
-
-    run_composio_tool("INSTAGRAM_CREATE_POST", {"ig_user_id": "28104900562482809", "creation_id": "<id>"}, account="instagram_damson-ruffle")
-
-Publish exactly ONCE. If it errors, report it; a retry can double-post.
-
-Write the Instagram caption for Instagram, hook first, hashtags last.
-
-## 6. Report
-
-Topic index and how many of the 120 remain, title, YouTube id, URL and
-processing status, Instagram media id, both confirmed account identities. If one
-platform failed, say exactly which and why. Never post to any other account.
+Topic index and how many of the 84 remain, title, YouTube id, URL and
+processing status and the confirmed channel id. If nothing posted, say exactly
+why. YouTube only — never post this anywhere else.

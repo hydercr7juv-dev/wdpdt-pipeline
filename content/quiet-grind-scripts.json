@@ -12,35 +12,11 @@
  ],
  "bank": [
   {
-   "slug": "firstHourDecides",
-   "hook": "Your first hour decides the other fifteen",
-   "script": "Nobody tells you that the first hour after you wake up sets the difficulty of your whole day. Your brain is most sensitive to reward right after sleep. Feed it a feed, and everything slower than a feed feels broken for hours afterwards. That is why your books feel impossible at four in the afternoon. It is not that you are lazy. You spent the sensitive hour on the fastest thing in the house. Tomorrow, keep the phone in another room until you have been awake sixty minutes.",
-   "keywords": "morning bedroom sunrise window waking alarm clock",
-   "emphasis": "first hour, difficulty, sensitive, reward, feed, impossible, lazy, sixty minutes",
-   "used": false
-  },
-  {
-   "slug": "nobodyIsWatching",
-   "hook": "They are not judging you, they are not thinking about you",
-   "script": "You are not starting because you think people will watch you be bad at it. Here is the thing nobody says. They are not watching. They are inside their own head, worrying about their own version of exactly this. The audience you are performing for does not exist. You invented it, and then you let it make your decisions. Everything you have not started is being blocked by people who are not paying attention. Pick the thing you are embarrassed about and do the first ten minutes of it badly today.",
-   "keywords": "crowd street walking alone city people blurred",
-   "emphasis": "not watching, own head, does not exist, invented, blocked, not paying attention, badly",
-   "used": false
-  },
-  {
    "slug": "twoYearGap",
    "hook": "One hour a day for two years is 730 hours",
    "script": "An hour a day sounds like nothing. Over two years it is seven hundred and thirty hours. That is more time than most people spend learning anything in their entire adult life. It is the difference between a person who can do something and a person who talks about it. And the reason almost nobody collects those hours is that on any single day the hour feels pointless, because it is. The hour is not the point. The pile is the point. Start the pile tonight with one hour, and do not measure anything for a month.",
    "keywords": "stacking books desk lamp night studying hands writing",
    "emphasis": "seven hundred and thirty, entire adult life, difference, pointless, the pile, tonight, do not measure",
-   "used": false
-  },
-  {
-   "slug": "motivationIsWeather",
-   "hook": "Waiting to feel like it is the whole mistake",
-   "script": "You are waiting to feel motivated. Motivation is a feeling, and feelings are weather. You would not plan your week around whether it rains on Thursday, but you are planning your life around whether you happen to feel inspired at seven in the evening. People who get things done are not more motivated than you. They have stopped consulting the feeling before they start. The feeling usually shows up about four minutes after you begin, which is the cruel part. Tonight, start without checking how you feel about it first.",
-   "keywords": "rain window storm clouds grey weather walking",
-   "emphasis": "waiting, feeling, weather, planning your life, inspired, stopped consulting, four minutes, without checking",
    "used": false
   },
   {
@@ -209,6 +185,238 @@
    "script": "At some point you work out that there is no teacher, parent or lucky break arriving to organise your life for you. That lands like bad news. It is not. If nobody is coming, then nothing is waiting on permission, and every single thing you have been holding until someone notices you can start this evening. The same fact that makes you responsible makes you free, and most people only ever feel the first half of it. Name one thing you have been waiting for permission to start, and start it tonight.",
    "keywords": "alone road walking door opening empty horizon stairs",
    "emphasis": "no teacher, lucky break, bad news, nobody is coming, waiting on permission, this evening, responsible makes you free, start it tonight",
+   "used": false
+  },
+  {
+   "slug": "boredomTolerance",
+   "hook": "The real skill is tolerating boredom",
+   "script": "Everyone talks about discipline like it is about pain. It is not. It is about boredom. Anyone can do something hard once, when it feels dramatic. Almost nobody can do something boring on the eightieth day, when it feels like nothing. That is the actual filter, and it is why so few people get good at anything. Your phone exists to make sure you never have to be bored, which is the same as making sure you never build this. Sit with one boring task for twenty minutes tonight without checking anything.",
+   "keywords": "night desk alone lamp dark room boredom sitting still",
+   "emphasis": "discipline, pain, boredom, dramatic, eightieth day, nothing, actual filter, never build this, twenty minutes",
+   "used": false
+  },
+  {
+   "slug": "secondRep",
+   "hook": "The rep after it starts hurting is the only one that counts",
+   "script": "When you lift, the reps before it burns do almost nothing. They are a warm up for the two or three at the end that your body actually responds to. Studying is the same shape. The first twenty minutes of reading are you getting into the room. The understanding happens in the uncomfortable part just after you want to stop. Most people stop exactly there and wonder why nothing is changing. Next session, when you first want to quit, do five more minutes. That is where the whole gain lives.",
+   "keywords": "push ups weights straining effort dark gym single person",
+   "emphasis": "before it burns, warm up, actually responds, same shape, into the room, uncomfortable part, want to stop, five more minutes, whole gain",
+   "used": false
+  },
+  {
+   "slug": "decideOnce",
+   "hook": "Decide once, not every single day",
+   "script": "If you decide every morning whether you are training today, you will lose that argument most mornings. Not because you are weak, but because you are asking a tired brain to win a debate before breakfast. People who look disciplined are not winning that argument daily. They removed it. The session is at a fixed time, the bag is already packed, and there is nothing left to decide. Pick your time and write it down once. Then stop treating it as a question you get to reopen.",
+   "keywords": "alarm clock night preparation bag packed routine dark",
+   "emphasis": "decide every morning, lose that argument, tired brain, before breakfast, look disciplined, removed it, fixed time, nothing left to decide, reopen",
+   "used": false
+  },
+  {
+   "slug": "frictionNotWillpower",
+   "hook": "Move the obstacle, do not out-muscle it",
+   "script": "You keep trying to want the right thing harder. That is the least reliable tool you own. The people who read more did not grow more willpower, they put the book on the pillow and the phone in a drawer in another room. Every extra step between you and the thing you regret is worth more than an hour of good intentions. Willpower is what you spend when the setup has already failed. Change one thing about your room tonight so the wrong choice takes thirty more seconds.",
+   "keywords": "phone dark room night desk drawer reaching distance",
+   "emphasis": "want it harder, least reliable, more willpower, pillow, another room, extra step, good intentions, setup has failed, thirty more seconds",
+   "used": false
+  },
+  {
+   "slug": "becomeNotAchieve",
+   "hook": "You do not hit a target, you turn into someone",
+   "script": "A goal is a date and a number. It ends, and then you go back to being whoever you were before it. That is why people get the grades and still feel like a fraud, and why they lose the weight and put it back on. What actually lasts is the quieter thing underneath: you become a person who trains, or who reads, or who finishes. The sessions are not payments towards a prize. They are the thing itself. Ask what you are becoming this month, not what you are getting.",
+   "keywords": "mirror night training alone repetition shadow boxing",
+   "emphasis": "a date and a number, go back, like a fraud, put it back on, quieter thing, become a person, not payments, the thing itself, becoming",
+   "used": false
+  },
+  {
+   "slug": "doItBadly",
+   "hook": "Give yourself permission to do it badly",
+   "script": "A lot of what looks like laziness is actually perfectionism wearing a different coat. You are not avoiding the work, you are avoiding producing something bad, so you wait for a version of yourself who will do it properly. That person is not coming. Every good thing you have ever seen started as a bad first attempt that somebody did not delete. The bar for today is not good. The bar is finished and ugly. Do the worst possible version of the thing you have been putting off, tonight.",
+   "keywords": "writing night desk lamp crossing out alone dark",
+   "emphasis": "looks like laziness, perfectionism, different coat, something bad, do it properly, not coming, bad first attempt, not delete, finished and ugly",
+   "used": false
+  },
+  {
+   "slug": "tiredIsNotDone",
+   "hook": "Tired and finished are not the same thing",
+   "script": "Your body says tired long before it is actually out of anything. It is a budget warning, not an empty tank, and it arrives early on purpose because keeping you alive matters more to it than your goals. Once you know that, tired stops being an instruction. It becomes information you can argue with. Not always. Sometimes tired means sleep, and ignoring that is just stupidity with extra steps. But most of the time there is a clear gap between the two. Next time you feel done, ask which one it is.",
+   "keywords": "exhausted sweat resting breathing hard night gym alone",
+   "emphasis": "long before, budget warning, empty tank, arrives early, keeping you alive, not an instruction, argue with, stupidity with extra steps, which one",
+   "used": false
+  },
+  {
+   "slug": "missOnceNotTwice",
+   "hook": "Missing once is an accident, missing twice is a decision",
+   "script": "You will break the streak. Everyone does, and the day you miss is almost never the thing that ruins it. What ruins it is the second day, because by then you are not a person who missed a session. You are a person who does not do this any more, and that story is much harder to climb out of. So treat day two as the real emergency, not day one. Whatever you missed yesterday, do a small version of it today. The size does not matter. The return does.",
+   "keywords": "stairs climbing back door night walking alone dark street",
+   "emphasis": "break the streak, day you miss, never the thing, second day, not do this any more, harder to climb out, real emergency, small version, the return",
+   "used": false
+  },
+  {
+   "slug": "hardestFirst",
+   "hook": "Do the worst task before you have talked yourself out of it",
+   "script": "Whatever you are dreading today is quietly charging you rent. You are not working on it, but you are carrying it, and it makes everything else feel heavier than it is. The cost is not the task. The cost is the six hours of knowing it is there. Put it first, before your brain is awake enough to build a case against it. You will be worse at it, and it will still be finished. Name the thing you are dreading and do it first thing tomorrow, badly.",
+   "keywords": "early dark morning desk lamp single task writing",
+   "emphasis": "dreading, charging you rent, carrying it, feel heavier, not the task, six hours of knowing, put it first, build a case, finished",
+   "used": false
+  },
+  {
+   "slug": "ninetySeconds",
+   "hook": "The urge passes in about ninety seconds",
+   "script": "The pull to check your phone is not a permanent state, it is a wave. It builds, it peaks, and if you do nothing at all it drops off, usually inside a couple of minutes. The problem is that you have never once let it finish, so you genuinely believe it lasts forever. It does not. You have just always paid it off before it ended. Next time you feel it mid session, do not fight it and do not feed it. Sit still and count to ninety. Then decide.",
+   "keywords": "phone glowing dark room still sitting night waiting",
+   "emphasis": "not a permanent state, a wave, builds, peaks, drops off, never let it finish, lasts forever, paid it off, count to ninety",
+   "used": false
+  },
+  {
+   "slug": "rivalIsLastWeek",
+   "hook": "Your only real rival is you, seven days ago",
+   "script": "Comparing yourself to the best person you can find is not motivating, it is just noise. You cannot see their last four years, their setup, or how much of it is luck, so the comparison tells you nothing you can act on. Last week's version of you is a fair fight. Same body, same room, same hours. You know exactly what that person managed, so you know exactly what beating them looks like. Write down one number from last week and beat it by a little this week.",
+   "keywords": "training alone no audience night gym repetition counting",
+   "emphasis": "best person you can find, just noise, last four years, tells you nothing, last week's version, fair fight, same room, beating them, beat it by a little",
+   "used": false
+  },
+  {
+   "slug": "sleepIsTheWork",
+   "hook": "You do not get stronger in the session",
+   "script": "The session is the signal. The actual change happens hours later while you are unconscious, which means sleep is not the thing you cut to make room for the work. It is part of the work. Training hard on five hours is paying for a gym membership and then skipping the gym. Same for revision: what you read today is filed overnight, and a short night quietly deletes a chunk of it. Push your phone out of the bedroom and your bedtime back by thirty minutes tonight.",
+   "keywords": "night bedroom dark sleeping rest quiet city lights",
+   "emphasis": "the signal, hours later, unconscious, not the thing you cut, part of the work, five hours, skipping the gym, filed overnight, deletes a chunk, thirty minutes",
+   "used": false
+  },
+  {
+   "slug": "plansInHeadArentPlans",
+   "hook": "A plan you never wrote down is just a mood",
+   "script": "Everything feels organised when it is in your head, because in your head it has no times, no order and no conflicts. Written down, it stops being a feeling and becomes a thing with holes in it, and the holes are the useful part. That is uncomfortable, which is exactly why most people keep their plans internal and keep being surprised by the same week. Three lines on paper beats an hour of thinking about it. Write tomorrow down tonight: three tasks, in order, with a start time.",
+   "keywords": "writing paper night desk lamp list planning alone",
+   "emphasis": "in your head, no times, no order, no conflicts, a thing with holes, useful part, uncomfortable, keep them internal, same week, three lines",
+   "used": false
+  },
+  {
+   "slug": "conditionsNeverArrive",
+   "hook": "You are waiting for a better room",
+   "script": "The right desk, the quieter house, the week with nothing else on. You have been waiting for conditions for months, and the conditions are not coming, because there is no version of your life that arrives pre-cleared for you to start. People have written books in worse rooms than yours. The work does not care how it feels. It only counts whether it happened. Whatever you were going to start when things calmed down, do fifteen minutes of it today in the room you are actually in.",
+   "keywords": "small dark room floor training alone cramped night",
+   "emphasis": "the right desk, quieter house, nothing else on, not coming, pre-cleared, worse rooms, does not care, whether it happened, fifteen minutes",
+   "used": false
+  },
+  {
+   "slug": "quittingIsDiscipline",
+   "hook": "Dropping the wrong thing is discipline too",
+   "script": "You have been told that quitting is weakness, so you are carrying three commitments you no longer believe in and doing all of them badly. That is not loyalty, it is just avoidance with a good reputation. Attention is the one thing you genuinely cannot make more of, and spreading it thin feels productive while producing nothing. Choosing is the cost of being good at anything. Pick the one that actually matters to you and drop something this week to pay for it. Properly drop it, not quietly neglect it.",
+   "keywords": "door closing walking away night street empty alone",
+   "emphasis": "quitting is weakness, no longer believe in, all of them badly, not loyalty, avoidance, good reputation, cannot make more of, spreading it thin, choosing is the cost, pay for it",
+   "used": false
+  },
+  {
+   "slug": "countSessionsNotWeeks",
+   "hook": "Count sessions, not weeks",
+   "script": "Saying you have been at it a month tells you almost nothing, because a month is a thing that happens to you whether you show up or not. Twelve sessions is a fact about what you did. Switch to counting the thing you control and two useful things happen: a missed day stops wiping the slate, and a quiet week with four sessions stops feeling like failure. The number only goes up. Start a count today at one, and only add to it when you actually do the work.",
+   "keywords": "counting reps tally night training alone repetition",
+   "emphasis": "been at it a month, happens to you, whether you show up, twelve sessions, a fact, thing you control, wiping the slate, stops feeling like failure, only goes up",
+   "used": false
+  },
+  {
+   "slug": "thirtyDayLie",
+   "hook": "Thirty days does not make it automatic",
+   "script": "The thirty day habit thing is a story people repeat because it is tidy. Simple habits can take a few weeks. Anything that needs real effort and a decision takes a lot longer, and plenty of it never goes fully automatic at all. That matters because when day forty still feels like a choice, you conclude it is not working and stop. It is working. It just does not stop requiring you. Expect it to feel like a decision for months, and plan for that instead of being ambushed by it.",
+   "keywords": "calendar night long road walking alone persistence",
+   "emphasis": "tidy, a few weeks, real effort, a lot longer, never fully automatic, day forty, still feels like a choice, conclude it is not working, requiring you, ambushed",
+   "used": false
+  },
+  {
+   "slug": "borrowingFromYou",
+   "hook": "You are borrowing from a real person",
+   "script": "Every time you push something to tomorrow you are not making it disappear, you are handing it to a specific person who has your name and your room and no more hours than you do. You treat that person like they are fictional, and they are the one who actually pays. Tonight you get the free evening. They get your evening plus their own work, and they will be just as tired as you are now. Do one small thing right now that your Thursday self would thank you for.",
+   "keywords": "night mirror clock late dark room alone thinking",
+   "emphasis": "push it to tomorrow, not disappear, your name, your room, no more hours, like they are fictional, actually pays, free evening, just as tired, one small thing",
+   "used": false
+  },
+  {
+   "slug": "noProofNeeded",
+   "hook": "Doing it with nothing to show",
+   "script": "A lot of effort only feels real to you once somebody has seen it, so you post the gym photo and show the open book and quietly do less when nobody is looking. The problem is that the audience and the result are not connected. Being watched makes you perform. The hours that actually move you are the unglamorous ones with no proof attached, and they are exactly the ones you skip when nothing is being recorded. Do one session this week and tell nobody at all about it.",
+   "keywords": "training alone dark no audience empty gym night solitary",
+   "emphasis": "only feels real, somebody has seen it, gym photo, when nobody is looking, not connected, makes you perform, unglamorous, no proof, tell nobody",
+   "used": false
+  },
+  {
+   "slug": "inputDiet",
+   "hook": "Watching people do it is not doing it",
+   "script": "You can spend six hours on videos about studying, training or getting your life together and finish the day with absolutely nothing done, feeling like you worked. That feeling is the dangerous part, because it pays you the reward for effort you did not spend, and then you are not hungry enough to actually start. Advice has almost no value past the first ten minutes. After that it is entertainment wearing a useful costume. Close the video now and do five minutes of the actual thing instead.",
+   "keywords": "phone scrolling glowing dark room night watching alone",
+   "emphasis": "six hours, nothing done, feeling like you worked, dangerous part, reward for effort, not hungry enough, first ten minutes, entertainment, useful costume, five minutes",
+   "used": false
+  },
+  {
+   "slug": "twoMinuteDoor",
+   "hook": "The hard part is the doorway",
+   "script": "Think about the last session you really did not want to do. The resistance was not spread through it, was it. It was stacked up in the two minutes before you started, and about a minute in it mostly vanished. You are not bad at training or revising, you are bad at the doorway, and that is a much smaller problem. So stop negotiating about the whole hour. Agree only to the first two minutes, with a genuine option to stop after, and let the doorway do its thing.",
+   "keywords": "door opening threshold night entering gym alone dark",
+   "emphasis": "really did not want to, not spread through it, two minutes before, mostly vanished, bad at the doorway, much smaller problem, stop negotiating, first two minutes, genuine option to stop",
+   "used": false
+  },
+  {
+   "slug": "silenceTraining",
+   "hook": "Sit with no input for ten minutes",
+   "script": "You have probably not been alone with your own head, properly, for weeks. Every gap gets filled, the queue, the walk, the two minutes before sleep. That constant filling is why you cannot concentrate for long, and why every boring task now feels unbearable rather than just boring. Attention is trained by being unstimulated, the same way strength is trained by load. There is no version of this that feels interesting. Sit for ten minutes tonight with no phone, no music and nothing to look at.",
+   "keywords": "sitting still dark room night quiet alone window rain",
+   "emphasis": "alone with your own head, every gap gets filled, the queue, before sleep, constant filling, cannot concentrate, unbearable, unstimulated, trained by load, ten minutes",
+   "used": false
+  },
+  {
+   "slug": "badSessionCounts",
+   "hook": "A bad session still counts",
+   "script": "There is a version of today where you do forty per cent of what you planned, and you should take it. Half a session keeps you a person who trains. Zero sessions, even once, starts quietly rewriting that, and the rewrite is far more expensive than the lost work. You are not protecting your standards by skipping when you cannot do it properly. You are protecting your mood. Lower today's bar until it is almost embarrassing, then clear it. You can be strict again tomorrow, from a streak you did not break.",
+   "keywords": "half effort tired training alone night gym low light",
+   "emphasis": "forty per cent, take it, half a session, keeps you a person who trains, quietly rewriting, far more expensive, protecting your standards, your mood, almost embarrassing, did not break",
+   "used": false
+  },
+  {
+   "slug": "outOfSightWins",
+   "hook": "Out of sight beats self control",
+   "script": "The phone face down on the desk is still winning. You are not reading, you are waiting, and part of your attention is permanently parked on whether it lit up. Being in the room is the whole problem, because resisting something nearby costs you continuously, and you are spending that on top of the actual work. Distance is cheaper than discipline, every single time. Put it in another room, not your pocket, not face down, not on silent. Another room, for one session. Notice how much easier the work gets.",
+   "keywords": "phone glowing desk night dark room reaching distance",
+   "emphasis": "face down, still winning, you are waiting, permanently parked, in the room, costs you continuously, on top of the work, distance is cheaper, another room",
+   "used": false
+  },
+  {
+   "slug": "sameTimeNotMood",
+   "hook": "Anchor it to a time, not a feeling",
+   "script": "If your session happens whenever you get round to it, it is competing with everything else in the day and it will lose, because everything else is louder and has deadlines. A fixed time is not about being rigid. It is about the thing having a place that is already defended, so you are not relitigating it against your mood every afternoon. Pick a time that is realistic on your worst day, not your best. Then protect it like something else put it in your calendar, because in a sense it did.",
+   "keywords": "clock night routine fixed time alarm dark training",
+   "emphasis": "whenever you get round to it, competing, it will lose, louder, has deadlines, not about being rigid, already defended, relitigating, worst day, protect it",
+   "used": false
+  },
+  {
+   "slug": "progressIsInvisible",
+   "hook": "You cannot see it from inside",
+   "script": "Progress is almost impossible to notice while it is happening, because you improve and your standards improve at the same rate, so the gap between where you are and where you want to be looks identical every week. That is why eight good weeks can feel like nothing. The only honest check is a record: what you lifted, how fast you read, what you could not do in January. Write down one measurable thing today and do not look at it again until the end of the month.",
+   "keywords": "training alone repetition night gym mirror counting",
+   "emphasis": "impossible to notice, standards improve, same rate, looks identical, eight good weeks, feel like nothing, honest check, a record, could not do in January, end of the month",
+   "used": false
+  },
+  {
+   "slug": "youAreTheAverage",
+   "hook": "You are roughly the average of your last ten days",
+   "script": "Not your best day, which you remember, and not your worst, which you defend. The average, which you never actually look at. One brilliant session does not move an average much, and that is why a huge effort followed by five days off leaves you where you started, feeling cheated. The boring middle is what the average is made of. Stop aiming at remarkable days. Aim at raising the floor, and ask what the laziest acceptable version of your day looks like, then make that the default.",
+   "keywords": "repetition night training alone consistency dark gym",
+   "emphasis": "best day, you remember, worst, you defend, the average, never look at, one brilliant session, five days off, feeling cheated, boring middle, raising the floor, laziest acceptable",
+   "used": false
+  },
+  {
+   "slug": "talkingSpendsIt",
+   "hook": "Announcing it spends the feeling",
+   "script": "Telling people your plan gives you a small hit of the thing you were supposed to earn by doing it. You get the nods, the you-will-smash-it, a bit of the identity, all before any work exists. Having been paid in advance, you are measurably less likely to follow through, which is the opposite of what accountability is supposed to do. Keep the next one quiet until there is something real to point at. Do four sessions before you tell a single person it is happening.",
+   "keywords": "alone silent night training no audience dark solitary",
+   "emphasis": "a small hit, supposed to earn, the nods, the identity, before any work, paid in advance, less likely to follow through, opposite of accountability, keep it quiet, four sessions",
+   "used": false
+  },
+  {
+   "slug": "restIsNotReward",
+   "hook": "Rest is part of the plan, not a prize",
+   "script": "You treat rest as something you have to deserve, so you either skip it and get worse, or take it badly and feel guilty the whole time, which means it does not even work. Rest is not the opposite of the work. It is the part where the work gets absorbed, and scheduling it on purpose is what lets you push properly on the days in between. Put one real rest day in your week, now, in advance. Not when you collapse. Chosen, written down and taken without apology.",
+   "keywords": "resting night calm dark room recovery alone quiet",
+   "emphasis": "have to deserve, skip it, take it badly, feel guilty, does not even work, not the opposite, gets absorbed, on purpose, push properly, in advance, without apology",
    "used": false
   }
  ]

@@ -18,6 +18,7 @@ Returns the finished mp4 path, ready for upload_local_file().
 
 import os
 import re
+import shlex
 import subprocess
 
 RAW = "https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main"
@@ -30,8 +31,18 @@ TAIL = 0.5  # hold after the voiceover ends
 
 
 def ff():
+    """Path to ffmpeg, already shell-quoted.
+
+    Quoted because every caller interpolates this into a shell string. In the
+    cloud sandbox the site-packages path has no spaces so it never mattered, but
+    on a Mac the checkout can sit under a folder like
+    "Desktop - hyder's MacBook Air", and an unquoted path there silently
+    resolves to nothing: the command produces no output, and the caller fails
+    with a confusing "could not read duration" instead of "ffmpeg not found".
+    """
+    import shlex
     import imageio_ffmpeg
-    return imageio_ffmpeg.get_ffmpeg_exe()
+    return shlex.quote(imageio_ffmpeg.get_ffmpeg_exe())
 
 
 def run(cmd, timeout=900):
@@ -112,10 +123,15 @@ def say(text, path="/tmp/vo.mp3"):
 
 
 def duration(path):
-    out = run(f'{ff()} -i {path} -hide_banner 2>&1 || true')
+    out = run(f'{ff()} -i {shlex.quote(path)} -hide_banner 2>&1 || true')
     m = re.search(r"Duration: (\d+):(\d+):([\d.]+)", out)
     if not m:
-        raise RuntimeError(f"could not read duration of {path}")
+        # `|| true` hides a non-zero exit, so an unreadable file and a missing
+        # ffmpeg both land here. Say which, or this costs an hour to diagnose.
+        size = os.path.getsize(path) if os.path.exists(path) else -1
+        raise RuntimeError(
+            f"could not read duration of {path} (size={size}); "
+            f"ffmpeg output was: {out.strip()[-300:] or '<empty — ffmpeg did not run>'}")
     h, mi, s = m.groups()
     return int(h) * 3600 + int(mi) * 60 + float(s)
 

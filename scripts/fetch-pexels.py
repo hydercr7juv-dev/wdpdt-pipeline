@@ -69,6 +69,24 @@ QUERY_SETS = {
         "qg_nightcity": "empty city street at night",
         "qg_nightdesk": "studying alone at night lamp",
     },
+    # Replaces the first qg_night attempt, half of which came back in daylight.
+    # These lean on words that actually correlate with low-key footage on
+    # Pexels: silhouette, moody, dark, neon, night. The luma gate above is what
+    # really enforces it; the wording just improves the hit rate.
+    "qg_dark": {
+        "qg_dpush": "silhouette man push ups dark",
+        "qg_dcore": "man training floor dark room",
+        "qg_dpull": "silhouette pull up bar night",
+        "qg_drope": "skipping rope dark gym",
+        "qg_dbag": "boxing heavy bag dark gym",
+        "qg_dbox": "boxer silhouette shadow",
+        "qg_dlift": "weight training dark moody gym",
+        "qg_dsprint": "man sprinting night floodlight",
+        "qg_dstairs": "running stairs night alone",
+        "qg_dtread": "treadmill dark gym night",
+        "qg_dwindow": "man alone window night city",
+        "qg_ddesk": "working late night desk lamp dark",
+    },
 }
 
 PER_QUERY = 2
@@ -117,6 +135,26 @@ def ff():
 # from curl, which is what made this look like an auth failure rather than a
 # blocked client.
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+
+
+MAX_LUMA = 72          # mean 0-255; above this the clip reads as daylight
+MIN_LUMA = 12          # below this there is nothing visible to look at
+
+
+def mean_luma(path, frames=12):
+    """Average brightness of the clip, 0-255.
+
+    The Quiet Grind is meant to look like one person training at night, and a
+    text query cannot enforce that: "man doing push ups alone" returned a sunlit
+    brick courtyard and a white-walled studio. Brightness can enforce it, so it
+    is now a hard gate rather than something to notice later in a contact sheet.
+    """
+    r = subprocess.run(
+        [ff().strip("'"), "-v", "error", "-i", path, "-vf",
+         "fps=2,scale=64:64,format=gray", "-frames:v", str(frames),
+         "-f", "rawvideo", "-"],
+        capture_output=True)
+    return sum(r.stdout) / len(r.stdout) if r.stdout else None
 
 
 def existing_hashes():
@@ -253,6 +291,12 @@ def main():
             try:
                 download(f["link"], tmp)
                 normalise(tmp, out, min(MAX_SECONDS, max(3, v.get("duration") or 6)))
+                lum = mean_luma(out)
+                if lum is None or not (MIN_LUMA <= lum <= MAX_LUMA):
+                    os.remove(out)
+                    failed.append(f"{name}: luma {lum:.0f} outside {MIN_LUMA}-{MAX_LUMA}"
+                                  if lum is not None else f"{name}: unreadable")
+                    continue
                 digest = hashlib.md5(open(out, "rb").read()).hexdigest()
                 if digest in seen:
                     # Same footage already in the library under another name.
@@ -261,7 +305,7 @@ def main():
                     failed.append(f"{name}: duplicate of {seen[digest]} (pexels id {v['id']}), skipped")
                     continue
                 seen[digest] = name
-                made.append(f"{name}  ({f['width']}x{f['height']} -> {W}x{H}, pexels id {v['id']})")
+                made.append(f"{name}  luma {lum:3.0f}  (pexels id {v['id']})")
                 n += 1
             except Exception as e:
                 failed.append(f"{name}: {e}")

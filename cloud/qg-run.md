@@ -8,7 +8,8 @@ Read it with `curl`, not WebFetch. WebFetch summarises and refuses to reproduce
 a long file verbatim on quote limits, which cost the 09:05 plane run a turn on
 17 Oct before it fell back to curl. Use:
 
-    curl -sS https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/cloud/qg-run.md -o /tmp/run.md -w '%{http_code}\n'
+    curl -sS https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/cloud/qg-run.md -o /tmp/run.md -w '%{http_code}
+'
 
 then read /tmp/run.md. A status other than 200 means STOP and report.
 
@@ -32,16 +33,59 @@ are separate routines because one routine cannot fire more often than hourly.
 If anything returns 403 quotaExceeded or 429, the pool is dry. Name the script
 that was lost, say the quota caused it, and stop. Do not retry or switch account.
 
-## 1. Script
+## 1. Verify the channel FIRST. Mandatory.
 
-    import requests, datetime
+This comes first because it also supplies the number the script index needs.
+
+    account : youtube_combed-mero
+    channel : UCc1UHI5kNuquWr4Hy5tpUYw   (The Quiet Grind, @thequietgrind7861)
+
+    res, err = run_composio_tool("YOUTUBE_GET_CHANNEL_STATISTICS", {"mine": True},
+                                 account="youtube_combed-mero")
+    # -> data.channels[0].id and data.channels[0].statistics.videoCount
+
+If the id is not UCc1UHI5kNuquWr4Hy5tpUYw, STOP and report what you got. Never
+try another account. A DIFFERENT channel is also called The Quiet Grind
+(UCVXCxe5iBzDvYvf69nI1uVw, handle @thequietgrind) and is not this one.
+
+If this fails with 403 quotaExceeded or 429, the shared pool is dry. Say so and
+stop before building anything.
+
+Keep `videoCount` as an integer. You need it next.
+
+## 2. Pick the script from the video count, not the date
+
+    import requests
     bank = requests.get('https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/content/quiet-grind-scripts.json', timeout=60).json()['bank']
-    days  = (datetime.datetime.now(datetime.timezone.utc).date() - datetime.date(2026, 10, 17)).days
-    index = days * 6 + SLOT
+    index = int(videoCount) - 4
     print('index', index, 'of', len(bank))
 
-**If index < 0 or index >= len(bank), STOP** and report that the bank is empty
-and needs more scripts written. Never wrap, never clamp, never invent one.
+**Why not the date.** It used to be `days_since_epoch * 6 + SLOT`. On 18 and 19
+October every run was rejected before it started, because the Claude account hit
+its weekly limit, and since the index came from the calendar, indices 6 to 17
+were silently skipped and would never have posted. Twelve finished scripts lost
+to two bad days. Counting published videos is self-correcting: a day that fails
+costs nothing, because the count does not move.
+
+The 4 is the channel's video count when the bank was rewritten on 20 October,
+with the three already-published scripts removed from it. So `videoCount - 4` is
+the next unpublished script. Do not change that number unless the bank is
+rewritten again.
+
+**If index < 0 or index >= len(bank), STOP** and report that the bank needs more
+scripts written. Never wrap, never clamp, never invent one.
+
+**Duplicate guard.** The six slots run 30 minutes apart and a build takes about
+five, so the previous video is normally live before the next run reads the count.
+If two runs ever do collide they would compute the same index, so check before
+posting: list the channel's recent uploads (the uploads playlist via
+YOUTUBE_LIST_PLAYLIST_ITEMS, or whichever list tool this connection exposes —
+search the available tools rather than guessing a name) and compare titles. If
+`bank[index]['hook']` is already published, step FORWARD to the next index whose
+hook is not, and say in the report that you skipped and why. Never step
+backwards and never post a hook twice: a repeated topic measurably halved views
+on the plane channel. If no list tool is available, note that in the report and
+continue — the count arithmetic is still the primary mechanism.
 
 SCRIPT   = bank[index]['script'] VERBATIM. Do not rewrite, shorten, lengthen or
 add a sign off. It is already timed to about 30 seconds at this voice and rate.
@@ -51,7 +95,7 @@ TITLE    = bank[index]['hook'] + ' #Shorts'   (under 100 characters)
 There is no call to action on this channel yet. Do not add one, do not mention a
 product, link or bio. The audience comes first.
 
-## 2. Build, in the background, then poll
+## 3. Build, in the background, then poll
 
 Poll with ONE short sleep per call: `time.sleep(30)`, print whether /tmp/done
 exists, nothing more. The whole workbench call must return within 45 seconds.
@@ -76,20 +120,24 @@ both the plane and the What If Labs routines. One sleep per call, then return.
         ms.build(j["script"], j["emph"], j["clips"], out="/tmp/out.mp4")
         open("/tmp/done","w").write("OK")
     except Exception:
-        open("/tmp/done","w").write("ERR\\n"+traceback.format_exc()[-500:])
+        open("/tmp/done","w").write("ERR\
+"+traceback.format_exc()[-500:])
     ''')
     subprocess.Popen("nohup python3 /tmp/build.py > /tmp/b.log 2>&1 &", shell=True)
 
 CLIPS: EIGHT, matched to `bank[index]['keywords']`.
 
 **Only the clips in this list.** The look is one person training alone in the
-dark. Not a busy gym, not a group class, not a bright morning, not a tidy desk.
+dark. Every clip here was checked by eye: nothing in daylight, nothing with a
+second person in shot, nothing from a busy gym.
 
-  qg_pushups1 qg_pushups2 qg_situps1 qg_situps2 qg_pullups1 qg_pullups2
-  qg_skipping1 qg_skipping2 qg_boxing1 qg_boxing2 qg_shadowbox1 qg_shadowbox2
-  qg_weights1 qg_weights2 qg_nightgym1 qg_nightgym2 qg_nightrun1 qg_nightrun2
-  qg_nightwalk1 qg_nightwalk2 qg_nightcity1 qg_nightcity2 qg_nightdesk1
-  qg_nightdesk2 qg_gym1 qg_gym2 qg_running1 qg_running2
+  qg_dpush1 qg_dcore1 qg_dcore2 qg_dpull1
+  qg_dpull2 qg_drope1 qg_drope2 qg_dbag1
+  qg_dbox1 qg_dlift1 qg_dlift2 qg_dstairs2
+  qg_dtread2 qg_dwindow1 qg_dwindow2 qg_ddesk1
+  qg_ddesk2 qg_skipping1 qg_skipping2 qg_shadowbox1
+  qg_weights2 qg_nightgym2 qg_nightwalk1 qg_nightwalk2
+  qg_nightcity1 qg_nightcity2 qg_nightdesk2
 
 All need the `.mp4` extension. Repeating a clip inside one video is fine; vary
 them between runs so the channel does not look like a single loop.
@@ -108,23 +156,15 @@ format on Shorts and is what YouTube's inauthentic content policy targets.
 If `/tmp/done` says ERR, read the traceback, fix it (usually a wrong clip name)
 and retry ONCE. Twice failed: report the exact error and stop.
 
-## 3. Verify the channel BEFORE uploading. Mandatory.
-
-    account : youtube_combed-mero
-    channel : UCc1UHI5kNuquWr4Hy5tpUYw   (The Quiet Grind, @thequietgrind7861)
-
-YOUTUBE_GET_CHANNEL_STATISTICS `{"mine": true}` with that account. If the id
-differs, STOP and report what you got. Never try another account. A DIFFERENT
-channel is also called The Quiet Grind (UCVXCxe5iBzDvYvf69nI1uVw, handle
-@thequietgrind) and is not this one.
-
 ## 4. Upload
 
     up, _ = upload_local_file("/tmp/out.mp4")
     run_composio_tool("YOUTUBE_MULTIPART_UPLOAD_VIDEO", {
         "videoFile": {"s3key": up["s3key"], "name": "short.mp4", "mimetype": "video/mp4"},
         "title": TITLE,
-        "description": <one or two sentences from the script's own idea> + "\n\n#shorts #discipline #focus #study #motivation #habits",
+        "description": <one or two sentences from the script's own idea> + "
+
+#shorts #discipline #focus #study #motivation #habits",
         "tags": ["shorts","discipline","focus","study","habits","motivation"],
         "categoryId": "27", "privacyStatus": "public"
     }, account="youtube_combed-mero")

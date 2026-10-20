@@ -80,19 +80,30 @@ both the plane and the What If Labs routines. One sleep per call, then return.
     ''')
     subprocess.Popen("nohup python3 /tmp/build.py > /tmp/b.log 2>&1 &", shell=True)
 
-CLIPS: EIGHT, matched to `bank[index]['keywords']`. ONLY clips beginning `qg_`.
-Never an aviation, `sci_`, `story_` or `shop_` clip.
+CLIPS: EIGHT, matched to `bank[index]['keywords']`.
 
-  qg_sunrise1 qg_sunrise2 qg_alarm1 qg_alarm2 qg_desklamp1 qg_desklamp2
-  qg_writing1 qg_writing2 qg_rainwindow1 qg_rainwindow2 qg_train1 qg_street1
-  qg_street2 qg_crowd1 qg_phoneglow1 qg_phoneglow2 qg_scroll1 qg_scroll2
-  qg_gym1 qg_gym2 qg_running1 qg_running2 qg_stairs1 qg_stairs2 qg_laptop1
-  qg_laptop2 qg_books1 qg_books2 qg_clock1 qg_clock2 qg_calendar1 qg_calendar2
-  qg_door1 qg_door2 qg_road1 qg_rest1 qg_city1 qg_city2 qg_tidydesk1 qg_tidydesk2
+**Only the clips in this list.** The look is one person training alone in the
+dark. Not a busy gym, not a group class, not a bright morning, not a tidy desk.
 
-All need the `.mp4` extension. The look is ordinary life, not rented wealth:
-stock luxury with an AI voice is the most duplicated format on Shorts and is
-what YouTube's inauthentic content policy targets.
+  qg_pushups1 qg_pushups2 qg_situps1 qg_situps2 qg_pullups1 qg_pullups2
+  qg_skipping1 qg_skipping2 qg_boxing1 qg_boxing2 qg_shadowbox1 qg_shadowbox2
+  qg_weights1 qg_weights2 qg_nightgym1 qg_nightgym2 qg_nightrun1 qg_nightrun2
+  qg_nightwalk1 qg_nightwalk2 qg_nightcity1 qg_nightcity2 qg_nightdesk1
+  qg_nightdesk2 qg_gym1 qg_gym2 qg_running1 qg_running2
+
+All need the `.mp4` extension. Repeating a clip inside one video is fine; vary
+them between runs so the channel does not look like a single loop.
+
+**Do not use any other `qg_` clip.** The original library still sits in the repo
+(qg_sunrise, qg_alarm, qg_calendar, qg_tidydesk, qg_books, qg_crowd, qg_street,
+qg_city, qg_door, qg_train, qg_road, qg_rest, qg_laptop, qg_writing,
+qg_desklamp, qg_rainwindow, qg_clock, qg_phoneglow, qg_scroll, qg_stairs) and is
+deliberately retired: it was too soft and too crowded for this voice. Never an
+aviation, `sci_`, `story_` or `shop_` clip either.
+
+The look is ordinary effort, not rented wealth. There are no supercars or
+watches here on purpose: stock luxury with an AI voice is the most duplicated
+format on Shorts and is what YouTube's inauthentic content policy targets.
 
 If `/tmp/done` says ERR, read the traceback, fix it (usually a wrong clip name)
 and retry ONCE. Twice failed: report the exact error and stop.

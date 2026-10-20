@@ -17,30 +17,67 @@ Generate ONE What If Labs Short and post it to YouTube AND Instagram. Then stop.
 EVERYTHING happens inside COMPOSIO_REMOTE_WORKBENCH. Load it with ToolSearch
 (query: COMPOSIO_REMOTE_WORKBENCH). Do not render in the routine sandbox.
 
-## Why all six runs sit between 07:00 and 10:00 UTC
+## Why the runs sit between 07:00 and 10:00 UTC
 
-The YouTube upload quota belongs to Composio's shared Google Cloud project, used
-by every Composio customer. It refills about 07:00 UTC and other people's
-traffic drains it through the day. Runs at 15:00 and 19:00 hit 403 quotaExceeded.
-Six separate routines now fire inside that window; they are separate routines
-because one routine cannot fire more often than hourly.
+Two separate ceilings, both real.
 
-403 quotaExceeded or 429 on YouTube means the pool is dry: skip YouTube, say so
-plainly, and still post to Instagram, which uses a different quota entirely.
+The **YouTube upload quota** belongs to Composio's shared Google Cloud project
+(`project_number:1068312718386`), used by every Composio customer. It refills
+about 07:00 UTC and other people's traffic drains it through the day, so runs
+later on hit 403 quotaExceeded.
 
-## 1. Pick this run's topic
+The **Claude weekly limit** is the one that actually stopped everything. On 18
+and 19 October all three channels produced nothing: every run was rejected in
+under ten seconds with `rate_limit: rejected (seven_day)`. Eighteen agent runs a
+day was more than the plan sustains, so on 20 October this channel dropped to
+three a day while the plane channel kept six.
 
-    import datetime
-    days  = (datetime.datetime.now(datetime.timezone.utc).date() - datetime.date(2026, 10, 17)).days
-    index = days * 6 + SLOT
+## 1. Verify the accounts FIRST, then pick the topic
 
-**If index < 0 or index >= 120, STOP** and report that the topic bank is used up
-and needs extending.
+The YouTube check comes first because it also supplies the number the topic
+index needs.
 
-**Order matters.** Indices 0 to 83 are topics this channel has NEVER
-published. Indices 84 to 119 are the original 36, which the old `% 36`
-cycled repeatedly across the 149 videos already up, so they are re-treads
-and deliberately sit at the end. Do not reorder this list.
+    YouTube  : youtube_elt-gentoo        -> UCjcSxwyu8ecxyu5-0rGDKIA
+    Instagram: instagram_damson-ruffle   -> what_if_labs1
+
+  - YOUTUBE_GET_CHANNEL_STATISTICS {"mine": true}, account=youtube_elt-gentoo
+    Keep `data.channels[0].statistics.videoCount` as an integer.
+  - INSTAGRAM_GET_USER_INFO {"ig_user_id": "me"}, account=instagram_damson-ruffle
+
+A failed check skips THAT platform only. Never fall back to another account.
+403 quotaExceeded or 429 on YouTube means the shared pool is dry: skip YouTube,
+say so, and still post to Instagram, whose quota is separate.
+
+Then:
+
+    index = int(videoCount) - 152
+
+**Why the video count and not the date.** It used to be
+`day_of_year * 6 + slot`. On 18 and 19 October every run was rejected before it
+started because the Claude account hit its weekly limit, and a calendar index
+silently skips the topics belonging to a dead day — they are simply never
+posted. Counting published videos is self-correcting: a failed day costs
+nothing, because the count does not move.
+
+152 is this channel's video count on 20 October, when the bank was rewritten to
+contain only unpublished topics. Do not change it unless the bank is rewritten.
+
+**If index < 0 or index >= 84, STOP** and report that the bank needs extending.
+Never wrap, never clamp, never invent a topic.
+
+**Duplicate guard.** Before building, list the channel's recent uploads (its
+uploads playlist, or whichever list tool this connection exposes — search the
+available tools rather than guessing a name) and compare titles. If the topic at
+`index` is already published, step FORWARD to the next one that is not, and say
+so in the report. Never step backwards. If no list tool is available, note that
+and continue.
+
+**Every topic here is one this channel has never published.** The original 36
+were removed on 20 October. The old `% 36` had published them over and over and
+the damage is measurable: "What If You Fell Into a Black Hole" went out five
+times for 518, 394, 16, 8 and 1 views; "The Sun Were a Red Dwarf" four times for
+944, 9, 7 and 5. The first upload of a topic earns; every retread dies. Never
+re-add them and never wrap this list.
 
   0 you were exposed to space without a suit (vacuum is not the instant freeze films show; it is pressure)
   1 the Earth had no tilt (no seasons; climate bands fixed by latitude forever)
@@ -126,43 +163,6 @@ and deliberately sit at the end. Do not reorder this list.
  81 the Sun were twice as massive (it would burn far hotter and far shorter)
  82 you could survive a lightning strike (many people do; the path matters more than the energy)
  83 the Earth were the only planet (no Jupiter means more impacts reaching us)
- 84 the Earth stopped spinning (momentum, not gravity; oceans migrate to the poles)
- 85 you fell into a black hole (tidal stretching; outside observers never see you arrive)
- 86 the Sun went out (8min20s of light in transit; oceans freeze top-down; vents survive)
- 87 all the ice melted (about 60m of sea level rise; ice reflects sunlight so loss compounds)
- 88 Earth lost its magnetic field (slow atmospheric stripping; Mars is the case study)
- 89 a solar storm hit today (induced currents in long conductors; 1859 telegraph fires)
- 90 the Moon disappeared (tides drop to about a third; axial tilt destabilises)
- 91 you fell through the centre of the Earth (you would oscillate; the core is hotter than the Sun's surface)
- 92 you travelled at light speed (energy needed climbs without limit for anything with mass)
- 93 the oceans vanished (they drive the weather; land dries, temperatures swing violently)
- 94 gravity doubled (not crushed but strained; the atmosphere compresses downward)
- 95 Earth had two moons (competing tides; unstable orbits over long timescales)
- 96 the Earth were twice as big (higher surface gravity, thicker air, orbit much harder to reach)
- 97 you could see every wavelength (you would see heat, radio, and stars invisible now)
- 98 a supervolcano erupted (ash blocks sunlight; a volcanic winter lasting years)
- 99 humans disappeared tomorrow (cities fail fast; what outlasts us is surprising)
-100 the Earth's orbit were a perfect circle (seasons come from axial tilt, not distance)
-101 we found life on Europa (a subsurface ocean kept liquid by tidal heating)
-102 you jumped into a volcano (you would not sink; lava is far denser than a person)
-103 time ran backwards (entropy defines the arrow of time)
-104 the Milky Way collided with Andromeda (it will; the space between stars means almost nothing hits)
-105 you could stand on Jupiter (there is no surface to stand on)
-106 the Earth's core cooled (the magnetic field dies and the atmosphere erodes)
-107 light were slower (everyday objects would show relativistic effects)
-108 the magnetic poles flipped (it has happened many times, over millennia not overnight)
-109 Earth had rings like Saturn (visible day and night, and they would shadow the surface)
-110 an asteroid the size of a city hit (the energy dwarfs every weapon ever built; dust cools the planet)
-111 you fell from the edge of space (terminal velocity; the danger is heat and spin, not the fall)
-112 the atmosphere were twice as thick (higher pressure, easier flight, very different weather)
-113 you never slept again (the brain forces microsleeps; cognition collapses within days)
-114 all insects disappeared (pollination and soil recycling fail; the knock-on reaches everything)
-115 the Sun were a red dwarf (the habitable zone sits far closer in, and planets tidally lock)
-116 you could hear sound in space (no medium carries it, but plasma waves can be converted to audio)
-117 the Earth spun twice as fast (shorter days, stronger Coriolis, a bigger equatorial bulge)
-118 we could stop a hurricane (the energy released dwarfs anything we could deploy against it)
-119 there were no Moon at all (no large tides, and a far less stable axial tilt)
-
 Use the topic at that index. Research nothing you are not sure of.
 
 ## 2. Write the script (house format, follow exactly)
@@ -227,20 +227,7 @@ Repeating a clip is fine. Match the shot to what is being said.
 If `/tmp/done` says ERR, read the traceback, fix it (usually a wrong clip name)
 and retry ONCE. Twice failed: report the error and post nothing.
 
-## 4. Verify BOTH accounts before posting. Mandatory.
-
-Several brands run through this Composio account and some connections have
-pointed at the wrong destination before.
-
-    YouTube  : youtube_elt-gentoo        -> UCjcSxwyu8ecxyu5-0rGDKIA
-    Instagram: instagram_damson-ruffle   -> what_if_labs1
-
-  - YOUTUBE_GET_CHANNEL_STATISTICS {"mine": true}, account=youtube_elt-gentoo
-  - INSTAGRAM_GET_USER_INFO {"ig_user_id": "me"}, account=instagram_damson-ruffle
-
-A failed check skips THAT platform only. Never fall back to another account.
-
-## 5. YouTube
+## 4. YouTube
 
     up, _ = upload_local_file("/tmp/out.mp4")
     run_composio_tool("YOUTUBE_MULTIPART_UPLOAD_VIDEO", {
@@ -256,7 +243,7 @@ success: wait ~25s then YOUTUBE_GET_VIDEO_DETAILS_BATCH `{"id": [vid], "parts":
 ["status","processingDetails"]}`. Anything but processed or succeeded means it
 was rejected: say so and give the id.
 
-## 6. The same video to Instagram
+## 5. The same video to Instagram
 
 Reuse the s3key. Instagram's quota is separate, so do this even if YouTube
 failed on quota.
@@ -285,7 +272,7 @@ Publish exactly ONCE. If it errors, report it; a retry can double-post.
 
 Write the Instagram caption for Instagram, hook first, hashtags last.
 
-## 7. Report
+## 6. Report
 
 Topic index and how many of the 120 remain, title, YouTube id, URL and
 processing status, Instagram media id, both confirmed account identities. If one

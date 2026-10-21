@@ -32,6 +32,7 @@ from concurrent.futures import ThreadPoolExecutor
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                     "(KHTML, like Gecko) Chrome/129.0 Safari/537.36"}
 CH = "https://find-and-update.company-information.service.gov.uk"
+MODE = "shop"
 
 # Registered at an agent's office tells us nothing about the business and is
 # often a shell company.
@@ -48,6 +49,14 @@ PARKED = re.compile(r'\bfor sale\b|domain (is )?(for sale|broker)|buy this domai
 # A real shop leaves traces: a cart, a checkout, or a known platform.
 SHOP = re.compile(r'add to (cart|bag|basket)|/cart|/checkout|/collections/|/products/|'
                   r'cdn\.shopify|myshopify|woocommerce|bigcommerce|squarespace|wixstatic', re.I)
+
+# A trade does not have a cart. What a real plumber or landscaper does have is a
+# phone number you can ring and some sense of what they do and where. Using the
+# SHOP test on them would reject every single one.
+PHONE = re.compile(r'(?:\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}'
+                   r'|(?:\+44\s?|0)(?:1\d{2,3}|2\d|3\d{2}|8\d{2})\s?\d{3,4}\s?\d{3,4}')
+LOCAL = re.compile(r'\bservices?\b|\bcontact\b|\bquote\b|\bcall\s?us\b|\bget in touch\b|'
+                   r'\bemergency\b|\bcallout\b|\bfully insured\b|\bfree estimate\b', re.I)
 EMAIL = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
 SUFFIX = r'\b(limited|ltd|llp|plc|uk|the|company|co)\b'
 FREEMAIL = {'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'hotmail.co.uk',
@@ -139,8 +148,14 @@ def probe(rec):
                 continue
             if PARKED.search(home[:40_000]):
                 continue
-            if not SHOP.search(home):
-                continue
+            if MODE == "shop":
+                if not SHOP.search(home):
+                    continue
+            else:
+                # A trade site must look like a business someone can hire: a
+                # ringable UK number plus the language of a service business.
+                if not (PHONE.search(home) and LOCAL.search(home)):
+                    continue
             if not name_matches(rec["name"], d):
                 continue
 
@@ -176,8 +191,12 @@ def main():
     ap.add_argument("--pages", type=int, default=4)
     ap.add_argument("--want", type=int, default=8)
     ap.add_argument("--skip", default="", help="comma separated addresses to exclude")
+    ap.add_argument("--mode", default="shop", choices=["shop", "local"],
+                    help="shop: needs a cart. local: a trade, needs a phone number.")
     a = ap.parse_args()
 
+    global MODE
+    MODE = a.mode
     skip = {s.strip().lower() for s in a.skip.split(",") if s.strip()}
     out, seen_emails = [], set()
 

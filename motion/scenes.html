@@ -1,0 +1,147 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;width:1080px;height:1920px;background:#0d1b2a;overflow:hidden}
+  svg{display:block}
+  .lbl{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;letter-spacing:.03em}
+  .sub{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:500}
+</style></head>
+<body>
+<svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16314a"/><stop offset="1" stop-color="#091320"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#dde5ed"/>
+      <stop offset="1" stop-color="#93a3b4"/>
+    </linearGradient>
+    <marker id="ah" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 Z" fill="#4fc3f7"/>
+    </marker>
+    <marker id="ahw" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 Z" fill="#e8a33d"/>
+    </marker>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#sky)"/>
+  <g id="grid" opacity=".13"></g>
+  <g id="stage"></g>
+  <g id="callout" opacity="0">
+    <text id="t1" class="lbl" x="540" y="640" font-size="64" fill="#e8a33d" text-anchor="middle"></text>
+    <text id="t2" class="sub" x="540" y="708" font-size="38" fill="#9fc0dd" text-anchor="middle"></text>
+  </g>
+</svg>
+<script>
+// One file, three scenes, selected with ?scene=. Every property is a pure
+// function of ?f= so each frame is screenshotted independently and the motion
+// is identical on any machine - no CSS animation, no timers, nothing that can
+// race a headless screenshot.
+const Q = new URLSearchParams(location.search);
+const SCENE = Q.get('scene') || 'flaps';
+const f = parseInt(Q.get('f') || '0', 10);
+const FPS = 30, DUR = 3.0, N = Math.round(DUR * FPS);
+const t = Math.min(1, Math.max(0, f / (N - 1)));
+
+const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2, 3)/2;
+const seg  = (x,a,b) => Math.min(1, Math.max(0, (x-a)/(b-a)));
+const el = id => document.getElementById(id);
+
+let g='';
+for (let x=0;x<=1080;x+=90) g+=`<line x1="${x}" y1="0" x2="${x}" y2="1920" stroke="#6f97bd" stroke-width="1"/>`;
+for (let y=0;y<=1920;y+=90) g+=`<line x1="0" y1="${y}" x2="1080" y2="${y}" stroke="#6f97bd" stroke-width="1"/>`;
+el('grid').innerHTML = g;
+
+const stage = el('stage');
+const CY = 1020;                       // vertical centre of every diagram
+
+// ---------------------------------------------------------------- FLAPS ---
+if (SCENE === 'flaps') {
+  const ext = ease(seg(t, .12, .84));          // 0 = clean, 1 = fully extended
+  // main wing section, nose left, trailing edge right
+  const wing = `<path d="M 150 ${CY-6} Q 420 ${CY-74} 760 ${CY-34} L 790 ${CY+6}
+                         Q 470 ${CY+62} 150 ${CY+30} Z" fill="url(#metal)"/>`;
+  // leading edge slat: swings forward and down
+  const sx = -46*ext, sy = 30*ext, sr = 18*ext;
+  const slat = `<g transform="translate(${sx} ${sy}) rotate(${sr} 170 ${CY})">
+      <path d="M 120 ${CY-2} Q 186 ${CY-44} 236 ${CY-26} L 232 ${CY+14}
+               Q 176 ${CY+26} 120 ${CY+26} Z" fill="#cfd9e3"/></g>`;
+  // trailing edge flap: slides aft and hinges down, in the familiar two stages
+  const fx = 118*ext, fy = 72*ext, fr = 34*ext;
+  const flap = `<g transform="translate(${fx} ${fy}) rotate(${fr} 756 ${CY})">
+      <path d="M 740 ${CY-30} L 946 ${CY+6} L 944 ${CY+34} L 740 ${CY+16} Z" fill="#dde5ed"/>
+      <path d="M 740 ${CY-30} L 946 ${CY+6}" stroke="#ffffff" stroke-opacity=".7" stroke-width="3" fill="none"/>
+    </g>`;
+  // airflow: bends further down the more the flap is out
+  let flow='';
+  for (let i=0;i<3;i++){
+    const y = CY - 120 + i*110;
+    const drop = 54*ext*(1 - i*0.22);
+    flow += `<path d="M 40 ${y} Q 440 ${y-18} 820 ${y+drop} T 1040 ${y+drop*1.5}"
+             fill="none" stroke="#4fc3f7" stroke-width="5" opacity=".75" marker-end="url(#ah)"/>`;
+  }
+  stage.innerHTML = flow + wing + slat + flap;
+  el('t1').textContent = 'FLAPS';
+  el('t2').textContent = 'more lift at low speed';
+}
+
+// ------------------------------------------------------- REVERSE THRUST ---
+if (SCENE === 'reverse') {
+  const dep = ease(seg(t, .16, .80));          // reverser deployment
+  const nac = `<rect x="300" y="${CY-120}" width="480" height="240" rx="118" fill="url(#metal)"/>
+               <rect x="300" y="${CY-120}" width="96"  height="240" rx="48" fill="#9fb0c1"/>
+               <circle cx="352" cy="${CY}" r="64" fill="#161d25"/>
+               <circle cx="352" cy="${CY}" r="26" fill="#4a5765"/>`;
+  // translating cowl slides AFT, opening the cascade vents
+  const slide = 128*dep;
+  const cowl = `<rect x="${612+slide}" y="${CY-122}" width="176" height="244" rx="60" fill="#c8d3de"/>`;
+  // cascades revealed underneath
+  let casc='';
+  for (let i=0;i<5;i++) casc += `<rect x="${620+i*30}" y="${CY-112}" width="16" height="224" rx="7"
+                                  fill="#2b3d50" opacity="${dep.toFixed(2)}"/>`;
+  // blocker door swings across the exhaust duct
+  const bd = 74*dep;
+  const block = `<g transform="rotate(${bd} 700 ${CY-58})"><rect x="696" y="${CY-62}" width="22" height="120" rx="9" fill="#8fa0b1"/></g>
+                 <g transform="rotate(${-bd} 700 ${CY+58})"><rect x="696" y="${CY-58}" width="22" height="120" rx="9" fill="#8fa0b1"/></g>`;
+  // airflow: straight out the back when stowed, forward through the cascades when deployed
+  const back = `<path d="M 790 ${CY} L ${980 - 150*dep} ${CY}" stroke="#4fc3f7" stroke-width="9"
+                 opacity="${(1-dep).toFixed(2)}" marker-end="url(#ah)"/>`;
+  const fwdU = `<path d="M 666 ${CY-116} Q 560 ${CY-210} 400 ${CY-214}" fill="none" stroke="#e8a33d"
+                 stroke-width="9" opacity="${dep.toFixed(2)}" marker-end="url(#ahw)"/>`;
+  const fwdD = `<path d="M 666 ${CY+116} Q 560 ${CY+210} 400 ${CY+214}" fill="none" stroke="#e8a33d"
+                 stroke-width="9" opacity="${dep.toFixed(2)}" marker-end="url(#ahw)"/>`;
+  stage.innerHTML = back + nac + casc + block + cowl + fwdU + fwdD;
+  el('t1').textContent = 'REVERSE THRUST';
+  el('t2').textContent = 'the engine pushes air forwards';
+}
+
+// ------------------------------------------------------------- SPOILERS ---
+if (SCENE === 'spoilers') {
+  const up = ease(seg(t, .18, .74));
+  const wing = `<path d="M 120 ${CY-4} Q 430 ${CY-80} 820 ${CY-38} L 860 ${CY+8}
+                         Q 480 ${CY+66} 120 ${CY+32} Z" fill="url(#metal)"/>`;
+  // three panels hinge up out of the upper surface
+  let pan='';
+  for (let i=0;i<3;i++){
+    const px = 430 + i*132, py = CY - 56 - i*6;
+    pan += `<g transform="rotate(${-52*up} ${px} ${py})">
+              <rect x="${px}" y="${py-16}" width="126" height="18" rx="6" fill="#eaf0f5"/></g>`;
+  }
+  // airflow that was attached breaks up over the raised panels
+  let flow = `<path d="M 30 ${CY-150} Q 340 ${CY-186} 560 ${CY-168}"
+                fill="none" stroke="#4fc3f7" stroke-width="6" opacity=".8"/>`;
+  let turb='';
+  for (let i=0;i<7;i++){
+    const bx = 600 + i*58, by = CY - 190 - (i%2)*34;
+    turb += `<circle cx="${bx}" cy="${by}" r="${(10+ (i%3)*5)}" fill="none" stroke="#e8a33d"
+              stroke-width="5" opacity="${(up*0.9).toFixed(2)}"/>`;
+  }
+  const clean = `<path d="M 560 ${CY-168} Q 820 ${CY-158} 1050 ${CY-150}" fill="none"
+                  stroke="#4fc3f7" stroke-width="6" opacity="${(1-up).toFixed(2)}" marker-end="url(#ah)"/>`;
+  stage.innerHTML = flow + clean + turb + wing + pan;
+  el('t1').textContent = 'SPOILERS';
+  el('t2').textContent = 'they dump the lift on touchdown';
+}
+
+// callout fades in once the mechanism has visibly moved, out right at the end
+el('callout').setAttribute('opacity', (seg(t,.42,.60) * (1 - seg(t,.95,1))).toFixed(3));
+</script>
+</body></html>

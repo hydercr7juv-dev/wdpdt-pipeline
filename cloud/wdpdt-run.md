@@ -174,8 +174,25 @@ Clips beginning `mg_` are DRAWN DIAGRAMS, authored at exactly 1080x1920 in
 `motion/`. The builder detects the prefix and uses them full frame with no
 crop and no Ken Burns, because panning a diagram slides its labels out of shot.
 
-  mg_gear.mp4   3s - an airliner's main gear swinging forward into the belly,
-                doors opening and closing over it, with a LANDING GEAR callout
+  mg_gear.mp4      3s - main gear swinging forward into the belly, bay doors
+                   opening and closing over it
+  mg_flaps.mp4     3s - leading edge slat and trailing edge flap extending,
+                   with the airflow bending further down as they go out
+  mg_reverse.mp4   3s - the translating cowl sliding aft, cascades opening and
+                   blocker doors swinging across, exhaust turning from
+                   rearwards (blue) to forwards (amber)
+  mg_spoilers.mp4  3s - upper surface panels hinging up and the attached
+                   airflow breaking into turbulence behind them
+
+Match the graphic to the TOPIC, not to a word in the script:
+
+  gearThump, gearWindRoar                    -> mg_gear.mp4
+  flapGrind, flapsRetractClimb               -> mg_flaps.mp4
+  reverseRoar                                -> mg_reverse.mp4
+  spoilersPop, speedbrakeShudder, firmTouchdown -> mg_spoilers.mp4
+
+If the topic is not in that list, use live footage only. A diagram of the
+wrong mechanism is worse than no diagram.
 
 Use a motion graphic for the ONE scene where the script states the mechanism -
 the sentence that actually answers the question. Stock footage of an aeroplane

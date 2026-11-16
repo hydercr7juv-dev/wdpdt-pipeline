@@ -1,0 +1,130 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+  html,body{margin:0;padding:0;width:1080px;height:1920px;background:#0d1b2a;overflow:hidden}
+  svg{display:block}
+  .lbl{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;letter-spacing:.03em}
+</style></head>
+<body>
+<svg id="s" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16314a"/><stop offset="1" stop-color="#091320"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#dfe7ee"/>
+      <stop offset="1" stop-color="#9dadbd"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfd9e3"/><stop offset="1" stop-color="#8b9bac"/>
+    </linearGradient>
+    <clipPath id="bellyClip">
+      <path d="M 70 905 Q 300 806 620 812 L 905 836 Q 1012 852 1012 900
+               L 1012 960 Q 980 1012 880 1020 L 300 1020 Q 120 1000 70 952 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#sky)"/>
+  <g id="grid" opacity=".13"></g>
+
+  <!-- ===================== AIRCRAFT, SIDE VIEW ===================== -->
+  <!-- nose at the left, tail at the right, as it would fly across frame -->
+  <g id="plane">
+    <!-- tail fin -->
+    <path d="M 905 836 L 988 648 L 1016 652 L 1012 860 Z" fill="url(#wing)"/>
+    <!-- tailplane -->
+    <path d="M 960 846 L 1064 806 L 1070 826 L 980 872 Z" fill="#b6c3d0"/>
+
+    <!-- fuselage -->
+    <path d="M 70 905 Q 300 806 620 812 L 905 836 Q 1012 852 1012 900
+             L 1012 960 Q 980 1012 880 1020 L 300 1020 Q 120 1000 70 952 Z"
+          fill="url(#skin)"/>
+    <!-- cheat line along the top -->
+    <path d="M 92 902 Q 310 820 620 826 L 900 848" fill="none"
+          stroke="#ffffff" stroke-opacity=".75" stroke-width="4"/>
+    <!-- cockpit glass -->
+    <path d="M 96 904 Q 142 878 186 874 L 196 900 Q 150 906 112 920 Z" fill="#2c4258"/>
+    <g id="windows"></g>
+
+    <!-- wing, swept back and down -->
+    <path d="M 470 946 L 742 944 L 856 1042 L 690 1026 Z" fill="url(#wing)"/>
+    <!-- engine slung under the wing -->
+    <g>
+      <rect x="432" y="972" width="186" height="86" rx="43" fill="#c3cfdb"/>
+      <rect x="432" y="972" width="48" height="86" rx="24" fill="#8fa0b1"/>
+      <circle cx="458" cy="1015" r="25" fill="#1b232c"/>
+    </g>
+
+    <!-- wheel bay: a recess in the belly, clipped so it cannot spill outside -->
+    <g clip-path="url(#bellyClip)">
+      <rect id="bay" x="556" y="952" width="300" height="74" fill="#0a1522"/>
+      <rect x="556" y="952" width="300" height="74" fill="none" stroke="#33485e" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- ===================== GEAR ===================== -->
+  <g id="gear">
+    <rect x="-15" y="0" width="30" height="196" rx="9" fill="#93a2b2"/>
+    <rect x="-24" y="74"  width="48" height="18" rx="7" fill="#72818f"/>
+    <rect x="-24" y="124" width="48" height="18" rx="7" fill="#72818f"/>
+    <g id="bogie">
+      <rect x="-66" y="186" width="132" height="20" rx="10" fill="#72818f"/>
+      <circle cx="-46" cy="234" r="44" fill="#13181e"/><circle cx="-46" cy="234" r="18" fill="#52606e"/>
+      <circle cx="46"  cy="234" r="44" fill="#13181e"/><circle cx="46"  cy="234" r="18" fill="#52606e"/>
+    </g>
+  </g>
+
+  <!-- bay doors, hinged at the two ends of the recess -->
+  <g id="doorL"><rect x="-152" y="-9" width="152" height="18" rx="7" fill="#eaf0f5"/></g>
+  <g id="doorR"><rect x="0" y="-9" width="152" height="18" rx="7" fill="#eaf0f5"/></g>
+
+  <!-- ===================== CALLOUT ===================== -->
+  <g id="callout" opacity="0">
+    <line id="cline" x1="706" y1="986" x2="706" y2="986" stroke="#e8a33d" stroke-width="4"/>
+    <circle cx="706" cy="986" r="9" fill="#e8a33d"/>
+    <text class="lbl" x="540" y="676" font-size="62" fill="#e8a33d" text-anchor="middle">LANDING GEAR</text>
+    <text class="lbl" x="540" y="742" font-size="38" fill="#9fc0dd" text-anchor="middle" font-weight="500">folds up into the belly</text>
+  </g>
+</svg>
+<script>
+// Every property is a pure function of ?f= so each frame can be screenshotted
+// on its own and the motion is byte-identical on any machine. No CSS
+// animation, no timers, nothing that can race a headless screenshot.
+const f = parseInt(new URLSearchParams(location.search).get('f') || '0', 10);
+const FPS = 30, DUR = 3.0, N = Math.round(DUR * FPS);
+const t = Math.min(1, Math.max(0, f / (N - 1)));
+
+const ease = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2, 3)/2;
+const seg  = (x, a, b) => Math.min(1, Math.max(0, (x - a) / (b - a)));
+
+let g = '';
+for (let x = 0; x <= 1080; x += 90) g += `<line x1="${x}" y1="0" x2="${x}" y2="1920" stroke="#6f97bd" stroke-width="1"/>`;
+for (let y = 0; y <= 1920; y += 90) g += `<line x1="0" y1="${y}" x2="1080" y2="${y}" stroke="#6f97bd" stroke-width="1"/>`;
+document.getElementById('grid').innerHTML = g;
+
+let w = '';
+for (let i = 0; i < 17; i++) {
+  const x = 236 + i * 40;
+  const y = 892 - 74 * Math.min(1, (x - 70) / 560) + 18;
+  w += `<rect x="${x}" y="${y}" width="19" height="13" rx="5" fill="#33495e" opacity=".9"/>`;
+}
+document.getElementById('windows').innerHTML = w;
+
+// --- gear swings forward (clockwise in SVG) until it lies inside the bay ---
+const PIVOT_X = 836, PIVOT_Y = 966;   // aft top corner of the recess
+const up   = ease(seg(t, .12, .80));
+document.getElementById('gear').setAttribute(
+  'transform', `translate(${PIVOT_X} ${PIVOT_Y}) rotate(${96 * up})`);
+// the bogie levels off as it stows, as it does on the real aircraft
+document.getElementById('bogie').setAttribute('transform', `rotate(${-20 * up} 0 196)`);
+
+// --- doors swing clear, then close over the stowed gear ---
+const swing = 92 * ease(seg(t, 0, .16)) - 92 * ease(seg(t, .74, 1));
+document.getElementById('doorL').setAttribute('transform', `translate(556 1018) rotate(${-swing})`);
+document.getElementById('doorR').setAttribute('transform', `translate(856 1018) rotate(${ swing})`);
+
+// --- callout rises once the gear is mostly in ---
+document.getElementById('callout').setAttribute(
+  'opacity', (seg(t, .52, .70) * (1 - seg(t, .95, 1))).toFixed(3));
+document.getElementById('cline').setAttribute('y2', 986 - 212 * ease(seg(t, .52, .78)));
+</script>
+</body></html>

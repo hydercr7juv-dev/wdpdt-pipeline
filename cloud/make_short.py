@@ -375,6 +375,15 @@ def build(script, emphasis, clips, out="/tmp/final.mp4", question=None, music=No
         src_len = duration(p)
         start_at = min(0.8 + (i % 4) * 1.6, max(0.0, src_len - seg - 0.2))
         caps = ass_for_window(groups, a0, a1, f"/tmp/caps_{i}.ass")
+
+        # A clip named mg_*.mp4 is a MOTION GRAPHIC, not stock footage: it was
+        # authored at exactly 1080x1920 in motion/, so it must not be cropped,
+        # scaled or pushed. Ken Burns on a drawn diagram slides the labels off
+        # the frame. These are the shots that show the mechanism the script is
+        # describing, which footage of an aeroplane from outside can never do.
+        is_graphic = os.path.basename(p).startswith("mg_")
+        if is_graphic:
+            start_at = 0.0
         if i % 2 == 0:                       # push in
             z = f"1.0+{0.10 / frames:.6f}*on"
         else:                                # push out
@@ -407,10 +416,14 @@ def build(script, emphasis, clips, out="/tmp/final.mp4", question=None, music=No
         # exactly `frames`/FPS long, which is what the per-scene caption rebase
         # in ass_for_window assumes. Get this wrong and the subtitles drift
         # further out of sync with every scene.
+        if is_graphic:
+            vf = f'fps={FPS},scale={W}:{H},setsar=1,{subs},{fade}'
+        else:
+            vf = (f'fps={FPS},scale={ZW}:{ZH}:force_original_aspect_ratio=increase,crop={ZW}:{ZH},'
+                  f"zoompan=z='{z}':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H},"
+                  f'setsar=1,{subs},{fade}')
         run(f'{ff()} -y -stream_loop -1 -ss {start_at:.2f} -i {p} '
-            f'-vf "fps={FPS},scale={ZW}:{ZH}:force_original_aspect_ratio=increase,crop={ZW}:{ZH},'
-            f"zoompan=z='{z}':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H},"
-            f'setsar=1,{subs},{fade}" -filter_threads 1 -frames:v {frames} '
+            f'-vf "{vf}" -filter_threads 1 -frames:v {frames} '
             f'-an {VENC} {outp}')
         parts.append(outp)
 

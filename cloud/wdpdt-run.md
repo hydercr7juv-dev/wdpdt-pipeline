@@ -144,6 +144,24 @@ biggest gap and it needs new footage, not a workaround.
 
 Repeating a clip is fine. Open on a shot that visually answers the hook.
 
+### Motion graphics
+
+Clips beginning `mg_` are DRAWN DIAGRAMS, authored at exactly 1080x1920 in
+`motion/`. The builder detects the prefix and uses them full frame with no
+crop and no Ken Burns, because panning a diagram slides its labels out of shot.
+
+  mg_gear.mp4   3s - an airliner's main gear swinging forward into the belly,
+                doors opening and closing over it, with a LANDING GEAR callout
+
+Use a motion graphic for the ONE scene where the script states the mechanism -
+the sentence that actually answers the question. Stock footage of an aeroplane
+from the outside can never show what is happening inside it, and that is the
+whole point of this channel. Put it in the CLIPS list at the position matching
+that sentence; everything before and after stays live footage.
+
+Only use a graphic whose subject matches the topic. Do not put mg_gear.mp4 in a
+video about cabin pressure.
+
 If `/tmp/done` says ERR, read the traceback, fix the cause (usually a wrong clip
 filename) and retry ONCE. If it fails twice, report the exact error and stop.
 Never post a broken file.

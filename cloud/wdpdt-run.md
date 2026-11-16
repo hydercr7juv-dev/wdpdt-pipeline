@@ -71,15 +71,29 @@ qualitative rather than invent one.
 
 Then append a space and this sentence, WORD FOR WORD, as the last thing:
 
-    Also guys, if you are a nervous flyer, I have made a PDF guide that explains every noise on a flight, gate to landing, and why the crew are never worried. Link in my bio.
+    Nervous flyer? Free guide to every noise on a flight. Link in my bio.
 
 It sells whydoplanesdothat.gumroad.com/l/nervous-flyer, linked in the channel
 bio. Do not reword it and do not move it earlier: a plug mid-script costs
-retention at exactly the moment the explanation lands. It adds about 10 seconds,
-so the finished video runs around 34 seconds. That is intended.
+retention at exactly the moment the explanation lands.
+
+This replaced a 28 word version that ran about 10 seconds. On a 34 second
+Short that was nearly a third of the runtime spent on an advert, and Shorts
+distribution is driven by retention. The short version says the same thing in
+about 4 seconds, so the finished video runs around 28 seconds.
 
 Pick 18 to 24 EMPHASIS words (nouns, numbers, pivot words) including "nervous",
 "flyer", "guide" and "bio". They render yellow.
+
+Also set HOOK: the question itself as a title card, held over the opening shot
+for the first 1.5 seconds. Shorts are judged on the first frame, and opening on
+unlabelled stock footage gives a scrolling viewer nothing to hold onto. Upper
+case, no question mark, two short lines separated by a literal \N, and no more
+than about 26 characters per line or it will wrap badly at 1080 wide:
+
+    HOOK = "WHY THERE'S A THUMP\N20 SECONDS AFTER TAKEOFF"
+
+If HOOK is left out the builder simply draws no card, so never omit it here.
 
 ## 3. Build, in the background, then poll
 
@@ -99,21 +113,25 @@ both the plane and the What If Labs routines. One sleep per call, then return.
     subprocess.run("pkill -9 -f build.py; pkill -9 -f ffmpeg", shell=True)
     subprocess.run("rm -f /tmp/done /tmp/out.mp4 /tmp/src_* /tmp/scene_* /tmp/caps_*", shell=True)
     subprocess.run("curl -sfL -o /tmp/ms.py https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/cloud/make_short.py", shell=True)
-    json.dump({"script": SCRIPT, "emph": EMPHASIS, "clips": CLIPS}, open("/tmp/job.json","w"))
+    json.dump({"script": SCRIPT, "emph": EMPHASIS, "clips": CLIPS,
+               "question": HOOK}, open("/tmp/job.json","w"))
     open("/tmp/build.py","w").write('''
     import sys, json, traceback
     sys.path.insert(0,"/tmp")
     import ms
     j=json.load(open("/tmp/job.json"))
     try:
-        ms.build(j["script"], j["emph"], j["clips"], out="/tmp/out.mp4")
+        ms.build(j["script"], j["emph"], j["clips"], out="/tmp/out.mp4",
+                 question=j.get("question"))
         open("/tmp/done","w").write("OK")
     except Exception:
         open("/tmp/done","w").write("ERR\\n"+traceback.format_exc()[-500:])
     ''')
     subprocess.Popen("nohup python3 /tmp/build.py > /tmp/b.log 2>&1 &", shell=True)
 
-CLIPS: pick EIGHT, aviation only. Never a clip starting with `sci_`, `story_`,
+CLIPS: pick TWELVE to FOURTEEN, aviation only. Cuts now land on speech and
+run about 2.6 seconds each, so a 28 second script is roughly 11 to 13 scenes.
+Supplying only eight means the list wraps and the opening shots replay. Never a clip starting with `sci_`, `story_`,
 `shop_` or `qg_`; those belong to other channels and would look wrong here.
 
   apron.mp4 apronplanes.mp4 cabin.mp4 climbout.mp4 clouds.mp4 clouds2.mp4

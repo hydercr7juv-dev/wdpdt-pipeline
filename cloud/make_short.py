@@ -372,6 +372,17 @@ def build(script, emphasis, clips, out="/tmp/final.mp4", question=None, music=No
         a0, a1 = f0 / FPS, (f0 + frames) / FPS
 
         p = paths[i % len(paths)]
+
+        # A motion graphic must never play twice. There are usually more scenes
+        # than clips, so paths[] wraps and an mg_ file would come back around
+        # late in the video - a diagram of the mechanism replaying after the
+        # script has moved on reads as a mistake. On a repeat, fall through to
+        # the next live clip instead.
+        if os.path.basename(p).startswith("mg_") and i >= len(paths):
+            live = [q for q in paths if not os.path.basename(q).startswith("mg_")]
+            if live:
+                p = live[i % len(live)]
+
         src_len = duration(p)
         start_at = min(0.8 + (i % 4) * 1.6, max(0.0, src_len - seg - 0.2))
         caps = ass_for_window(groups, a0, a1, f"/tmp/caps_{i}.ass")

@@ -206,14 +206,21 @@ both the plane and the What If Labs routines. One sleep per call, then return.
     subprocess.run("pkill -9 -f build.py; pkill -9 -f ffmpeg", shell=True)
     subprocess.run("rm -f /tmp/done /tmp/out.mp4 /tmp/src_* /tmp/scene_* /tmp/caps_*", shell=True)
     subprocess.run("curl -sfL -o /tmp/ms.py https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/cloud/make_short.py", shell=True)
-    json.dump({"script": SCRIPT, "emph": EMPHASIS, "clips": CLIPS}, open("/tmp/job.json","w"))
+HOOK is the title card held over the opening 1.5 seconds: the question or
+premise in upper case, two short lines separated by a literal \N, about 26
+characters per line maximum. Example: "WHAT IF YOU FELL\\NINTO A BLACK HOLE".
+Leave it as None to draw no card.
+
+    json.dump({"script": SCRIPT, "emph": EMPHASIS, "clips": CLIPS,
+               "question": HOOK}, open("/tmp/job.json","w"))
     open("/tmp/build.py","w").write('''
     import sys, json, traceback
     sys.path.insert(0,"/tmp")
     import ms
     j=json.load(open("/tmp/job.json"))
     try:
-        ms.build(j["script"], j["emph"], j["clips"], out="/tmp/out.mp4")
+        ms.build(j["script"], j["emph"], j["clips"], out="/tmp/out.mp4",
+                 question=j.get("question"))
         open("/tmp/done","w").write("OK")
     except Exception:
         open("/tmp/done","w").write("ERR\\n"+traceback.format_exc()[-500:])

@@ -12,6 +12,12 @@ a long file verbatim on quote limits, which cost the 09:05 plane run a turn on
 
 then read /tmp/run.md. A status other than 200 means STOP and report.
 
+raw.githubusercontent.com caches for roughly five minutes. If this file or
+the question bank was pushed in the last few minutes, curl can still hand
+back the previous version. Nothing to do about it at 07:05, but if a run
+behaves as though a change did not land, that is why - wait and re-run
+rather than editing anything.
+
 Generate ONE brand-new aviation Short and post it to YouTube. Then stop.
 
 EVERYTHING happens inside COMPOSIO_REMOTE_WORKBENCH, the only sandbox that

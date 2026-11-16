@@ -37,7 +37,7 @@ wait, do not switch account.
 
     import requests, datetime
     bank = requests.get('https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main/content/question-bank.json', timeout=60).json()['bank']
-    days  = (datetime.datetime.now(datetime.timezone.utc).date() - datetime.date(2026, 10, 17)).days
+    days  = (datetime.datetime.now(datetime.timezone.utc).date() - datetime.date(2026, 11, 16)).days
     index = days * 6 + SLOT
     print('index', index, 'of', len(bank))
 
@@ -50,8 +50,15 @@ The index runs forward and never wraps on purpose. The old prompt used
 `(day_of_year * 6 + slot) % 30`, cycling a 30 topic list every five days. It
 produced three cabin pressure videos in ten days, two luggage videos and two
 taxi-on-one-engine videos. The first upload on a topic got 10,404 views and each
-retread about 2,400, because they split the same audience. The bank holds 119
-unused topics, about twenty days at six a day.
+retread about 2,400, because they split the same audience. The bank holds 179
+unused topics, about thirty days at six a day.
+
+**When the index runs past the end of the bank the channel silently stops
+publishing.** That is exactly what happened from 6 to 13 November 2026: the
+bank ran dry at index 119 and seven days of runs produced nothing. The epoch
+date above is reset every time the bank is refilled, so index 0 is always the
+first unused topic. If the report in step 6 says fewer than 12 topics remain,
+the bank needs refilling THAT WEEK.
 
 ## 2. Script
 
@@ -109,11 +116,31 @@ both the plane and the What If Labs routines. One sleep per call, then return.
 CLIPS: pick EIGHT, aviation only. Never a clip starting with `sci_`, `story_`,
 `shop_` or `qg_`; those belong to other channels and would look wrong here.
 
-  apron.mp4 apronplanes.mp4 beltoff.mp4 boardsteps.mp4 cabin.mp4 citynight.mp4
-  climbout.mp4 clouds.mp4 clouds2.mp4 cockpit.mp4 depboard.mp4 engine.mp4 eye.mp4
-  gate.mp4 jets.mp4 landing.mp4 passenger.mp4 planeview.mp4 runway.mp4
-  seatbelt.mp4 skyplane.mp4 suitcases.mp4 sunsetflight.mp4 takeoff.mp4
-  taxiqueue.mp4 terminal.mp4 window.mp4 windowseat.mp4
+  apron.mp4 apronplanes.mp4 cabin.mp4 climbout.mp4 clouds.mp4 clouds2.mp4
+  engine.mp4 gate.mp4 planeview.mp4 skyplane.mp4 suitcases.mp4 sunsetflight.mp4
+  taxiqueue.mp4 terminal.mp4 windowseat.mp4
+
+**Do not use these, they are in the repo but they are not usable.** Every one
+was checked frame by frame on 13 Nov 2026:
+
+  cockpit.mp4    NOT a cockpit - it is a laundrette control panel
+  eye.mp4        a human eye, nothing to do with aviation
+  depboard.mp4   departures board with garbled text (555/U00US5555...)
+  jets.mp4       a small private jet, wrong aircraft class for this channel
+  landing.mp4    a Dash-8 turboprop, same problem
+  boardsteps.mp4 retro TWA airstairs, looks like archive footage
+  runway.mp4     near black, only distant lights are visible
+  takeoff.mp4    near black night shot
+  window.mp4     dark night window, nothing legible
+  citynight.mp4  very dark, only usable as a deliberate night beat
+  passenger.mp4  murky grey window, no subject
+  beltoff.mp4    dark extreme close-up, unreadable at thumbnail size
+  seatbelt.mp4   same
+
+Two draft renders put a black frame on screen for three seconds because of the
+dark ones, and a video about airliners cut to a private turboprop. **There is
+currently NO usable daylight takeoff shot in the library** - that is the single
+biggest gap and it needs new footage, not a workaround.
 
 Repeating a clip is fine. Open on a shot that visually answers the hook.
 

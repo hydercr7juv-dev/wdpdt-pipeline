@@ -24,7 +24,7 @@ import subprocess
 RAW = "https://raw.githubusercontent.com/hydercr7juv-dev/wdpdt-pipeline/main"
 ASSETS = RAW + "/public/assets"
 FONT_URL = RAW + "/public/fonts/Anton-Regular.ttf"
-VOICE = "en-US-AndrewMultilingualNeural"
+VOICE = "en-GB-RyanNeural"   # British: the scripts use British spelling and phrasing
 RATE = "+12%"
 W, H, FPS = 1080, 1920, 30
 TAIL = 0.5  # hold after the voiceover ends
@@ -188,7 +188,8 @@ PlayResY: {h}
 WrapStyle: 0
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: K,Anton,104,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,6,3,2,60,60,430,1
+Style: K,Anton,122,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,9,4,5,70,70,0,1
+Style: HOOK,Anton,86,&H0000E5FF,&H0000E5FF,&H00000000,&HA0000000,0,0,0,0,100,100,2,0,1,8,4,8,80,80,250,1
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """
@@ -271,7 +272,7 @@ PlayResY: {H}
 WrapStyle: 0
 [V4+ Styles]
 Format: Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,OutlineColour,BackColour,Bold,Italic,Underline,StrikeOut,ScaleX,ScaleY,Spacing,Angle,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,Encoding
-Style: K,Anton,104,&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,6,3,2,60,60,430,1
+Style: K,Anton,122,&H00FFFFFF,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,9,4,5,70,70,0,1
 [Events]
 Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
 """
@@ -279,48 +280,140 @@ Format: Layer,Start,End,Style,Name,MarginL,MarginR,MarginV,Effect,Text
     return path
 
 
-def build(script, emphasis, clips, out="/tmp/final.mp4"):
+def hook_line(question, path="/tmp/hook.ass", hold=1.5):
+    """The question, on screen, for the first second and a half.
+
+    Shorts are judged in the first frame. Opening on unlabelled stock footage
+    gives a scrolling viewer nothing to hold on to, so the question that the
+    video answers goes up immediately, in the accent colour, while the voice
+    says it.
+    """
+    q = question.strip().upper().replace("{", "").replace("}", "")
+    # \an5 centres it; the \t() grows it slightly so it is not a dead title card.
+    body = (r"{\fad(180,220)\t(0,%d,\fscx106\fscy106)}" % int(hold * 600)) + q
+    open(path, "w").write(
+        ASS_HEAD.format(w=W, h=H)
+        + f"Dialogue: 1,{_ts(0.15)},{_ts(hold)},HOOK,,0,0,0,,{body}\n"
+    )
+    return path
+
+
+def scene_bounds(groups, total, target=2.6):
+    """Cut points that land on speech, not on a stopwatch.
+
+    The old build divided the runtime into eight equal slices, so a cut could
+    land mid-word and never had anything to do with what was being said. Here
+    the boundaries snap to the end of a caption group, and scenes run about
+    2.6 seconds, which is roughly twice the cut rate of the old eight-scene
+    version. Faster cutting is most of why a Short holds a scrolling viewer.
+    """
+    if not groups:
+        n = max(8, int(round(total / target)))
+        seg = total / n
+        return [(i * seg, (i + 1) * seg) for i in range(n)]
+
+    ends = [ge for _, ge, _ in groups]
+    bounds, last = [], 0.0
+    for e in ends:
+        if e - last >= target:
+            bounds.append((last, e))
+            last = e
+    if total - last > 0.6:
+        bounds.append((last, total))
+    elif bounds:
+        bounds[-1] = (bounds[-1][0], total)
+    else:
+        bounds = [(0.0, total)]
+    return bounds
+
+
+def build(script, emphasis, clips, out="/tmp/final.mp4", question=None, music=None):
     install_font()
     vo, timings = say(script)
     total = duration(vo) + TAIL
     paths = fetch_clips(clips)
 
     if not timings:
-        # No WordBoundary events came back. Rather than ship a video whose
-        # captions are silently out of step, fall back to the old estimate and
-        # say so in the log, so it is obvious why that one looks worse.
         print("warning: no word timings from edge-tts, falling back to estimated caption timing")
         timings = word_timings(script, total - TAIL)
 
-    # Captions are burned scene by scene (see ass_for_window), so each ffmpeg
-    # pass is only a few seconds long and peak memory stays flat.
     groups = caption_groups(timings, emphasis)
-    seg = total / len(paths)
+    bounds = scene_bounds(groups, total)
 
-    # These colour/timing flags are what YouTube wants — a file without them
-    # comes back "Processing abandoned". They go on the scene encodes because
-    # those streams are concatenated straight into the final video.
     VENC = (f'-threads 2 -c:v libx264 -profile:v high -level 4.0 -preset veryfast -crf 21 '
             f'-pix_fmt yuv420p -color_range tv -colorspace bt709 -color_primaries bt709 '
             f'-color_trc bt709 -r {FPS} -fps_mode cfr -video_track_timescale 15360 '
             f'-x264-params "threads=2:lookahead-threads=1:sliced-threads=0"')
 
+    # Ken Burns. Source is scaled to 1.25x the frame so zoompan has room to move
+    # into; alternating push-in and push-out stops a long video feeling like one
+    # continuous drift. 1350x2400 rather than a 4K intermediate keeps peak memory
+    # inside the workbench's ~1GB, which is the same reason captions are burned
+    # per scene rather than in one pass.
+    ZW, ZH = 1350, 2400
+
+    hook = hook_line(question, hold=1.5) if question else None
+
     parts = []
-    for i, p in enumerate(paths):
+    for i, (s0, s1) in enumerate(bounds):
+        # Everything is resolved on the frame grid, not in floating seconds.
+        #
+        # Scenes are rendered separately and concatenated, so scene i begins in
+        # the final video at exactly the sum of the preceding frame counts.
+        # Snapping each scene's length to whole frames WITHOUT moving its
+        # caption window to match would let a fraction of a frame accumulate at
+        # every cut, and the subtitles would walk away from the voice over the
+        # length of the video. f0/f1 are the authoritative positions; the
+        # caption window is rebased from those, not from the float bounds.
+        f0 = int(round(s0 * FPS))
+        f1 = int(round(s1 * FPS))
+        frames = max(2, f1 - f0)
+        seg = frames / FPS
+        a0, a1 = f0 / FPS, (f0 + frames) / FPS
+
+        p = paths[i % len(paths)]
         src_len = duration(p)
-        start = min(1.0 + (i % 3) * 2.0, max(0.0, src_len - seg - 0.2))
-        caps = ass_for_window(groups, i * seg, (i + 1) * seg, f"/tmp/caps_{i}.ass")
+        start_at = min(0.8 + (i % 4) * 1.6, max(0.0, src_len - seg - 0.2))
+        caps = ass_for_window(groups, a0, a1, f"/tmp/caps_{i}.ass")
+        if i % 2 == 0:                       # push in
+            z = f"1.0+{0.10 / frames:.6f}*on"
+        else:                                # push out
+            z = f"1.10-{0.10 / frames:.6f}*on"
+
+        # Subtitle filters are applied after zoompan so the text never scales
+        # with the footage. The hook only exists on the first scene.
+        subs = f"ass={caps}"
+        if hook and i == 0:
+            subs = f"ass={hook},{subs}"
+
+        fade = f"fade=t=in:st=0:d=0.18,fade=t=out:st={max(0.0, seg - 0.18):.2f}:d=0.18"
+        if i == 0:
+            fade = f"fade=t=out:st={max(0.0, seg - 0.18):.2f}:d=0.18"
+
         outp = f"/tmp/scene_{i}.mp4"
-        run(f'{ff()} -y -stream_loop -1 -ss {start:.2f} -t {seg:.2f} -i {p} '
-            f'-vf "scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},'
-            f'fps={FPS},setsar=1,ass={caps}" -filter_threads 1 '
+        # fps MUST be forced to a constant rate BEFORE zoompan.
+        #
+        # zoompan with d=1 emits exactly one output frame per INPUT frame, and
+        # its own fps= option only tags the output rate - it does not resample.
+        # The pool runs at 23.98, 25, 29.91, 30, 50 and 60 fps, so without this
+        # filter a 2.6s cut from a 60fps clip produced 156 frames played at 30
+        # (5.2s on screen) while a 25fps clip came out short. Captions are
+        # rebased per scene assuming the scene is exactly `seg` long, so every
+        # scene drifted by a different amount and the subtitles slid further out
+        # of sync as the video went on. That is exactly what it looked like.
+        # -frames:v, not -t. An input-side -t on a -stream_loop'd source does not
+        # bound the filtered output exactly (a 2.6s request came out as 94
+        # frames, 3.13s). Pinning the output frame count makes every scene
+        # exactly `frames`/FPS long, which is what the per-scene caption rebase
+        # in ass_for_window assumes. Get this wrong and the subtitles drift
+        # further out of sync with every scene.
+        run(f'{ff()} -y -stream_loop -1 -ss {start_at:.2f} -i {p} '
+            f'-vf "fps={FPS},scale={ZW}:{ZH}:force_original_aspect_ratio=increase,crop={ZW}:{ZH},'
+            f"zoompan=z='{z}':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H},"
+            f'setsar=1,{subs},{fade}" -filter_threads 1 -frames:v {frames} '
             f'-an {VENC} {outp}')
         parts.append(outp)
 
-    # Sources are freed only once every scene is cut. Deleting each one right
-    # after use looked like a tidy way to save space, but a clip list may name
-    # the same file twice (a shot returning later in the video), and the second
-    # pass then found it missing.
     for p in set(paths):
         try:
             os.remove(p)
@@ -331,10 +424,19 @@ def build(script, emphasis, clips, out="/tmp/final.mp4"):
         for p in parts:
             f.write(f"file '{p}'\n")
 
-    # Video is already captioned and correctly encoded, so it is copied, not
-    # re-encoded — no second full-length pass, which is what kept blowing up.
-    run(f'{ff()} -y -fflags +genpts -f concat -safe 0 -i /tmp/list.txt -i {vo} '
-        f'-map 0:v -map 1:a -map_metadata -1 -c:v copy '
+    # Music bed, if the caller named one. Mixed well under the voice and faded
+    # at both ends. Shorts without a bed feel flat next to everything around
+    # them in the feed, but the voice has to stay the loudest thing by a mile.
+    if music:
+        mpath = fetch_clips([music])[0]
+        amix = (f'-i {vo} -i {mpath} -filter_complex '
+                f'"[1:a]volume=0.13,afade=t=in:st=0:d=1,afade=t=out:st={max(0.0,total-1.5):.2f}:d=1.5[m];'
+                f'[0:a][m]amix=inputs=2:duration=first:dropout_transition=0[a]" -map 0:v -map "[a]"')
+    else:
+        amix = f'-i {vo} -map 0:v -map 1:a'
+
+    run(f'{ff()} -y -fflags +genpts -f concat -safe 0 -i /tmp/list.txt {amix} '
+        f'-map_metadata -1 -c:v copy '
         f'-c:a aac -b:a 160k -ar 48000 -ac 2 -movflags +faststart -shortest {out}')
 
     for p in parts:
